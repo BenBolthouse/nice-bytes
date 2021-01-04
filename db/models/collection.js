@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   Collection.associate = function(models) {
     // associations can be defined here
-    Collection.belongsTo(models.user { foreignKey: 'userId'});
+    Collection.belongsTo(models.User, { foreignKey: 'userId'});
 
     const columnMapping = {
       through: 'SpotCollection',
@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'collectionId'
     }
 
-    Collection.belongToMany(models.Spot, columnMapping);
+    Collection.belongsToMany(models.Spot, columnMapping);
   };
   return Collection;
 };

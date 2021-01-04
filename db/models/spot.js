@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'spotId'
     }
 
-    Spot.belongToMany(models.Collection, columnMapping);
+    Spot.belongsToMany(models.Collection, columnMapping);
     Spot.hasMany(models.Review, {foreignKey: 'spotId' });
   };
   return Spot;
