@@ -39,27 +39,29 @@ router.post(
     // Push validation errors to errors array and send view
     if (!validationErrors.isEmpty()) {
       errors.push(validationErrors.array().map(error => error.msg));
-      res.render('log-in', { csrf: req.csrfToken(), validationErrors: errors });
+      return res.render('log-in', { csrf: req.csrfToken(), validationErrors: errors });
     }
 
+    const usernameIsUnique = await getUsernameIsUnique(username);
+    const emailIsUnique = await getEmailIsUnique(email);
+
     // Check to see if the username and email taken, handle gracefully
-    if (await !usernameIsUnique()) {
+    if (usernameIsUnique) {
       errors.push('message');
     }
-    if (await !emailIsUnique()) {
+    if (emailIsUnique) {
       errors.push('message');
     }
 
     // If there is anything inside of the errors array then send the errors to
     // the client, else redirect
-    if (!errors.length) {
-      res.render('log-in', { csrf: req.csrfToken(), validationErrors: errors });
+    if (errors.length) {
+      return res.render('log-in', { csrf: req.csrfToken(), validationErrors: errors });
     } else {
       // If we get this far then we're good to create the user
 
       // Hash the password
       const passwordHash = await bcrypt.hash(`${password}:${secret}`, 10);
-      
 
       await User.create({
         username: username,
@@ -76,7 +78,7 @@ router.post(
 //
 router.get('/login', csrfProtection, (req, res, next) => {
   //
-  res.render('log-in', { csrfToken: req.csrfToken() });
+  return res.render('log-in', { csrfToken: req.csrfToken() });
 });
 
 //
@@ -92,28 +94,28 @@ router.post(
     // If there is anything inside of the errors array then send the errors to
     // the client, else redirect
     if (!errors.length) {
-      res.render('log-in', { csrf: req.csrfToken(), errors });
+      return res.render('log-in', { csrf: req.csrfToken(), errors });
     } else {
     }
   })
 );
 
-const usernameIsUnique = async username => {
-  try{
-    await User.findAll({where: { username: username }})
+const getUsernameIsUnique = async username => {
+  try {
+    const user = await User.findAll({ where: { username: username } });
   } catch {
-    return true
+    return true;
   }
-  return false
+  return false;
 };
 
-const emailIsUnique = async email => {
-  try{
-    await User.findAll({where: { email: email }})
-    } catch {
-    return true
+const getEmailIsUnique = async email => {
+  try {
+    const user = await User.findAll({ where: { email: email } });
+  } catch {
+    return true;
   }
-  return false
+  return false;
 };
 
 module.exports = router;
