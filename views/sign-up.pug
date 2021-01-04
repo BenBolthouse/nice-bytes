@@ -2,18 +2,18 @@ extends layout
 
 block content
 
-  h2 Sign Up
-  form(class='sign-up')
-    input(type='hidden' name='_csrf' value=csrfToken)
-    div(class='form-group')
-      label(for='first-name')
-      input(id='first-name' type='text' placeholder='First name')
-    div(class='form-group')
-      label(for='last-name')
-      input(id='last-name' type='text' placeholder='Last name')
-    div(class='form-group')
-      label(for='username')
-      input(id='username' type='text' placeholder='Username')
-    include includes/authorization-fields
-    button(id='sign-up-button' type='submit') Sign Up
-  a(href='/log-in') If you already have an account -- log in here.
+  div(class='sign-up-container')
+    form(class='sign-up')
+      input(type='hidden' name='_csrf' value=csrfToken)
+      div(class='form-group')
+        label(for='first-name')
+        input(id='first-name' type='text' placeholder='First name')
+      div(class='form-group')
+        label(for='last-name')
+        input(id='last-name' type='text' placeholder='Last name')
+      div(class='form-group')
+        label(for='username')
+        input(id='username' type='text' placeholder='Username')
+      include includes/authorization-fields
+      button(id='sign-up-button' type='submit') Sign Up
+    a(href='/log-in') If you already have an account -- log in here.
