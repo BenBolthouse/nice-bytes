@@ -1,3 +1,39 @@
 h1 {
     color: #555555;
 }
+
+/* Nav Bar */
+
+#global-header {
+    position: fixed;
+    width: 100%;
+    background-color: lightblue;
+    height: 50px;
+    border: 1px solid
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+#logo {
+    height: 100%;
+    margin: auto;
+    text-align: center;
+}
+
+#nav-list li {
+    display: flex;
+    flex-direction: row;
+}
+
+#nav-list {
+    display: flex;
+    /* justify-content: space-between; */
+}
+
+#main-container {
+    padding-top: 50px;
+}
