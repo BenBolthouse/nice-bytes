@@ -3,15 +3,34 @@
 const { check } = require('express-validator');
 
 const userSignupValidator = [
-  check('username').exists({checkFalsy: true}).withMessage('Username is required.'),
-  check('emailAddress').exists({checkFalsy: true}).withMessage('Email is required.'),
-  check('password').exists({checkFalsy: true}).withMessage('Password is required.'),
-  check('confirmPassword').exists({checkFalsy: true}).withMessage('Password confirmation is required.'),
+  check('username')
+    .exists({ checkFalsy: true })
+    .withMessage('Username is required.')
+    .isLength({ min: 4, max: 20 })
+    .withMessage('Username must be between 4 and 20 characters long.')
+    .matches(/^[a-zA-Z0-9_-]*$/gim)
+    .withMessage('Username can only contain letters, numbers and the characters "-" and "_".'),
+  check('emailAddress')
+    .exists({ checkFalsy: true })
+    .withMessage('Email is required.')
+    .isEmail()
+    .withMessage('Email address must be a valid email address.'),
+  check('password')
+    .exists({ checkFalsy: true })
+    .withMessage('Password is required.')
+    .isLength({ min: 8, max: 20 })
+    .matches(/((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W]).{8,64})/g)
+    .withMessage(
+      'Password must contain an uppercase letter, lowercase letter, special character and a number.'
+    ),
+  
+  // TODO: Implement confirm password validator.
+    
 ];
 
 const userLoginValidator = [
-  check('emailAddress').exists({checkFalsy: true}).withMessage('Username is required.'),
-  check('password').exists({checkFalsy: true}).withMessage('Password is required.'),
+  check('emailAddress').exists({ checkFalsy: true }).withMessage('Username is required.'),
+  check('password').exists({ checkFalsy: true }).withMessage('Password is required.'),
 ];
 
 module.exports = { userSignupValidator, userLoginValidator };
