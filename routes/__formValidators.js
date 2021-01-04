@@ -10,7 +10,7 @@ const userSignupValidator = [
     .withMessage('Username must be between 4 and 20 characters long.')
     .matches(/^[a-zA-Z0-9_-]*$/gim)
     .withMessage('Username can only contain letters, numbers and the characters "-" and "_".'),
-  check('emailAddress')
+  check('email')
     .exists({ checkFalsy: true })
     .withMessage('Email is required.')
     .isEmail()
@@ -32,7 +32,7 @@ const userSignupValidator = [
 ];
 
 const userLoginValidator = [
-  check('emailAddress').exists({ checkFalsy: true }).withMessage('Username is required.'),
+  check('email').exists({ checkFalsy: true }).withMessage('Username is required.'),
   check('password').exists({ checkFalsy: true }).withMessage('Password is required.'),
 ];
 
