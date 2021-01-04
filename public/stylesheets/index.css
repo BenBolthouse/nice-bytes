@@ -63,12 +63,3 @@ li > li {
 #main-container {
   padding-top: 50px;
 }
-
-/*  Not sure if I should make a sign-up.css for this*/
-
-input {
-  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
-  margin: 5px;
-  padding: 2px 6px;
-}
