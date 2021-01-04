@@ -43,10 +43,10 @@ router.post(
     }
 
     // Check to see if the username and email taken, handle gracefully
-    if (!usernameIsUnique()) {
+    if (await !usernameIsUnique()) {
       errors.push('message');
     }
-    if (!emailIsUnique()) {
+    if (await !emailIsUnique()) {
       errors.push('message');
     }
 
@@ -98,8 +98,22 @@ router.post(
   })
 );
 
-const usernameIsUnique = username => {};
+const usernameIsUnique = async username => {
+  try{
+    await User.findAll({where: { username: username }})
+  } catch {
+    return true
+  }
+  return false
+};
 
-const emailIsUnique = username => {};
+const emailIsUnique = async email => {
+  try{
+    await User.findAll({where: { email: email }})
+    } catch {
+    return true
+  }
+  return false
+};
 
 module.exports = router;
