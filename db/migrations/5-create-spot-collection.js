@@ -10,12 +10,12 @@ module.exports = {
       },
       collectionId: {
         allowNull: false,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
         references: { model: 'Collections'}
       },
       spotId: {
         allowNull: false,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
         references: { model: 'Spots'}
       },
       createdAt: {
