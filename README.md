@@ -35,9 +35,30 @@ At this point you should be able to use `code .` in bash in the project root to 
 
 ### VS Code Debugger for Nodemon
 
-Our skeleton project has an NPM script `npm start:development` for the development server. However, if you'd like a breakpoint debugger for your project (highly recommend!!) then follow these steps:
+Our skeleton project has an NPM script `npm start:development` for the development server. However, if you'd like a breakpoint debugger for the project (highly recommend!!) then follow these steps:
 
-...add debugger steps
+1. In the project root create a file `./.vscode/launch.json`; you may need to create the directory
+1. In `launch.json` copy and paste the following launch configuration;
+```
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "name": "Nodemon",
+      "program": "${workspaceFolder}/bin/www",
+      "request": "launch",
+      "restart": true,
+      "runtimeExecutable": "nodemon",
+      "runtimeArgs": ["-r", "dotenv/config"],
+      "skipFiles": ["<node_internals>/**"],
+      "type": "pwa-node"
+    }
+  ]
+}
+```
+3. Confirm that the debugger works by selecting a breakpoint in the application and then run the debugger "Nodemon"; the application should pause at the breakpoint
 
 ## MVP Branching Strategy
 
