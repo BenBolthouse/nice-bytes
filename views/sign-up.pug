@@ -4,7 +4,7 @@ block content
   link(rel='stylesheet' href='/stylesheets/sign-up.css')
 
   div(class='sign-up-container')
-    form(class='sign-up')
+    form(class='sign-up' action='/users/sign-up' method='post')
       input(type='hidden' name='_csrf' value=csrfToken)
       div(class='form-group')
         label(for='first-name')
