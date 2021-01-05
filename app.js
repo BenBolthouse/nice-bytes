@@ -1,13 +1,14 @@
+const { sequelize } = require('./db/models');
+const { secret } = require('./config');
 const createError = require('http-errors');
-const express = require('express');
+const usersRouter = require('./routes/users');
+const indexRouter = require('./routes/index');
 const path = require('path');
 const cookieParser = require('cookie-parser');
-const logger = require('morgan');
-const { sequelize } = require('./db/models');
+const express = require('express');
 const session = require('express-session');
+const logger = require('morgan');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
-const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
 
 const app = express();
 
@@ -16,8 +17,8 @@ app.set('view engine', 'pug');
 
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // set up session middleware
@@ -25,16 +26,18 @@ const store = new SequelizeStore({ db: sequelize });
 
 app.use(
   session({
-    secret: 'superSecret',
+    name: 'nice-bytes.sid',
+    secret,
     store,
     saveUninitialized: false,
     resave: false,
   })
 );
 
-// create Session table if it doesn't already exist
+// create session table if it doesn't already exist
 store.sync();
 
+// application routes
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 

@@ -1,3 +1,107 @@
-h1 {
-    color: #555555;
+@font-face {
+  font-family: "Kufam ExtraBold";
+  src: url("./fonts/Kufam/static/Kufam-ExtraBold.ttf") format("truetype");
 }
+
+@font-face {
+  font-family: "Kufam Black";
+  src: url("./fonts/Kufam/static/Kufam-Black.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Kufam Regular";
+  src: url("./fonts/Kufam/static/Kufam-Regular.ttf") format("truetype");
+}
+
+html {
+  height: 100%;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+h1 {
+  color: #555555;
+}
+
+/* Removes a:link default css setting that underlines links. */
+a:link {
+  text-decoration: none;
+}
+
+body {
+  background-color: rgba(244, 241, 234, 0.5);
+  height: 100%;
+  overflow: hidden;
+  /* margin-top: 50px; */
+  /* padding-top: 50px; */
+}
+
+li a {
+}
+
+/* Nav Bar */
+
+#global-header {
+  position: fixed;
+  width: 100%;
+  background-color: #f4f1ea;
+  height: 50px;
+  border: 1px solid;
+  border-left: hidden;
+  border-right: hidden;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+}
+
+#logo {
+  /* height: 100%; */
+  margin: auto 15px;
+  /* text-align: center; */
+  /* width: 150px; */
+}
+
+#logo-image {
+  margin-top: 2px;
+  border-radius: 5px;
+}
+
+#nav-list li {
+  display: flex;
+  flex-direction: row;
+  /* margin: auto 0px; */
+  padding: 0px 15px;
+  border-left-style: solid;
+  border-width: 1px;
+  text-align: center;
+}
+
+.nav-list__link:hover {
+  background-color: grey;
+}
+
+li > li {
+  border-left-style: solid;
+  border-width: 1px;
+}
+
+#nav-list {
+  display: flex;
+  /* display: block; */
+  /* float: right; */
+  /* justify-content: space-between; */
+}
+
+/* Main Container */
+
+#main-container {
+  padding-top: 50px;
+}
+
+
