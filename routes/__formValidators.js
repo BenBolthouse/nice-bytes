@@ -23,12 +23,15 @@ const userSignupValidator = [
     .withMessage(
       'Password must contain an uppercase letter, lowercase letter, special character and a number.'
     ),
-  check('confirmPassword').custom((value, { req }) => {
-    if (value !== req.body.password) {
-      throw new Error('Confirm Password does not match Password');
-    }
-    return true;
-  }),
+  check('confirmPassword')
+    .exists({ checkFalsy: true })
+    .withMessage('Confirm password is required.')
+    .custom((value, { req }) => {
+      if (value !== req.body.password) {
+        throw new Error('Confirm Password does not match Password');
+      }
+      return true;
+    }),
 ];
 
 const userLoginValidator = [
