@@ -5,15 +5,16 @@ const parser = require('body-parser');
 const { validationResult } = require('express-validator');
 
 const { secret } = require('../config');
-const { userSignupValidator, userLoginValidator } = require('./__formValidators');
+const { userSignupValidator, userLoginValidator } = require('./__validators');
 const { asyncHandler: asyn } = require('./__utils');
 const { User } = require('../db/models');
 
 const router = express.Router();
 
-// Middleware configuration
+// form request forgery protection
 const csrfProtection = csrf({ cookie: true });
 
+// errors per input field
 let errorMessages = {
   firstName: [],
   lastName: [],
@@ -23,6 +24,7 @@ let errorMessages = {
   confirmPassword: [],
 };
 
+// indicates in the router scope that a request is invalid
 let validationPassing = true;
 
 //
@@ -102,13 +104,51 @@ router.post(
   userLoginValidator,
   csrfProtection,
   asyn(async (req, res, next) => {
-    const errors = [];
+    // from sign-in form
+    const { email, password } = req.body;
 
-    // If there is anything inside of the errors array then send the errors to
-    // the client, else redirect
-    if (!errors.length) {
-      return res.render('log-in', { csrf: req.csrfToken(), errorMessages });
-    } else {
+    // route scoped user
+    let user;
+
+    // Check for validation errors
+    const validationErrors = validationResult(req);
+
+    // If express validator found errors
+    if (!validationErrors.isEmpty()) {
+      validationErrors.errors.forEach(err => {
+        errorMessages[err.param].push(err.msg);
+      });
+      validationPassing = false;
+    }
+
+    // try to find the user by email
+    try {
+      user = await User.findOne({where: { email: email }});
+    }
+    catch (e) {
+      errorMessages.email.push(`User was not found with email address ${email}.`)
+      return res.render('sign-in', { csrf: req.csrfToken(), errorMessages });
+    }
+
+    // try to validate the password
+    const saltyPassword = `${password}:${secret}`;
+    const passwordIsValid = await bcrypt.compare(saltyPassword, user.passwordHash.toString());
+
+    // If validation failed
+    if (!validationPassing) {
+      // Then send a view with errors and new csrf token...
+      return res.render('sign-in', { csrf: req.csrfToken(), errorMessages });
+    }
+
+    // Else create a session for the user
+    else {
+      const passwordHash = await bcrypt.hash(`${password}:${secret}`, 10);
+      await User.create({
+        username: username,
+        email: email,
+        passwordHash: passwordHash,
+      });
+      return res.redirect('/');
     }
   })
 );
