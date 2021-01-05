@@ -136,7 +136,7 @@ router.post(
     } catch (e) {
       // if user cannot be found then notify client
       errorMessages.email.push(`User was not found with email address ${email}.`);
-      return res.render('login', {
+      return res.render('log-in', {
         csrfToken: req.csrfToken(),
         errorMessages: validationViewModel,
       });
@@ -149,7 +149,7 @@ router.post(
     // if password is invalid notify client
     if (!passwordIsValid) {
       validationViewModel.password.push('Password is invalid.');
-      return res.render('login', {
+      return res.render('log-in', {
         csrfToken: req.csrfToken(),
         errorMessages: validationViewModel,
       });
@@ -157,7 +157,7 @@ router.post(
 
     // if any notify client
     if (!validationPassing) {
-      return res.render('login', {
+      return res.render('log-in', {
         csrfToken: req.csrfToken(),
         errorMessages: validationViewModel,
       });
