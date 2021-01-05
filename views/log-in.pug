@@ -1,8 +1,9 @@
-
+extends layout
+block content
   div(class="errors")
   h2 Log In
   form(class="log-in" action='/users/login' method='post')
-  input(type='hidden' name='_csrf' value=csrfToken)
+    input(type='hidden' name='_csrf' value=csrfToken)
     include includes/authorization-fields
     button(id="log-in-button" type="submit") Log In
-      a(href="/sign-up") If you don't have an account -- sign up here!
+    a(href="/sign-up") If you don't have an account -- sign up here!
