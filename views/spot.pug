@@ -1,0 +1,8 @@
+extends layout.pug
+
+block content
+  
+    h1= spot.name
+    h2= spot.description
+    img(src= `${spot.imgUrl}`)
+    p= spot.type
