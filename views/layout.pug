@@ -14,7 +14,14 @@ html
         ul(id="nav-list") 
           li 
             a(href='/spots') Spots
-          li 
-            a(href='/collections') Collections
+          if (loggedIn)
+            li 
+              a(href='/collections') Collections
+            li 
+              a(href='/users/logout') Log Out
+          else 
+            li 
+              a(href='/users/login') Log In
+
     div(id="main-container")
     block content
