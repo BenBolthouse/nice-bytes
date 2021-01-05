@@ -1,8 +1,13 @@
 extends layout.pug
 
+append head
+  //- add page specific styles by appending to the head
+  link(rel="stylesheet" href="/stylesheets/spots.css")
+
 block content
-  
+  if spot
     h1= spot.name
     h2= spot.description
     img(src= `${spot.imgUrl}`)
     p= spot.type
+   
