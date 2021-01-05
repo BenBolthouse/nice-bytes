@@ -6,22 +6,24 @@ html
         link(rel='stylesheet' href='/stylesheets/reset.css')
         link(rel='stylesheet' href='/stylesheets/index.css')
   body
-    header(id="global-header") 
-      div(class="container")
-        div(id="logo")
-          a(href="/" id="logo-link") 
-            img(src='/images/nicebytes-logo2.png' height='45px' width='45px' id='logo-image')
-        ul(id="nav-list") 
-          li(class='nav-list__link') 
-            a(href='/spots') Spots
-          if (loggedIn)
-            li 
-              a(href='/collections') Collections
-            li 
-              a(href='/users/logout') Log Out
-          else 
-            li(class='nav-list__link')
-              a(href='/users/login') Log In
+
+    include includes/navbar.pug
+    //- header(id="global-header") 
+    //-   div(class="container")
+    //-     div(id="logo")
+    //-       a(href="/" id="logo-link") 
+    //-         img(src='/images/nicebytes-logo2.png' height='45px' width='45px' id='logo-image')
+    //-     ul(id="nav-list") 
+    //-       li(class='nav-list__link') 
+    //-         a(href='/spots') Spots
+    //-       if (loggedIn)
+    //-         li 
+    //-           a(href='/collections') Collections
+    //-         li 
+    //-           a(href='/users/logout') Log Out
+    //-       else 
+    //-         li(class='nav-list__link')
+    //-           a(href='/users/login') Log In
 
     div(id="main-container")
     block content

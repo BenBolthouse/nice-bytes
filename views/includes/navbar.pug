@@ -1,0 +1,16 @@
+link(rel="stylesheet", href="/stylesheets/navbar.css")
+header(class="navbar")
+  div(class="navbar__brand")
+    a(href="/")
+      img(class="navbar__logo" src="/images/nicebytes-logo2.png")
+      span(class="navbar__name") NiceBytes
+  div(class="navbar__links")
+    ul
+      if(user)
+        li
+          a(href='/collections') Collections
+        li
+          a(href='/users/logout') Log out
+      else
+        li
+          a(href='/users/login') Log in

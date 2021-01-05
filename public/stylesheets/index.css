@@ -33,6 +33,7 @@ a:link {
 body {
   background-color: rgba(244, 241, 234, 0.5);
   height: 100%;
+  overflow: hidden;
   /* margin-top: 50px; */
   /* padding-top: 50px; */
 }
@@ -102,3 +103,5 @@ li > li {
 #main-container {
   padding-top: 50px;
 }
+
+

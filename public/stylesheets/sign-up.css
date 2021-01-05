@@ -1,6 +1,6 @@
 body {
-  background-image: url("../images/restaurant-blue.jpg");
-  background-size: 100% 120%;
+  background-image: url("/images/restaurant-blue.jpg");
+  background-size: cover;
   background-repeat: no-repeat;
 }
 

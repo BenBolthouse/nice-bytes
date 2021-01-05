@@ -3,36 +3,45 @@ extends layout
 block content
   link(rel='stylesheet' href='/stylesheets/sign-up.css')
   link(rel='stylesheet' href='/stylesheets/log-in.css')
+
   div(class='full-container')
     div(class='half-container left-side')
       div(class='content-container')
         h2(class='h2-header') Nice Bytes
           p Insert Random Text Here
+
     div(class='half-container right-side')
+      
       div(class='tabs-container')
         div(class='link-container' id='link-container-sign-up')
           a(href='/users/signup' id='sign-up-link') Sign Up
         div(class='link-container' id='link-container-log-in')
           a(href='/users/login' id='log-in-link') Log In
+      
       div(class='sign-up-container')
         form(class='sign-up' action='/users/login' method='post')
           div
             h3(class='form__h3') Welcome back!
             p(class='form__p') Temporary ugly form.
+          
           input(type='hidden' name='_csrf' value=csrfToken)
+          
           div(class='form-group')
             label(for='email')
             input(id='email' type='email' name='email' placeholder='Email')
             ul(class='sign-up-container__input-errors' id='sign-up-container-email-errors')
               each err in errorMessages.email
                 li= err
+          
           div(class='form-group')
             label(for='password')
             input(id='password' type='password' name='password' placeholder='Password')
             ul(class='sign-up-container__input-errors' id='sign-up-container-password-errors')
               each err in errorMessages.password
                 li= err
+          
           button(id='sign-up-container__button' type='submit') Log In
+          
           p(class='hidden') All required fields are marked with *
         div(id='log-in-link-container')
           //- a(href='/log-in' id='log-in-link') If you already have an account -- log in here.
