@@ -30,7 +30,6 @@ router.post(
   '/signup',
   userSignupValidator,
   csrfProtection,
-  bodyParser,
   asyn(async (req, res, next) => {
     // Request URL params 
     const { username, email, password } = req.params;
