@@ -14,12 +14,23 @@ const router = express.Router();
 // Middleware configuration
 const csrfProtection = csrf({ cookie: true });
 
+let errorMessages = {
+  firstName: [],
+  lastName: [],
+  username: [],
+  email: [],
+  password: [],
+  confirmPassword: [],
+};
+
+let validationPassing = true;
+
 //
 // GET: http://localhost:8080/users/signup
 // Send the signup form with csrf protection token
 //
 router.get('/signup', csrfProtection, (req, res, next) => {
-  return res.render('sign-up', { csrfToken: req.csrfToken() });
+  return res.render('sign-up', { csrfToken: req.csrfToken(), errorMessages });
 });
 
 //
@@ -30,55 +41,47 @@ router.post(
   '/signup',
   userSignupValidator,
   csrfProtection,
-  bodyParser,
   asyn(async (req, res, next) => {
-    // Request URL params 
-    const { username, email, password } = req.params;
-
-    // Array of validation errors
-    const errors = [];
+    // Request URL params
+    const { username, email, password } = req.body;
 
     // Check for validation errors
     const validationErrors = validationResult(req);
 
-    // If express validator found errors...
+    // If express validator found errors
     if (!validationErrors.isEmpty()) {
-      // Push errors to the errors array...
-      errors.push(validationErrors.array().map(error => error.msg));
-
-      // Then send a view with errors and new csrf token
-      return res.render('log-in', { csrf: req.csrfToken(), validationErrors: errors });
+      validationErrors.errors.forEach(err => {
+        errorMessages[err.param].push(err.msg);
+      });
+      validationPassing = false;
     }
 
-    // Check if the requested username is in use
-    if (await userUsernameIsUnique(username)) {
-      // Push error to array if not unique
-      errors.push(`Username "${username}" is in use. Please pick another username.`);
-    }
-    // Check if the requested username is in use
-    if (await userEmailIsUnique(email)) {
-      // Push error to array if not unique
-      errors.push(`Email "${email}" is in use. Please use another email.`);
+    // If the requested username is in use
+    if (!(await userUsernameIsUnique(username))) {
+      errorMessages.username.push(`Username "${username}" is in use.`);
+      validationPassing = false;
     }
 
-    // If there is anything inside of the errors array...
-    if (errors.length) {
+    // If the requested username is in use
+    if (!(await userEmailIsUnique(email))) {
+      errorMessages.email.push(`Email "${email}" is in use.`);
+      validationPassing = false;
+    }
+
+    // If validation failed
+    if (!validationPassing) {
       // Then send a view with errors and new csrf token...
-      return res.render('log-in', { csrf: req.csrfToken(), validationErrors: errors });
+      return res.render('sign-up', { csrf: req.csrfToken(), errorMessages });
     }
+
     // Else create the user and redirect to home
     else {
-      // Hash the password
       const passwordHash = await bcrypt.hash(`${password}:${secret}`, 10);
-
-      // Create the user
       await User.create({
         username: username,
         email: email,
         passwordHash: passwordHash,
       });
-
-      // Redirect to home
       return res.redirect('/');
     }
   })
@@ -88,13 +91,14 @@ router.post(
  * GET: http://localhost:8080/users/login
  */
 router.get('/login', csrfProtection, (req, res, next) => {
-  return res.render('log-in', { csrfToken: req.csrfToken() });
+  return res.render('log-in', { csrfToken: req.csrfToken(), errorMessages });
 });
 
 /**
  * POST: http://localhost:8080/users/login
  */
-router.post('/login',
+router.post(
+  '/login',
   userLoginValidator,
   csrfProtection,
   asyn(async (req, res, next) => {
@@ -103,7 +107,7 @@ router.post('/login',
     // If there is anything inside of the errors array then send the errors to
     // the client, else redirect
     if (!errors.length) {
-      return res.render('log-in', { csrf: req.csrfToken(), errors });
+      return res.render('log-in', { csrf: req.csrfToken(), errorMessages });
     } else {
     }
   })
@@ -116,7 +120,7 @@ router.post('/login',
 const userUsernameIsUnique = async username => {
   try {
     const user = await User.findAll({ where: { username: username } });
-  } catch {
+  } catch (e) {
     return true;
   }
   return false;
@@ -129,7 +133,7 @@ const userUsernameIsUnique = async username => {
 const userEmailIsUnique = async email => {
   try {
     const user = await User.findAll({ where: { email: email } });
-  } catch {
+  } catch (e) {
     return true;
   }
   return false;
