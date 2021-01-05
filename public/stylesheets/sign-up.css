@@ -1,6 +1,6 @@
 body {
-  background-image: url("../images/restaurant-blue.jpg");
-  background-size: 100% 120%;
+  background-image: url("/images/restaurant-blue.jpg");
+  background-size: cover;
   background-repeat: no-repeat;
 }
 
@@ -8,7 +8,7 @@ body {
   display: flex;
   /* margin: auto 0px auto 0px; */
   height: 100%;
-  vertical-align: auto;
+  /* vertical-align: auto; */
 }
 
 .half-container {
@@ -17,22 +17,22 @@ body {
   /* height: 100%; */
 }
 
-.half-container + .half-container {
+.right-side {
   /* background-color: rgb(82, 140, 177); */
   /* border-left: 5px solid white; */
   width: 45%;
 }
 
 .content-container {
-  margin: 0px auto;
   height: 100%;
+  margin: 0px auto;
   width: 80%;
   /* width: 500px; */
 }
 
 .h2-header {
-  font: 30pt "Kufam Regular";
   color: white;
+  font: 30pt "Kufam Regular";
   letter-spacing: 3px;
   margin: auto;
 }
@@ -42,69 +42,64 @@ body {
 }
 
 .link-container {
-  /* margin: 5px auto; */
   border-top-left-radius: 7px;
   border-top-right-radius: 7px;
   display: flex;
   justify-content: space-around;
   padding: 10px 0px 10px 0px;
-  /* width: 500px; */
 }
 
 #log-in-link,
 #sign-up-link {
-  font: bold;
   text-align: center;
-  width: 50%;
 }
 
 .link-container,
 .sign-up-container {
   background-color: whitesmoke;
   margin: 60px auto 0px auto;
-  /* width: 500px; */
 }
 .sign-up-container {
   border: 2px solid black;
-  border-top: hidden;
   border-bottom-left-radius: 7px;
   border-bottom-right-radius: 7px;
+  border-top: hidden;
   margin: 0px auto 0px auto;
   width: 500px;
-  background-color: #eaedf4;
 }
 
 .sign-up {
-  margin: 5px 5%;
-  /* background-color: #eaedf4; */
+  background-color: whitesmoke;
+  margin: 0px 5%;
   padding: 10px;
+}
+
+.form__h3,
+.form__p {
+  font-family: "Kufam Regular";
+  text-align: center;
+}
+
+.form__h3 {
+  font-size: 20pt;
+  margin-top: 10px;
 }
 
 .link-container {
   border: 2px solid black;
-  /* border-bottom: hidden; */
-  /* padding: auto 0px; */
   width: 50%;
 }
 
-.testing-container {
+.tabs-container {
   display: flex;
   font: 14pt "Kufam Black";
-  margin: 0px auto 0px auto;
+  margin: 0px auto;
   width: 500px;
 }
 
-#sign-up-link {
-  /* border: 2px solid black; */
-  /* border-bottom: hidden; */
-  margin-right: 10px;
-}
-
 input {
-  /* background-color: rgb(90, 90, 185); */
   color: rgb(110, 107, 107);
   font: 14pt "Kufam Regular";
-  /* margin: 5px auto; */
   padding: 2px 12px 2px 24px;
   margin: 5px 0px;
   width: 100%;
@@ -112,13 +107,13 @@ input {
   font-size: 20px;
 }
 
-#sign-up-button {
-  font: 20px "Kufam Black";
+#sign-up-container__button {
   background-color: rgb(92 96 224);
   border: none;
   border-radius: 6px;
   box-shadow: none;
   color: white;
+  font: 20px "Kufam Black";
   margin: 10px 0px;
   padding: 3px 0px;
   text-decoration: none;

@@ -27,6 +27,7 @@ const store = new SequelizeStore({ db: sequelize });
 
 app.use(
   session({
+    name: 'nice-bytes.sid',
     secret,
     store,
     saveUninitialized: false,

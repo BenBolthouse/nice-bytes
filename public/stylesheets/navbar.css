@@ -1,0 +1,35 @@
+.navbar {
+  background-color: rgb(17, 17, 17);
+  color: #ffffff;
+  display: grid;
+  position: absolute;
+  grid-template-columns: 20% 80%;
+  height: 80px;
+  padding: 16px;
+  z-index: 200;
+  top: 0; right: 0; left: 0;
+}
+.navbar__brand a {
+  display: grid;
+  grid-template-columns: 48px auto;
+}
+.navbar__logo {
+  width: 48px;
+  height: 48px;
+}
+.navbar__name {
+  font-size: 18px;
+  letter-spacing: .1em;
+  line-height: 48px;
+  padding-left: 16px;
+}
+.navbar__links ul {
+  height: 50px;
+  list-style: none;
+}
+.navbar__links ul li {
+  height: 50px;
+}
+.navbar__links ul li a {
+  line-height: 50px;
+}

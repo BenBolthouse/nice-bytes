@@ -17,6 +17,10 @@ html {
   height: 100%;
 }
 
+.hidden {
+  visibility: hidden;
+}
+
 h1 {
   font: 30pt "Kufam Regular";
   color: white;
@@ -83,6 +87,12 @@ a:link {
 body {
   height: 100%;
   background-image: url("../images/restaurant-blue.jpg");
+  overflow: hidden;
+  /* margin-top: 50px; */
+  /* padding-top: 50px; */
+}
+
+li a {
 }
 
 /* Nav Bar */
@@ -119,10 +129,15 @@ body {
 #nav-list li {
   display: flex;
   flex-direction: row;
-  margin: auto 0px;
+  /* margin: auto 0px; */
   padding: 0px 15px;
   border-left-style: solid;
   border-width: 1px;
+  text-align: center;
+}
+
+.nav-list__link:hover {
+  background-color: grey;
 }
 
 li>li {
@@ -132,6 +147,8 @@ li>li {
 
 #nav-list {
   display: flex;
+  /* display: block; */
+  /* float: right; */
   /* justify-content: space-between; */
 }
 
