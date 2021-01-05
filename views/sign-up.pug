@@ -7,14 +7,17 @@ block content
       div(class='content-container')
         h2(class='h2-header') Nice Bytes
           p Insert Random Text Here
-    div(class='half-container')
-      div(class='testing-container')
+    div(class='half-container right-side')
+      div(class='tabs-container')
         div(class='link-container' id='link-container-sign-up')
-          a(href='/sign-up' id='sign-up-link') Sign Up
+          a(href='/users/signup' id='sign-up-link') Sign Up
         div(class='link-container' id='link-container-log-in')
-          a(href='/log-in' id='log-in-link') Log In
+          a(href='/users/login' id='log-in-link') Log In
       div(class='sign-up-container')
         form(class='sign-up' action='/users/signup' method='post')
+          div
+            h3(class='form__h3') Join our community!
+            p(class='form__p') Please fill in the required fields below.
           input(type='hidden' name='_csrf' value=csrfToken)
           div(class='form-group')
             label(for='firstName')
@@ -30,28 +33,29 @@ block content
                 li= err
           div(class='form-group')
             label(for='username')
-            input(id='username' type='text' name='username' placeholder='Username')
+            input(id='username' type='text' name='username' placeholder='Username*')
             ul(class='sign-up-container__input-errors' id='sign-up-container-username-errors')
               each err in errorMessages.username
                 li= err
           div(class='form-group')
             label(for='email')
-            input(id='email' type='email' name='email' placeholder='Email')
+            input(id='email' type='email' name='email' placeholder='Email*')
             ul(class='sign-up-container__input-errors' id='sign-up-container-email-errors')
               each err in errorMessages.email
                 li= err
           div(class='form-group')
             label(for='password')
-            input(id='password' type='password' name='password' placeholder='Password')
+            input(id='password' type='password' name='password' placeholder='Password*')
             ul(class='sign-up-container__input-errors' id='sign-up-container-password-errors')
               each err in errorMessages.password
                 li= err
           div(class='form-group')
             label(for='confirmPassword')
-            input(id='confirmPassword' type='password' name='confirmPassword' placeholder='Confirm password')
+            input(id='confirmPassword' type='password' name='confirmPassword' placeholder='Confirm password*')
             ul(class='sign-up-container__input-errors' id='sign-up-container-confirmPassword-errors')
               each err in errorMessages.confirmPassword
                 li= err
-          button(id='sign-up-button' type='submit') Sign Up
+          button(id='sign-up-container__button' type='submit') Sign Up
+          p All required fields are marked with *
         div(id='log-in-link-container')
           //- a(href='/log-in' id='log-in-link') If you already have an account -- log in here.

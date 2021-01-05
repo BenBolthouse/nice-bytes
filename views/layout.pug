@@ -12,7 +12,7 @@ html
           a(href="/" id="logo-link") 
             img(src='/images/nicebytes-logo2.png' height='45px' width='45px' id='logo-image')
         ul(id="nav-list") 
-          li 
+          li(class='nav-list__link') 
             a(href='/spots') Spots
           if (loggedIn)
             li 
@@ -20,7 +20,7 @@ html
             li 
               a(href='/users/logout') Log Out
           else 
-            li 
+            li(class='nav-list__link')
               a(href='/users/login') Log In
 
     div(id="main-container")
