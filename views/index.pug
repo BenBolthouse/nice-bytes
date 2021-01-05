@@ -8,4 +8,12 @@ append head
 
 block content
   h1= title
-  p Welcome to your Project Skeleton
+  p Find your new favorite Spot
+  if spots
+  div(class='spot-list__container')
+    each spot in spots
+      ul(class='spot-list__box')
+        div
+          img(class= 'spot-list__img', src= `${spot.imgUrl}`)
+        div(class= 'spot-list__name')= spot.name
+        div(class= 'spot-list__description')= spot.description

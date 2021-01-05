@@ -26,6 +26,23 @@ a:link {
   text-decoration: none;
 }
 
+.spot-list__img {
+  height: 100px;
+  width: 100px;
+}
+
+.spot-list__name {
+  font-size: large;
+}
+
+.spot-list__container {
+  display: flex;
+}
+
+.spot-list__box {
+  display:
+}
+
 body {
   background-color: rgba(244, 241, 234, 0.5);
   height: 100%;
