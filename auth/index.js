@@ -35,6 +35,7 @@ const logUserIn = (req, user) => {
  */
 const logUserOut = (req) => {
   delete req.session.auth;
+  delete req.session.user;
 };
 
 /**
