@@ -86,7 +86,7 @@ router.post(
         email: email,
         passwordHash: passwordHash,
       });
-      return res.send('/');
+      return res.redirect('/');
     }
   })
 );

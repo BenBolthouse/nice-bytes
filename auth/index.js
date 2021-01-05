@@ -21,6 +21,12 @@ const logUserIn = (req, user) => {
   req.session.auth = {
     userId: user.id,
   };
+  req.session.user = {
+    firstName: user.firstName,
+    lastName: user.lastName,
+    username: user.username,
+    email: user.email,
+  }
 };
 
 /**
@@ -29,6 +35,7 @@ const logUserIn = (req, user) => {
  */
 const logUserOut = (req) => {
   delete req.session.auth;
+  delete req.session.user;
 };
 
 /**
