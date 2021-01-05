@@ -15,30 +15,12 @@ block content
         div(class='link-container' id='link-container-log-in')
           a(href='/users/login' id='log-in-link') Log In
       div(class='sign-up-container')
-        form(class='sign-up' action='/users/signup' method='post')
+        form(class='sign-up' action='/users/login' method='post')
           div
             h3(class='form__h3') Welcome back!
             p(class='form__p') Temporary ugly form.
           input(type='hidden' name='_csrf' value=csrfToken)
-          div(class='form-group hidden')
-            label(for='firstName')
-            input(id='firstName' type='text' name='firstName' placeholder='First name')
-            ul(class='sign-up-container__input-errors' id='sign-up-container-firstName-errors')
-              each err in errorMessages.firstName
-                li= err
-          div(class='form-group hidden')
-            label(for='lastName')
-            input(id='lastName' type='text' name='lastName' placeholder='Last name')
-            ul(class='sign-up-container__input-errors' id='sign-up-container-lastName-errors')
-              each err in errorMessages.lastName
-                li= err
           div(class='form-group')
-            label(for='username')
-            input(id='username' type='text' name='username' placeholder='Username')
-            ul(class='sign-up-container__input-errors' id='sign-up-container-username-errors')
-              each err in errorMessages.username
-                li= err
-          div(class='form-group hidden')
             label(for='email')
             input(id='email' type='email' name='email' placeholder='Email')
             ul(class='sign-up-container__input-errors' id='sign-up-container-email-errors')
@@ -49,12 +31,6 @@ block content
             input(id='password' type='password' name='password' placeholder='Password')
             ul(class='sign-up-container__input-errors' id='sign-up-container-password-errors')
               each err in errorMessages.password
-                li= err
-          div(class='form-group hidden')
-            label(for='confirmPassword')
-            input(id='confirmPassword' type='password' name='confirmPassword' placeholder='Confirm password')
-            ul(class='sign-up-container__input-errors' id='sign-up-container-confirmPassword-errors')
-              each err in errorMessages.confirmPassword
                 li= err
           button(id='sign-up-container__button' type='submit') Log In
           p(class='hidden') All required fields are marked with *
