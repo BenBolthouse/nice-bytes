@@ -1,3 +1,22 @@
+@font-face {
+  font-family: "Kufam ExtraBold";
+  src: url("./fonts/Kufam/static/Kufam-ExtraBold.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Kufam Black";
+  src: url("./fonts/Kufam/static/Kufam-Black.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Kufam Regular";
+  src: url("./fonts/Kufam/static/Kufam-Regular.ttf") format("truetype");
+}
+
+html {
+  height: 100%;
+}
+
 h1 {
   color: #555555;
 }
@@ -9,6 +28,7 @@ a:link {
 
 body {
   background-color: rgba(244, 241, 234, 0.5);
+  height: 100%;
 }
 
 /* Nav Bar */
@@ -19,6 +39,8 @@ body {
   background-color: #f4f1ea;
   height: 50px;
   border: 1px solid;
+  border-left: hidden;
+  border-right: hidden;
 }
 
 .container {
