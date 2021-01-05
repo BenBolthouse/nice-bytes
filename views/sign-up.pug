@@ -2,20 +2,32 @@ extends layout
 
 block content
   link(rel='stylesheet' href='/stylesheets/sign-up.css')
-
-  div(class='sign-up-container')
-    form(class='sign-up' action='/users/sign-up' method='post')
-      input(type='hidden' name='_csrf' value=csrfToken)
-      div(class='form-group')
-        label(for='first-name')
-        input(id='first-name' type='text' placeholder='First name')
-      div(class='form-group')
-        label(for='last-name')
-        input(id='last-name' type='text' placeholder='Last name')
-      div(class='form-group')
-        label(for='username')
-        input(id='username' type='text' placeholder='Username')
-      include includes/authorization-fields
-      button(id='sign-up-button' type='submit') Sign Up
-    div(id='log-in-link-container')
-      a(href='/log-in' id='log-in-link') If you already have an account -- log in here.
+  div(class='full-container')
+    div(class='half-container left-side')
+      div(class='content-container')
+        h2(class='h2-header') Nice Bytes
+          p Insert Random Text Here
+    div(class='half-container')
+      div(class='testing-container')
+        div(class='link-container' id='link-container-sign-up')
+          a(href='/sign-up' id='sign-up-link') Sign Up
+        div(class='link-container' id='link-container-log-in')
+          a(href='/log-in' id='log-in-link') Log In
+      div(class='sign-up-container')
+        form(class='sign-up')
+          input(type='hidden' name='_csrf' value=csrfToken)
+          div(class='form-group')
+            label(for='first-name')
+            input(id='first-name' type='text' placeholder='First name')
+          div(class='form-group')
+            label(for='last-name')
+            input(id='last-name' type='text' placeholder='Last name')
+          div(class='form-group')
+            label(for='username')
+            input(id='username' type='text' placeholder='Username')
+          include includes/authorization-fields
+          div(class='form-group')
+            input(id='confirm-password' class='form-control' type='password', name='confirm-password', placeholder='Confirm Password')
+          button(id='sign-up-button' type='submit') Sign Up
+        div(id='log-in-link-container')
+          //- a(href='/log-in' id='log-in-link') If you already have an account -- log in here.
