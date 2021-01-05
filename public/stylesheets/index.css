@@ -18,10 +18,20 @@ html {
 }
 
 h1 {
-  color: #555555;
+  font: 30pt "Kufam Regular";
+  color: white;
+  letter-spacing: 3px;
+  /* margin: auto; */
+}
+
+h2 {
+  font: 20pt "Kufam Regular";
+  color: white;
+  letter-spacing: 3px;
 }
 
 /* Removes a:link default css setting that underlines links. */
+
 a:link {
   text-decoration: none;
 }
@@ -29,23 +39,50 @@ a:link {
 .spot-list__img {
   height: 100px;
   width: 100px;
+  border-radius: 5px;
 }
 
 .spot-list__name {
-  font-size: large;
+  font-size: 25px;
+  font-weight: bold;
 }
 
 .spot-list__container {
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 700px;
+  border: 2px solid #555555;
+  border-radius: 15px;
+  background-color: rgba(244, 241, 234);
 }
 
 .spot-list__box {
-  display:
+  display: flex;
+  flex-direction: row;
+  padding: 10px;
+}
+
+.spot-list__textwrap {
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  flex-wrap: wrap;
+}
+
+.spot-list__div {
+  padding: 10px;
+}
+
+.spot-list__parent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 body {
-  background-color: rgba(244, 241, 234, 0.5);
   height: 100%;
+  background-image: url("../images/restaurant-blue.jpg");
 }
 
 /* Nav Bar */
@@ -88,7 +125,7 @@ body {
   border-width: 1px;
 }
 
-li > li {
+li>li {
   border-left-style: solid;
   border-width: 1px;
 }
