@@ -1,12 +1,20 @@
 # Colors 
 
+Color Scheme: 
+- Primary fill: #f4f1ea
+- Seconday fill: #EAEDF4
+
 Background Color: 
-1. Body:  rgba(244, 241, 234, 0.5);
-2. Nav-bar: #f4f1ea;
+- Body:  ???
+- Nav-bar: #f4f1ea;
 
 Font Color: 
-1. Headings: 
-2. Regular text: 
+- Headings: ???
+- Regular text: ???
+
+Font: 
+- Headings:  ???
+- Regular text:  ???
 
 
 
