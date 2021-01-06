@@ -10,4 +10,7 @@ block content
     h2= spot.description
     img(src= `${spot.imgUrl}`)
     p= spot.type
-   
+    each review in reviews
+      p= review.title
+      p= review.body
+      p= review.stars
