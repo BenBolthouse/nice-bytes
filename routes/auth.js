@@ -29,7 +29,7 @@ class FormPrefillViewModel {
 }
 
 //
-// GET: http://localhost:8080/users/signup
+// GET: http://localhost:8080/signup
 //
 router.get('/signup', csrfProtection, (req, res, next) => {
   return res.render('sign-up', {
@@ -40,7 +40,7 @@ router.get('/signup', csrfProtection, (req, res, next) => {
 });
 
 //
-// POST: http://localhost:8080/users/signup
+// POST: http://localhost:8080/signup
 //
 router.post(
   '/signup',
@@ -97,6 +97,8 @@ router.post(
     else {
       const passwordHash = await bcrypt.hash(`${password}:${secret}`, 10);
       await User.create({
+        firstName: firstName || null,
+        lastName: lastName || null,
         username: username,
         email: email,
         passwordHash: passwordHash,
@@ -118,7 +120,7 @@ router.post(
 );
 
 /**
- * GET: http://localhost:8080/users/login
+ * GET: http://localhost:8080/login
  */
 router.get('/login', csrfProtection, (req, res, next) => {
   return res.render('log-in', {
@@ -129,7 +131,7 @@ router.get('/login', csrfProtection, (req, res, next) => {
 });
 
 /**
- * POST: http://localhost:8080/users/login
+ * POST: http://localhost:8080/login
  */
 router.post(
   '/login',
@@ -209,11 +211,11 @@ router.post(
 );
 
 /**
- * GET: http://localhost:8080/users/logout
+ * GET: http://localhost:8080/logout
  */
 router.get('/logout', authorize, (req, res, next) => {
   logUserOut(req);
-  res.redirect('/users/login');
+  res.redirect('/login');
 });
 
 /**

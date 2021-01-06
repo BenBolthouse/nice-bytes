@@ -12,12 +12,10 @@ const __setExpiryDate = () => {
  */
 const logUserIn = (req, user) => {
   req.session.cookie = {
-    httpOnly: true,
-    path: '/',
-    secure: false,
     expires: __setExpiryDate(),
-    maxAge: 10000,
-    domain: 'localhost:8080',
+    httpOnly: true,
+    secure: false,
+    path: '/',
   };
   req.session.auth = {
     userId: user.id,

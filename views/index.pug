@@ -1,24 +1,28 @@
 extends layout
 
 append head
-  //- add page specific styles by appending to the head
   link(rel="stylesheet" href="/stylesheets/index.css")
-  //- add page specific js
   script(src="/javascripts/index.js" type="module" defer)
 
 block content
-  div(class='spot-list__parent')
-    h1= title
-    h2 Find your new favorite Spot
-    if spots
-    ul(class='spot-list__container')
-      each spot in spots
-        a(href=`spots/${spot.id}`) 
-          li(class='spot-list__box')
-            div(class='spot-list__div')
-              img(class= 'spot-list__img', src= `${spot.imgUrl}`)
-            div(class='spot-list__textwrap')
-              div(class= 'spot-list__name spot-list__div')= spot.name
-              div(class= 'spot-list__description spot-list__div')= spot.description
+  div(class="page home-page")
+    div(class="page-content page-width")
+      h1 Find your new favorite spot
+      div(class="spot-list")
+        each spot in spots
+          p= spot.name
+
+    //- h1= title
+    //- h2 Find your new favorite Spot
+    //- if spots
+    //- ul(class='spot-list__container')
+    //-   each spot in spots
+    //-     a(href=`spots/${spot.id}`) 
+    //-       li(class='spot-list__box')
+    //-         div(class='spot-list__div')
+    //-           img(class= 'spot-list__img', src= `${spot.imgUrl}`)
+    //-         div(class='spot-list__textwrap')
+    //-           div(class= 'spot-list__name spot-list__div')= spot.name
+    //-           div(class= 'spot-list__description spot-list__div')= spot.description
               //- each review in spot.Reviews
               //-   div(class= 'spot-list__rating spot-list__div')= review.stars

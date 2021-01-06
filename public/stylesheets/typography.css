@@ -1,3 +1,7 @@
+html {
+  color: #333333;
+  font-family: "Open Sans", Arial, Helvetica, sans-serif;
+}
 h1, h2, h3 {
   font-family: "Kufam Regular", Arial, Helvetica, sans-serif;
 }
@@ -13,10 +17,6 @@ h2 {
 h3 {
   font-size: 1rem;
   font-weight: 600;
-}
-p, button, input, button, label {
-  color: #333333;
-  font-family: "Open Sans", Arial, Helvetica, sans-serif;
 }
 input {
   font-size: 1.125rem;

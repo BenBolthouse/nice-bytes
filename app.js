@@ -1,9 +1,9 @@
 const { sequelize } = require('./db/models');
 const { secret } = require('./config');
 const createError = require('http-errors');
-const usersRouter = require('./routes/users');
+const authRouter = require('./routes/auth');
 const indexRouter = require('./routes/index');
-const spotRouter = require('./routes/spots')
+const spotRouter = require('./routes/spots');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const express = require('express');
@@ -40,8 +40,8 @@ store.sync();
 
 // application routes
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/spots', spotRouter)
+app.use('/', authRouter);
+app.use('/spots', spotRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

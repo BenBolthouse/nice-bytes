@@ -1,67 +1,15 @@
-html, body, main {
+.home-page {
+  background-color: rgb(245,245,245);
   height: 100%;
 }
-body {
-  background-color: rgb(31, 49, 70);
-  background-size: cover;
-  overflow: hidden;
+.home-page h1 {
+  color: #777777;
+  margin: 2rem 0;
+  text-align: center;
 }
-.page {
-  overflow-x: hidden;
-  overflow-y: auto;
+.spot-list {
+  min-width: 480px;
 }
-.page-content {
+.spot-list__item {
   display: grid;
-  min-height: 100vh;
-  padding-top: 4rem; /* Clear the header */
-  padding-bottom: 2rem;
-}
-.page-width {
-  width: auto;
-  margin-left: 1rem;
-  margin-right: 1rem;
-}
-@media screen and (min-width: 640px) {
-  .page-width {
-    margin-left: auto;
-    margin-right: auto;
-    width: 560px;
-  }
-}
-@media screen and (min-width: 800px) {
-  .page-width {
-    width: 720px;
-  }
-}
-@media screen and (min-width: 1020px) {
-  .page-width {
-    width: 940px;
-  }
-}
-@media screen and (min-width: 1340px) {
-  .page-width {
-    width: 1260px;
-  }
-}
-/* label {
-  display: block;
-  font-size: .875rem;
-  font-weight: 700;
-  line-height: 1.25rem;
-  margin-top: .5rem;
-} */
-input {
-  border: 1px solid #bbbbbb;
-  border-radius: .25rem;
-  height: 3rem;
-  margin-top: .5rem;
-  padding: 0 .75rem;
-  width: 100%;
-}
-button {
-  background-color: #00B7FF;
-  border: none;
-  color: #ffffff;
-  font-size: 1.125rem;
-  padding: .5rem 2rem;
 }
