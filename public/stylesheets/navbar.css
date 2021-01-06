@@ -1,35 +1,39 @@
-.navbar {
+header {
   background-color: rgb(17, 17, 17);
   color: #ffffff;
-  display: grid;
   position: absolute;
-  grid-template-columns: 20% 80%;
-  height: 80px;
-  padding: 16px;
   z-index: 200;
   top: 0; right: 0; left: 0;
 }
+.navbar {
+  display: grid;
+  grid-template-columns: 20% 80%;
+  height: 4rem;
+  padding: 1rem;
+}
 .navbar__brand a {
   display: grid;
-  grid-template-columns: 48px auto;
+  grid-template-columns: 2rem auto;
 }
 .navbar__logo {
-  width: 48px;
-  height: 48px;
+  width: 2rem;
+  height: 2rem;
 }
 .navbar__name {
   font-size: 18px;
-  letter-spacing: .1em;
-  line-height: 48px;
-  padding-left: 16px;
+  letter-spacing: .1rem;
+  line-height: 2rem;
+  padding-left: 1rem;
 }
 .navbar__links ul {
-  height: 50px;
+  height: 2rem;
   list-style: none;
 }
 .navbar__links ul li {
-  height: 50px;
+  /* display: inline-block; */
+  float: right;
+  height: 2rem;
 }
 .navbar__links ul li a {
-  line-height: 50px;
+  line-height: 2rem;
 }

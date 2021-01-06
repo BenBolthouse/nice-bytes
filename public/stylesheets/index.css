@@ -1,159 +1,62 @@
-@font-face {
-  font-family: "Kufam ExtraBold";
-  src: url("./fonts/Kufam/static/Kufam-ExtraBold.ttf") format("truetype");
-}
-
-@font-face {
-  font-family: "Kufam Black";
-  src: url("./fonts/Kufam/static/Kufam-Black.ttf") format("truetype");
-}
-
-@font-face {
-  font-family: "Kufam Regular";
-  src: url("./fonts/Kufam/static/Kufam-Regular.ttf") format("truetype");
-}
-
-html {
+html, body, main {
   height: 100%;
 }
-
-.hidden {
-  visibility: hidden;
-}
-
-h1 {
-  font: 30pt "Kufam Regular";
-  color: white;
-  letter-spacing: 3px;
-  /* margin: auto; */
-}
-
-h2 {
-  font: 20pt "Kufam Regular";
-  color: white;
-  letter-spacing: 3px;
-}
-
-/* Removes a:link default css setting that underlines links. */
-
-a:link {
-  text-decoration: none;
-}
-
-.spot-list__img {
-  height: 100px;
-  width: 100px;
-  border-radius: 5px;
-}
-
-.spot-list__name {
-  font-size: 25px;
-  font-weight: bold;
-}
-
-.spot-list__container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 700px;
-  border: 2px solid #555555;
-  border-radius: 15px;
-  background-color: rgba(244, 241, 234);
-}
-
-.spot-list__box {
-  display: flex;
-  flex-direction: row;
-  padding: 10px;
-}
-
-.spot-list__textwrap {
-  display: flex;
-  flex-direction: column;
-  width: 500px;
-  flex-wrap: wrap;
-}
-
-.spot-list__div {
-  padding: 10px;
-}
-
-.spot-list__parent {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
 body {
-  height: 100%;
-  background-image: url("../images/restaurant-blue.jpg");
+  background-color: rgb(31, 49, 70);
+  background-size: cover;
   overflow: hidden;
-  /* margin-top: 50px; */
-  /* padding-top: 50px; */
 }
 
-li a {
-}
-
-/* Nav Bar */
-
-#global-header {
-  position: fixed;
-  width: 100%;
-  background-color: #f4f1ea;
-  height: 50px;
-  border: 1px solid;
-  border-left: hidden;
-  border-right: hidden;
-}
-
-.container {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
+/* ------------------------------------------------- Page-level rules */
+.page-content {
   height: 100%;
+  padding-top: 64px;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
-
-#logo {
-  /* height: 100%; */
-  margin: auto 15px;
-  /* text-align: center; */
-  /* width: 150px; */
+.page-width {
+  width: auto;
+  margin-left: 1rem;
+  margin-right: 1rem;
 }
-
-#logo-image {
-  margin-top: 2px;
-  border-radius: 5px;
+@media screen and (min-width: 640px) {
+  .page-width {
+    margin-left: auto;
+    margin-right: auto;
+    width: 560px;
+  }
 }
-
-#nav-list li {
-  display: flex;
-  flex-direction: row;
-  /* margin: auto 0px; */
-  padding: 0px 15px;
-  border-left-style: solid;
-  border-width: 1px;
-  text-align: center;
+@media screen and (min-width: 800px) {
+  .page-width {
+    width: 720px;
+  }
 }
-
-.nav-list__link:hover {
-  background-color: grey;
+@media screen and (min-width: 1020px) {
+  .page-width {
+    width: 940px;
+  }
 }
-
-li>li {
-  border-left-style: solid;
-  border-width: 1px;
+@media screen and (min-width: 1340px) {
+  .page-width {
+    width: 1260px;
+  }
 }
-
-#nav-list {
-  display: flex;
-  /* display: block; */
-  /* float: right; */
-  /* justify-content: space-between; */
+label {
+  display: block;
+  font-size: .875rem;
+  font-weight: 700;
+  line-height: 1.25rem;
+  margin-top: .5rem;
 }
-
-/* Main Container */
-
-#main-container {
-  padding-top: 50px;
+input {
+  height: 2rem;
+  padding: 0 .5rem;
+  width: 100%;
+}
+button {
+  background-color: #00B7FF;
+  border: none;
+  color: #ffffff;
+  font-size: 1.125rem;
+  padding: .5rem 2rem;
 }

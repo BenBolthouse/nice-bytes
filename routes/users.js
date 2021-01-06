@@ -21,6 +21,12 @@ class ValidationViewModel {
   password = [];
   confirmPassword = [];
 }
+class FormPrefillViewModel {
+  username = '';
+  firstName = '';
+  lastName = '';
+  email = '';
+}
 
 //
 // GET: http://localhost:8080/users/signup
@@ -29,6 +35,7 @@ router.get('/signup', csrfProtection, (req, res, next) => {
   return res.render('sign-up', {
     csrfToken: req.csrfToken(),
     errorMessages: new ValidationViewModel(),
+    prefill: new FormPrefillViewModel(),
   });
 });
 
@@ -41,11 +48,18 @@ router.post(
   csrfProtection,
   asyn(async (req, res, next) => {
     // body params
-    const { username, email, password, _csrf } = req.body;
+    const { firstName, lastName, username, email, password, _csrf } = req.body;
 
     // validation view model
     let validationViewModel = new ValidationViewModel();
     let validationPassing = true;
+
+    // form prefill persists form state across requests
+    let prefill = new FormPrefillViewModel();
+    prefill.firstName = firstName;
+    prefill.lastName = lastName;
+    prefill.username = username;
+    prefill.email = email;
 
     // check for form validation errors
     const validationErrors = validationResult(req);
@@ -75,6 +89,7 @@ router.post(
       return res.render('sign-up', {
         csrfToken: req.csrfToken(),
         errorMessages: validationViewModel,
+        prefill
       });
     }
 
@@ -98,6 +113,7 @@ router.get('/login', csrfProtection, (req, res, next) => {
   return res.render('log-in', {
     csrfToken: req.csrfToken(),
     errorMessages: new ValidationViewModel(),
+    prefill: new FormPrefillViewModel(),
   });
 });
 
@@ -119,6 +135,10 @@ router.post(
     let validationViewModel = new ValidationViewModel();
     let validationPassing = true;
 
+    // form prefill persists form state across requests
+    let prefill = new FormPrefillViewModel();
+    prefill.email = email;
+
     // check for form validation errors
     const validationErrors = validationResult(req);
 
@@ -139,6 +159,7 @@ router.post(
       return res.render('log-in', {
         csrfToken: req.csrfToken(),
         errorMessages: validationViewModel,
+        prefill
       });
     }
 
@@ -152,6 +173,7 @@ router.post(
       return res.render('log-in', {
         csrfToken: req.csrfToken(),
         errorMessages: validationViewModel,
+        prefill
       });
     }
 
@@ -160,6 +182,7 @@ router.post(
       return res.render('log-in', {
         csrfToken: req.csrfToken(),
         errorMessages: validationViewModel,
+        prefill
       });
     }
 

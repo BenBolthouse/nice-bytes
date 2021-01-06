@@ -1,41 +1,9 @@
-extends ./layout.pug
+extends /layout.pug
+
+link(rel='stylesheet' href='/stylesheets/sign-up.css')
 
 block content
-  link(rel="preconnect" href="https://fonts.gstatic.com")
-  link(href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet")
-  link(rel='stylesheet' href='/stylesheets/sign-up.css')
-  div(class="page-content page-width")
 
-    div(class="sign-up")
-      div(class="sign-up__panel-1")
-        h1 Violá!
-        p Just like that, 1,654 local restaurants.
-      div(class="sign-up__panel-2")
-        a(href="/users/login" class="sign-up__tab--inactive login-tab") Login
-        a(href="/users/sign-up" class="sign-up__tab--active sign-up-tab") Sign up
-        form(class="sign-up__form" action="/users/signup", method="post")
-          fieldset
-            div(class="sign-up__form-group")
-              label(for="firstName") First name
-              input(type="text" name="firstName" value=prefill.firstName)
-            div(class="sign-up__form-group")
-              label(for="lastName") Last name
-              input(type="text" name="lastName" value=prefill.lastName)
-            div(class="sign-up__form-group")
-              label(for="username") Username
-              input(type="text" name="username" required=true value=prefill.username)
-            div(class="sign-up__form-group")
-              label(for="email") Email
-              input(type="email" name="email" required=true value=prefill.email)
-            div(class="sign-up__form-group")
-              label(for="password") Password
-              input(type="password" name="password" required=true)
-            div(class="sign-up__form-group")
-              label(for="confirmPassword") Confirm password
-              input(type="password" name="confirmPassword" required=true)
-            //- CSRF protection field
-            input(type="hidden" name="_csrf" value=csrfToken)
-            button(type="submit") Sign up
 
   //- div(class='full-container')
   //-   div(class='half-container left-side')

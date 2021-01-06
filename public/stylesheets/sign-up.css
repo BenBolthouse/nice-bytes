@@ -1,4 +1,73 @@
-body {
+.sign-up {
+  align-items: center;
+  display: block;
+  height: 100%;
+}
+.sign-up__panel-1 {
+  color: #ffffff;
+  height: auto;
+  padding: 2rem 2rem 1.5rem;
+  text-align: center;
+}
+.sign-up__panel-1 h1 {
+  font-family: "Lobster";
+  font-size: 8rem;
+  margin-bottom: 2rem;
+  opacity: .5;
+}
+.sign-up__panel-1 p {
+  font-size: 2rem;
+}
+.sign-up__panel-2 {
+  background-color: #ffffff;
+  border-radius: 5px;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: 3rem auto;
+  margin: 0 auto;
+  min-height: 480px;
+  max-width: 420px;
+  overflow: hidden;
+}
+.sign-up__tab--active,
+.sign-up__tab--inactive {
+  display: block;
+  line-height: 3rem;
+  text-align: center;
+}
+.sign-up__tab--inactive {
+  background-color: #dddddd;
+  color: #777777;
+}
+.sign-up__form {
+  grid-column: 1 / 3;
+  padding: 2rem;
+}
+.sign-up__form label {
+  color: #777777;
+  margin-left: .5rem;
+}
+.sign-up__form button {
+  display: block;
+  margin: 2rem auto 0;
+}
+@media screen and (min-width: 1020px) {
+  .sign-up {
+    display: grid;
+    grid-template-columns: 60% 40%;
+  }
+  .sign-up__panel-2 {
+    margin: 0;
+  }
+}
+@media screen and (min-width: 1340px) {
+  .sign-up {
+    display: grid;
+    grid-template-columns: 70% 30%;
+  }
+}
+
+/* body {
   background-image: url("/images/restaurant-blue.jpg");
   background-size: cover;
   background-repeat: no-repeat;
@@ -6,20 +75,15 @@ body {
 
 .full-container {
   display: flex;
-  /* margin: auto 0px auto 0px; */
   height: 100%;
-  /* vertical-align: auto; */
 }
 
 .half-container {
   margin: auto 0px auto 0px;
   width: 55%;
-  /* height: 100%; */
 }
 
 .right-side {
-  /* background-color: rgb(82, 140, 177); */
-  /* border-left: 5px solid white; */
   width: 45%;
 }
 
@@ -27,7 +91,6 @@ body {
   height: 100%;
   margin: 0px auto;
   width: 80%;
-  /* width: 500px; */
 }
 
 .h2-header {
@@ -118,4 +181,4 @@ input {
   padding: 3px 0px;
   text-decoration: none;
   width: 100%;
-}
+} */
