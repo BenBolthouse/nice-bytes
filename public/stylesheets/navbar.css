@@ -16,6 +16,7 @@
 .navbar__logo {
   width: 48px;
   height: 48px;
+  border-radius: 5px;
 }
 .navbar__name {
   font-size: 18px;
