@@ -20,4 +20,5 @@ block content
             div(class='spot-list__textwrap')
               div(class= 'spot-list__name spot-list__div')= spot.name
               div(class= 'spot-list__description spot-list__div')= spot.description
-              //- div(class= 'spot-list__rating spot-list__div')= spot.Reviews.stars
+              //- each review in spot.Reviews
+              //-   div(class= 'spot-list__rating spot-list__div')= review.stars

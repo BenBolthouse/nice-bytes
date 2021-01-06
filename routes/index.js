@@ -8,12 +8,7 @@ var router = express.Router();
  * GET http://localhost:8080/
  */
 router.get('/', async function (req, res, next) {
-  // Code below to implement when we have reviews seeded
-  // Will not work:
-  // const spots = await Spot.findAll({include: Review, limit: 10, order: [ "Review.stars", 'DESC' ]});
-  // Will work:
-  const spots = await Spot.findAll({ limit: 10, order: ['name'] });
-  console.log(spots);
+  const spots = await Spot.findAll({ include: { model: Review }, limit: 10, order: ['name'] });
   res.render('index', { title: 'NiceBytes', user: req.session.user, spots });
 });
 
