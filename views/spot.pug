@@ -6,11 +6,15 @@ append head
 
 block content
   if spot
-    h1= spot.name
-    h2= spot.description
-    img(src= `${spot.imgUrl}` width="100px" height="100px")
-    p= spot.type
-    each review in reviews
-      p= review.title
-      p= review.body
-      p= review.stars
+    div(class= 'spot-review__parent')
+      img(src= `${spot.imgUrl}` width="100px" height="100px")
+      h1= spot.name
+      h2= spot.type
+      h3= spot.description
+      div(class= 'spot-review__box')
+        h2 Reviews
+        each review in reviews
+          div(class= 'spot-review__wrapper')
+            p= review.title
+            p= review.body
+            p= review.stars
