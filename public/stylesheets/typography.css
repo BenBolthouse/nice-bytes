@@ -15,7 +15,12 @@ h3 {
   font-weight: 600;
 }
 p, button, input, button, label {
+  color: #333333;
   font-family: "Open Sans", Arial, Helvetica, sans-serif;
+}
+input {
+  font-size: 1.125rem;
+  font-weight: 600;
 }
 label {
   letter-spacing: .025rem;

@@ -3,94 +3,75 @@ extends ./layout.pug
 block content
   link(rel="preconnect" href="https://fonts.gstatic.com")
   link(href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet")
-  link(rel='stylesheet' href='/stylesheets/sign-up.css')
-  div(class="page-content page-width")
-
-    div(class="sign-up")
-      div(class="sign-up__panel-1")
-        h1 Violá!
-        p Just like that, 1,654 local restaurants.
-      div(class="sign-up__panel-2")
-        a(href="/users/login" class="sign-up__tab--inactive login-tab") Login
-        a(href="/users/sign-up" class="sign-up__tab--active sign-up-tab") Sign up
-        form(class="sign-up__form" action="/users/signup", method="post")
-          fieldset
-            div(class="sign-up__form-group")
-              label(for="firstName") First name
-              input(type="text" name="firstName" value=prefill.firstName)
-            div(class="sign-up__form-group")
-              label(for="lastName") Last name
-              input(type="text" name="lastName" value=prefill.lastName)
-            div(class="sign-up__form-group")
-              label(for="username") Username
-              input(type="text" name="username" required=true value=prefill.username)
-            div(class="sign-up__form-group")
-              label(for="email") Email
-              input(type="email" name="email" required=true value=prefill.email)
-            div(class="sign-up__form-group")
-              label(for="password") Password
-              input(type="password" name="password" required=true)
-            div(class="sign-up__form-group")
-              label(for="confirmPassword") Confirm password
-              input(type="password" name="confirmPassword" required=true)
-            //- CSRF protection field
-            input(type="hidden" name="_csrf" value=csrfToken)
-            button(type="submit") Sign up
-
-  //- div(class='full-container')
-  //-   div(class='half-container left-side')
-  //-     div(class='content-container')
-  //-       h2(class='h2-header') Nice Bytes
-  //-         p Insert Random Text Here
-  //-   div(class='half-container right-side')
-  //-     div(class='tabs-container')
-  //-       div(class='link-container' id='link-container-sign-up')
-  //-         a(href='/users/signup' id='sign-up-link') Sign Up
-  //-       div(class='link-container' id='link-container-log-in')
-  //-         a(href='/users/login' id='log-in-link') Log In
-  //-     div(class='sign-up-container')
-  //-       form(class='sign-up' action='/users/signup' method='post')
-  //-         div
-  //-           h3(class='form__h3') Join our community!
-  //-           p(class='form__p') Please fill in the required fields below.
-  //-         input(type='hidden' name='_csrf' value=csrfToken)
-  //-         div(class='form-group')
-  //-           label(for='firstName')
-  //-           input(id='firstName' type='text' name='firstName' placeholder='First name')
-  //-           ul(class='sign-up-container__input-errors' id='sign-up-container-firstName-errors')
-  //-             each err in errorMessages.firstName
-  //-               li= err
-  //-         div(class='form-group')
-  //-           label(for='lastName')
-  //-           input(id='lastName' type='text' name='lastName' placeholder='Last name')
-  //-           ul(class='sign-up-container__input-errors' id='sign-up-container-lastName-errors')
-  //-             each err in errorMessages.lastName
-  //-               li= err
-  //-         div(class='form-group')
-  //-           label(for='username')
-  //-           input(id='username' type='text' name='username' placeholder='Username*')
-  //-           ul(class='sign-up-container__input-errors' id='sign-up-container-username-errors')
-  //-             each err in errorMessages.username
-  //-               li= err
-  //-         div(class='form-group')
-  //-           label(for='email')
-  //-           input(id='email' type='email' name='email' placeholder='Email*')
-  //-           ul(class='sign-up-container__input-errors' id='sign-up-container-email-errors')
-  //-             each err in errorMessages.email
-  //-               li= err
-  //-         div(class='form-group')
-  //-           label(for='password')
-  //-           input(id='password' type='password' name='password' placeholder='Password*')
-  //-           ul(class='sign-up-container__input-errors' id='sign-up-container-password-errors')
-  //-             each err in errorMessages.password
-  //-               li= err
-  //-         div(class='form-group')
-  //-           label(for='confirmPassword')
-  //-           input(id='confirmPassword' type='password' name='confirmPassword' placeholder='Confirm password*')
-  //-           ul(class='sign-up-container__input-errors' id='sign-up-container-confirmPassword-errors')
-  //-             each err in errorMessages.confirmPassword
-  //-               li= err
-  //-         button(id='sign-up-container__button' type='submit') Sign Up
-  //-         p All required fields are marked with *
-  //-       div(id='log-in-link-container')
-          //- a(href='/log-in' id='log-in-link') If you already have an account -- log in here.
+  link(rel='stylesheet' href='/stylesheets/auth-splash.css')
+  script(src="/javascripts/auth-splash.js")
+  div(class="page")
+    div(class="page-content page-width")
+      div(class="auth-splash")
+        div(class="auth-splash__panel-1")
+          h1 Violá!
+          p(class="sub-text") Just like that...1,654 local restaurants.
+        div(class="auth-splash__panel-2")
+          a(href="/users/login" class="auth-splash__tab--inactive login-tab") Login
+          a(href="/users/signup" class="auth-splash__tab--active auth-splash-tab") Sign up
+          form(id="authForm" class="auth-splash__form" action="/users/signup", method="post")
+            div(id="submittingOverlay" class="auth-splash__submitting--hide")
+              div(class="auth-splash__submitting-icon")
+            fieldset
+              div(class="auth-splash__form-group")
+                label(for="firstName") First name
+                input(type="text" name="firstName" value=prefill.firstName)
+                - var firstNameErrorState = errorMessages.firstName.length ? "invalid" : "valid";
+                if errorMessages.firstName.length
+                  div(id="firstNameMessageIcon" class="auth-splash__validation-icon--" + firstNameErrorState)
+                  ul(id="firstNameMessageList" class="auth-splash__form-messages--hide")
+                    each message in errorMessages.firstName
+                      li= message
+              div(class="auth-splash__form-group")
+                label(for="firstName") Last name
+                input(type="text" name="lastName" value=prefill.lastName)
+                - var lastNameErrorState = errorMessages.lastName.length ? "invalid" : "valid";
+                if errorMessages.lastName.length
+                  div(id="lastNameMessageIcon" class="auth-splash__validation-icon--" + lastNameErrorState)
+                  ul(id="lastNameMessageList" class="auth-splash__form-messages--hide")
+                    each message in errorMessages.lastName
+                      li= message
+              div(class="auth-splash__form-group")
+                label(for="firstName") Username
+                input(type="text" name="username" required=true value=prefill.username)
+                - var usernameErrorState = errorMessages.username.length ? "invalid" : "valid";
+                if errorMessages.username.length
+                  div(id="usernameMessageIcon" class="auth-splash__validation-icon--" + usernameErrorState)
+                  ul(id="usernameMessageList" class="auth-splash__form-messages--hide")
+                    each message in errorMessages.username
+                      li= message
+              div(class="auth-splash__form-group")
+                label(for="firstName") Email
+                input(type="email" name="email" required=true value=prefill.email)
+                - var emailErrorState = errorMessages.email.length ? "invalid" : "valid";
+                if errorMessages.email.length
+                  div(id="emailMessageIcon" class="auth-splash__validation-icon--" + emailErrorState)
+                  ul(id="emailMessageList" class="auth-splash__form-messages--hide")
+                    each message in errorMessages.email
+                      li= message
+              div(class="auth-splash__form-group")
+                label(for="firstName") Password
+                input(type="password" name="password" required=true)
+                - var passwordErrorState = errorMessages.password.length ? "invalid" : "valid";
+                if errorMessages.password.length
+                  div(id="passwordMessageIcon" class="auth-splash__validation-icon--" + passwordErrorState)
+                  ul(id="passwordMessageList" class="auth-splash__form-messages--hide")
+                    each message in errorMessages.password
+                      li= message
+              div(class="auth-splash__form-group")
+                label(for="firstName") Confirm password
+                input(type="password" name="confirmPassword" required=true)
+                - var confirmPasswordErrorState = errorMessages.confirmPassword.length ? "invalid" : "valid";
+                if errorMessages.confirmPassword.length
+                  div(id="confirmPasswordMessageIcon" class="auth-splash__validation-icon--" + confirmPasswordErrorState)
+                  ul(id="confirmPasswordMessageList" class="auth-splash__form-messages--hide")
+                    each message in errorMessages.confirmPassword
+                      li= message
+              //- CSRF protection field
+              input(type="hidden" name="_csrf" value=csrfToken)
+              button(type="submit") Sign up

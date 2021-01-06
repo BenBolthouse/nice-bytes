@@ -12,7 +12,7 @@ router.get('/', async function(req, res, next) {
   //const spots = await Spot.findAll({include: Review, limit: 10, order: [ "Review.stars", 'DESC' ]});
   const spots = await Spot.findAll({ limit: 10, order: [ 'name' ]});
   console.log(spots);
-  res.render('index', { title: 'NiceBytes', spots});
+  res.render('index', { title: 'NiceBytes', user: req.session.user, spots});
 });
 
 module.exports = router;

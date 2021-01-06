@@ -2,15 +2,12 @@ body {
   padding: 50px;
   font: 16px "Open Sans", Helvetica, Arial, sans-serif;
 }
-
 a {
   color: #00B7FF;
 }
-
 * {
   box-sizing: border-box;
 }
-
 h1, h2, h3, h4, h5, h6, a, ol, li, ul, div, span,
 body, header, nav, form, fieldset {
   font-size: 1rem;
@@ -22,11 +19,9 @@ body, header, nav, form, fieldset {
   outline: 0;
   font-weight: normal;
 }
-
 fieldset {
   border: none;
 }
-
 h1 {
   font-size: 2rem;
 }

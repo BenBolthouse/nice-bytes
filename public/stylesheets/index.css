@@ -6,13 +6,15 @@ body {
   background-size: cover;
   overflow: hidden;
 }
-
-/* ------------------------------------------------- Page-level rules */
-.page-content {
-  height: 100%;
-  padding-top: 64px;
+.page {
   overflow-x: hidden;
   overflow-y: auto;
+}
+.page-content {
+  display: grid;
+  min-height: 100vh;
+  padding-top: 4rem; /* Clear the header */
+  padding-bottom: 2rem;
 }
 .page-width {
   width: auto;
@@ -41,16 +43,19 @@ body {
     width: 1260px;
   }
 }
-label {
+/* label {
   display: block;
   font-size: .875rem;
   font-weight: 700;
   line-height: 1.25rem;
   margin-top: .5rem;
-}
+} */
 input {
-  height: 2rem;
-  padding: 0 .5rem;
+  border: 1px solid #bbbbbb;
+  border-radius: .25rem;
+  height: 3rem;
+  margin-top: .5rem;
+  padding: 0 .75rem;
   width: 100%;
 }
 button {
