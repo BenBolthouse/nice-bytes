@@ -10,9 +10,11 @@ router.get('/', (req, res) => {
 router.get('/:id', async (req, res, next) => {
     const id = req.params.id;
     const spot = await Spot.findByPk(id);
+    const reviews = await Review.findAll({ where: { spotId: id}});
     // const spot = await json.json();
     console.log(spot.name)
-    res.render('spot', { title: `${spot.name}`, spot });
+    console.log(reviews)
+    res.render('spot', { title: `${spot.name}`, spot, reviews });
 })
 
 module.exports = router;
