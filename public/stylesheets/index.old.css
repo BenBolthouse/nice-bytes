@@ -1,0 +1,118 @@
+html {
+  height: 100%;
+}
+body {
+  height: 100%;
+  background-image: url("../images/restaurant-blue.jpg");
+  overflow: hidden;
+}
+
+.spot-list__img {
+  height: 100px;
+  width: 100px;
+  border-radius: 5px;
+}
+
+.spot-list__name {
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.spot-list__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 700px;
+  border: 2px solid #555555;
+  border-radius: 15px;
+  background-color: rgba(244, 241, 234);
+}
+
+.spot-list__box {
+  display: flex;
+  flex-direction: row;
+  padding: 10px;
+}
+
+.spot-list__textwrap {
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  flex-wrap: wrap;
+}
+
+.spot-list__div {
+  padding: 10px;
+}
+
+.spot-list__parent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+li a {
+}
+
+/* Nav Bar */
+
+#global-header {
+  position: fixed;
+  width: 100%;
+  background-color: #f4f1ea;
+  height: 50px;
+  border: 1px solid;
+  border-left: hidden;
+  border-right: hidden;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+}
+
+#logo {
+  /* height: 100%; */
+  margin: auto 15px;
+  /* text-align: center; */
+  /* width: 150px; */
+}
+
+#logo-image {
+  margin-top: 2px;
+  border-radius: 5px;
+}
+
+#nav-list li {
+  display: flex;
+  flex-direction: row;
+  /* margin: auto 0px; */
+  padding: 0px 15px;
+  border-left-style: solid;
+  border-width: 1px;
+  text-align: center;
+}
+
+.nav-list__link:hover {
+  background-color: grey;
+}
+
+li>li {
+  border-left-style: solid;
+  border-width: 1px;
+}
+
+#nav-list {
+  display: flex;
+  /* display: block; */
+  /* float: right; */
+  /* justify-content: space-between; */
+}
+
+/* Main Container */
+
+#main-container {
+  padding-top: 50px;
+}

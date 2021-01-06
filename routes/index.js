@@ -1,18 +1,20 @@
 var express = require('express');
-const { Spot, Review } = require('../db/models')
+const { Spot, Review } = require('../db/models');
 var router = express.Router();
 
 //query the DB to find Spots
 
-
-
-/* GET home page. */
-router.get('/', async function(req, res, next) {
+/**
+ * GET http://localhost:8080/
+ */
+router.get('/', async function (req, res, next) {
   // Code below to implement when we have reviews seeded
-  const spots = await Spot.findAll({include: Review, limit: 10 });  // order: [ "Review.stars", 'DESC' ]
-  //const spots = await Spot.findAll({ limit: 10, order: [ 'name' ]});
-  //console.log('SPOTS', spots.Reviews)
-  res.render('index', { title: 'NiceBytes', spots, user: req.session.user, });
+  // Will not work:
+  // const spots = await Spot.findAll({include: Review, limit: 10, order: [ "Review.stars", 'DESC' ]});
+  // Will work:
+  const spots = await Spot.findAll({ limit: 10, order: ['name'] });
+  console.log(spots);
+  res.render('index', { title: 'NiceBytes', user: req.session.user, spots });
 });
 
 module.exports = router;
