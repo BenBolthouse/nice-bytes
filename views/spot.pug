@@ -8,9 +8,16 @@ block content
   if spot
     h1= spot.name
     h2= spot.description
-    img(src= `${spot.imgUrl}`)
+    img(src= `${spot.imgUrl}` width="100px" height="100px")
     p= spot.type
     each review in reviews
+<<<<<<< HEAD
       p= review.title
       p= review.body
       p= review.stars
+=======
+        p= review.title
+        p= review.body
+        p= review.stars
+   
+>>>>>>> 9b69c9bd15ec46407280aadac21e4b08c467fab0
