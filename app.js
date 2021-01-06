@@ -6,6 +6,7 @@ const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users')
 const spotRouter = require('./routes/spots');
 const collectionRouter = require('./routes/collection');
+const apiRouter = require('./routes/api');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const express = require('express');
@@ -43,6 +44,7 @@ store.sync();
 // application routes
 app.use('/', indexRouter);
 app.use('/', authRouter);
+app.use('/api', apiRouter);
 app.use('/spots', spotRouter);
 app.use('/users', usersRouter);
 app.use('/spots', spotRouter);

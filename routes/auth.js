@@ -1,6 +1,6 @@
 const { userSignupValidator, userLoginValidator } = require('./__validators');
 const { validationResult } = require('express-validator');
-const { asyncHandler: asyn } = require('./__utils');
+const { asyncHandler } = require('./__utils');
 const { secret } = require('../config');
 const { User, Collection } = require('../db/models');
 const bcrypt = require('bcrypt');
@@ -46,7 +46,7 @@ router.post(
   '/signup',
   userSignupValidator,
   csrfProtection,
-  asyn(async (req, res, next) => {
+  asyncHandler(async (req, res, next) => {
     // body params
     const { firstName, lastName, username, email, password, _csrf } = req.body;
 
@@ -137,7 +137,7 @@ router.post(
   '/login',
   csrfProtection,
   userLoginValidator,
-  asyn(async (req, res, next) => {
+  asyncHandler(async (req, res, next) => {
     // from sign-in form
     const { email, password } = req.body;
 

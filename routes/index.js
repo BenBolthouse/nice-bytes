@@ -1,6 +1,6 @@
-var express = require('express');
+const express = require('express');
 const { Spot, Review } = require('../db/models');
-var router = express.Router();
+const router = express.Router();
 
 //query the DB to find Spots
 
