@@ -2,7 +2,7 @@ const { userSignupValidator, userLoginValidator } = require('./__validators');
 const { validationResult } = require('express-validator');
 const { asyncHandler: asyn } = require('./__utils');
 const { secret } = require('../config');
-const { User } = require('../db/models');
+const { User, Collection } = require('../db/models');
 const bcrypt = require('bcrypt');
 const express = require('express');
 const csrf = require('csurf');
@@ -101,6 +101,17 @@ router.post(
         email: email,
         passwordHash: passwordHash,
       });
+
+      const userId = await User.findOne( { where: { username: username } });
+      await Collection.create({
+        userId: userId,
+        name: 'Want to Visit'
+      })
+      await Collection.create({
+        userId: userId,
+        name: 'Have Visited'
+      })
+
       return res.redirect('/');
     }
   })
