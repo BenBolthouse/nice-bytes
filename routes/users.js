@@ -102,13 +102,13 @@ router.post(
         passwordHash: passwordHash,
       });
 
-      const userId = await User.findOne( { where: { username: username } });
+      const user = await User.findOne( { where: { username: username } });
       await Collection.create({
-        userId: userId,
+        userId: user.id,
         name: 'Want to Visit'
       })
       await Collection.create({
-        userId: userId,
+        userId: user.id,
         name: 'Have Visited'
       })
 
