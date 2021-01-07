@@ -26,5 +26,5 @@ block form
           ul(id="passwordMessageList" class="auth-splash__form-messages--hide")
             each message in messages.password
               li= message
-      input(type="hidden" name="_csrf" value=csrfToken)
+      input(type="hidden" name="_csrf" value=csrf)
       button(type="submit") Login
