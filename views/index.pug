@@ -10,7 +10,10 @@ block content
       h1 Find your new favorite spot
       div(class="spot-list")
         each spot in spots
-          p= spot.name
+          div(class="spot-list__item")
+            img(src=spot.imgUrl)
+            div(class="spot-list__item-describe")
+            a(class="spot-list__item-depart")
 
     //- h1= title
     //- h2 Find your new favorite Spot

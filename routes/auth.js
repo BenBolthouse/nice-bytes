@@ -1,41 +1,46 @@
-const { userSignupValidator, userLoginValidator } = require('./__validators');
-const { validationResult } = require('express-validator');
-const { asyncHandler } = require('./__utils');
-const { secret } = require('../config');
+const { validateSignUp, validateLogin } = require('./__validators');
 const { User, Collection } = require('../db/models');
-const bcrypt = require('bcrypt');
+const { validationResult } = require('express-validator');
+const { secret } = require('../config');
+const { logUserIn, logUserOut, authorize } = require('../auth');
+const { asyncHandler } = require('./__utils');
 const express = require('express');
 const csrf = require('csurf');
-const { logUserIn, logUserOut, authorize } = require('../auth');
+const bcrypt = require('bcrypt');
 
 const router = express.Router();
 
 // form request forgery protection
 const csrfProtection = csrf({ cookie: true });
 
-class ValidationViewModel {
-  username = [];
-  firstName = [];
-  lastName = [];
-  email = [];
-  password = [];
-  confirmPassword = [];
-}
-class FormPrefillViewModel {
-  username = '';
-  firstName = '';
-  lastName = '';
-  email = '';
-}
+router.use((req, res, next) => {
+  const { firstName, lastName, username, email } = req.body;
+  res.locals.messages = {
+    firstName: [],
+    lastName: [],
+    username: [],
+    email: [],
+    password: [],
+    confirmPassword: [],
+  };
+  res.locals.prefill = {
+    firstName: firstName || '',
+    lastName: lastName || '',
+    username: username || '',
+    email: email || '',
+  };
+  next();
+});
 
 //
 // GET: http://localhost:8080/signup
 //
 router.get('/signup', csrfProtection, (req, res, next) => {
-  return res.render('sign-up', {
-    csrfToken: req.csrfToken(),
-    errorMessages: new ValidationViewModel(),
-    prefill: new FormPrefillViewModel(),
+  return res.render('partials/sign-up', {
+    csrf: req.csrfToken(),
+    user: req.session.user,
+    messages: res.locals.messages,
+    prefill: res.locals.prefill,
   });
 });
 
@@ -44,22 +49,14 @@ router.get('/signup', csrfProtection, (req, res, next) => {
 //
 router.post(
   '/signup',
-  userSignupValidator,
+  validateSignUp,
   csrfProtection,
   asyncHandler(async (req, res, next) => {
-    // body params
-    const { firstName, lastName, username, email, password, _csrf } = req.body;
+    // scoped uer variable
+    let user;
 
-    // validation view model
-    let validationViewModel = new ValidationViewModel();
-    let validationPassing = true;
-
-    // form prefill persists form state across requests
-    let prefill = new FormPrefillViewModel();
-    prefill.firstName = firstName;
-    prefill.lastName = lastName;
-    prefill.username = username;
-    prefill.email = email;
+    // indicates that express validation is passing
+    let passing = true;
 
     // check for form validation errors
     const validationErrors = validationResult(req);
@@ -67,55 +64,64 @@ router.post(
     // if form validation failed push errors into validation view model
     if (!validationErrors.isEmpty()) {
       validationErrors.errors.forEach(err => {
-        validationViewModel[err.param].push(err.msg);
+        res.locals.messages[err.param].push(err.msg);
       });
-      validationPassing = false;
+      passing = false;
     }
+
+    // data from form submission
+    const { _csrf, firstName, lastName, username, email, password } = req.body;
 
     // if the requested username is in use notify client
     if (!(await userUsernameIsUnique(username))) {
-      validationViewModel.username.push(`Username "${username}" is in use.`);
-      validationPassing = false;
+      res.locals.messages.username.push(
+        `Username "${username}" is taken, please choose another username.`
+      );
+      passing = false;
     }
 
-    // if the requested username is in use notify client
+    // if the requested email is in use notify client
     if (!(await userEmailIsUnique(email))) {
-      validationViewModel.email.push(`Email "${email}" is in use.`);
-      validationPassing = false;
+      res.locals.messages.email.push(
+        `Email "${email}" is already registered to an account.`
+      );
+      passing = false;
     }
 
-    // if any notify client
-    if (!validationPassing) {
-      return res.render('sign-up', {
-        csrfToken: req.csrfToken(),
-        errorMessages: validationViewModel,
-        prefill
+    // if any other validation is not passing notify the client
+    if (!passing)
+      return res.render('partials/sign-up', {
+        csrf: req.csrfToken(),
+        user: req.session.user,
+        messages: res.locals.messages,
+        prefill: res.locals.prefill,
       });
-    }
+
+    user = User.build();
 
     // else create the user and redirect to home
-    else {
-      const passwordHash = await bcrypt.hash(`${password}:${secret}`, 10);
-      await User.create({
+    const hash = await bcrypt.hash(`${password}:${secret}`, 10);
+    user = await User.create(
+      {
         firstName: firstName || null,
         lastName: lastName || null,
         username: username,
         email: email,
-        passwordHash: passwordHash,
-      });
+        passwordHash: hash,
+        collections: [{ name: 'Have Visited' }, { name: 'Want To Visit' }],
+      },
+      {
+        include: {
+          model: Collection,
+          as: 'collections',
+        },
+      }
+    );
 
-      const user = await User.findOne( { where: { username: username } });
-      await Collection.create({
-        userId: user.id,
-        name: 'Want to Visit'
-      })
-      await Collection.create({
-        userId: user.id,
-        name: 'Have Visited'
-      })
+    // log the user
+    // logUserIn(req, user);
 
-      return res.redirect('/');
-    }
+    return res.redirect('/');
   })
 );
 
@@ -123,10 +129,11 @@ router.post(
  * GET: http://localhost:8080/login
  */
 router.get('/login', csrfProtection, (req, res, next) => {
-  return res.render('log-in', {
-    csrfToken: req.csrfToken(),
-    errorMessages: new ValidationViewModel(),
-    prefill: new FormPrefillViewModel(),
+  return res.render('partials/log-in', {
+    csrf: req.csrfToken(),
+    user: req.session.user,
+    messages: res.locals.messages,
+    prefill: res.locals.prefill,
   });
 });
 
@@ -136,21 +143,13 @@ router.get('/login', csrfProtection, (req, res, next) => {
 router.post(
   '/login',
   csrfProtection,
-  userLoginValidator,
+  validateLogin,
   asyncHandler(async (req, res, next) => {
-    // from sign-in form
-    const { email, password } = req.body;
-
-    // scoped user
+    // scoped user variable
     let user;
 
-    // validation view model
-    let validationViewModel = new ValidationViewModel();
-    let validationPassing = true;
-
-    // form prefill persists form state across requests
-    let prefill = new FormPrefillViewModel();
-    prefill.email = email;
+    // indicates that express validation is passing
+    let passing = true;
 
     // check for form validation errors
     const validationErrors = validationResult(req);
@@ -158,55 +157,59 @@ router.post(
     // if form validation failed push errors into validation view model
     if (!validationErrors.isEmpty()) {
       validationErrors.errors.forEach(err => {
-        validationViewModel[err.param].push(err.msg);
+        res.locals.messages[err.param].push(err.msg);
       });
-      validationPassing = false;
+      passing = false;
     }
 
-    try {
-      // try to find the user by email
-      user = await User.findOne({ where: { email: email } });
-    } catch (e) {
-      // if user cannot be found then notify client
-      errorMessages.email.push(`User was not found with email address ${email}.`);
-      return res.render('log-in', {
-        csrfToken: req.csrfToken(),
-        errorMessages: validationViewModel,
-        prefill
+    // data from form submission
+    const { _csrf, email, password } = req.body;
+
+    // if the user cannot be found in user store notify client
+    user = await User.findOne({ where: { email: email } });
+    res.locals.messages.email.push(
+      'A user does not exist with the provided email.'
+    );
+    if (!user)
+      return res.render('partials/log-in', {
+        csrf: req.csrfToken(),
+        user: req.session.user,
+        messages: res.locals.messages,
+        prefill: res.locals.prefill,
       });
-    }
 
     // compare request password with user password
     const saltyPassword = `${password}:${secret}`;
-    const passwordIsValid = await bcrypt.compare(saltyPassword, user.passwordHash.toString());
+    const passwordIsValid = await bcrypt.compare(
+      saltyPassword,
+      user.passwordHash.toString()
+    );
 
     // if password is invalid notify client
-    if (!passwordIsValid) {
-      validationViewModel.password.push('Password is invalid.');
-      return res.render('log-in', {
-        csrfToken: req.csrfToken(),
-        errorMessages: validationViewModel,
-        prefill
+    if (!passwordIsValid)
+      res.locals.messages.password.push(
+        'Password is invalid. Please try again.'
+      );
+    if (!user)
+      return res.render('partials/log-in', {
+        csrf: req.csrfToken(),
+        user: req.session.user,
+        messages: res.locals.messages,
+        prefill: res.locals.prefill,
       });
-    }
 
-    // if any notify client
-    if (!validationPassing) {
-      return res.render('log-in', {
-        csrfToken: req.csrfToken(),
-        errorMessages: validationViewModel,
-        prefill
+    // if any other validation is not passing notify the client
+    if (!passing)
+      return res.render('partials/log-in', {
+        csrf: req.csrfToken(),
+        user: req.session.user,
+        messages: res.locals.messages,
+        prefill: res.locals.prefill,
       });
-    }
 
-    // else log the user in
-    else {
-      // session sign in
-      logUserIn(req, user);
-
-      // redirect to page
-      return res.redirect('/');
-    }
+    // if everything else checks out then log the user in
+    logUserIn(req, user);
+    return res.redirect('/');
   })
 );
 

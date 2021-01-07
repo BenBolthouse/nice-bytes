@@ -1,0 +1,30 @@
+extends ../auth-splash.pug
+
+block form
+
+  a(href="/login" class="auth-splash__tab--active login-tab") Login
+  a(href="/signup" class="auth-splash__tab--inactive auth-splash-tab") Sign up
+  form(id="authForm" class="auth-splash__form" action="/login", method="post")
+    div(id="submittingOverlay" class="auth-splash__submitting--hide")
+      div(class="auth-splash__submitting-icon")
+    fieldset
+      div(class="auth-splash__form-group")
+        label(for="firstName") Email
+        input(type="email" name="email" required=true value=prefill.email)
+        - var emailValid = messages.email.length ? "invalid" : "valid";
+        if messages.email.length
+          div(id="emailMessageIcon" class="auth-splash__validation-icon--" + emailValid)
+          ul(id="emailMessageList" class="auth-splash__form-messages--hide")
+            each message in messages.email
+              li= message
+      div(class="auth-splash__form-group")
+        label(for="firstName") Password
+        input(type="password" name="password" required=true)
+        - var passwordValid = messages.password.length ? "invalid" : "valid";
+        if messages.password.length
+          div(id="passwordMessageIcon" class="auth-splash__validation-icon--" + passwordValid)
+          ul(id="passwordMessageList" class="auth-splash__form-messages--hide")
+            each message in messages.password
+              li= message
+      input(type="hidden" name="_csrf" value=csrfToken)
+      button(type="submit") Login

@@ -21,4 +21,6 @@ header
       div(class="navbar__user")
         p= user.email
         div(class="navbar__avatar")
+          if(user.email)
+            div=user.email.slice(0,1).toUpperCase()
 

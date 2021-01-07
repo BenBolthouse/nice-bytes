@@ -86,6 +86,13 @@ header {
   height: 2rem;
   width: 2rem;
 }
+.navbar__avatar div {
+  color: #333;
+  font-family: 'Lobster', cursive;
+  line-height: 2rem;
+  width: 2rem;
+  text-align: center;
+}
 
 @media screen and (min-width: 1020px) {
   .navbar__links--no-stretch {

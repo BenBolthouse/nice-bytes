@@ -23,7 +23,7 @@
   text-align: center;
 }
 .auth-splash__panel-1 h1 {
-  font-family: 'Lobster';
+  font-family: 'Lobster', cursive;
   font-size: 10rem;
   margin-bottom: 2rem;
   text-shadow: 0.25rem 0.25rem 0 rgb(219, 13, 230), 0.5rem 0.5rem 0 rgb(114, 13, 230),
@@ -90,13 +90,14 @@
 .auth-splash__validation-icon--valid {
   border-radius: 50%;
   position: absolute;
+  cursor: pointer;
   height: 1.5rem;
   width: 1.5rem;
   top: 1.25rem; right: .75rem;
 }
 .auth-splash__validation-icon--invalid {
-  background-color: rgb(214, 24, 59);
-  cursor: pointer;
+  color: rgb(214, 24, 59);
+  font-size: 1.5rem;
 }
 .auth-splash__validation-icon--valid {
   background-color: greenyellow;

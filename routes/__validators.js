@@ -2,7 +2,7 @@
 
 const { check } = require('express-validator');
 
-const userSignupValidator = [
+const validateSignUp = [
   check('username')
     .exists({ checkFalsy: true })
     .withMessage('Username is required.')
@@ -35,9 +35,9 @@ const userSignupValidator = [
     }),
 ];
 
-const userLoginValidator = [
+const validateLogin = [
   check('email').exists({ checkFalsy: true }).withMessage('Username is required.'),
   check('password').exists({ checkFalsy: true }).withMessage('Password is required.'),
 ];
 
-module.exports = { userSignupValidator, userLoginValidator };
+module.exports = { validateSignUp, validateLogin };

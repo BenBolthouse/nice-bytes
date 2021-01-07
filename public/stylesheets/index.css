@@ -1,5 +1,5 @@
 .home-page {
-  background-color: rgb(245,245,245);
+  background-color: rgb(245, 245, 245);
   height: 100%;
 }
 .home-page h1 {
@@ -11,5 +11,38 @@
   min-width: 480px;
 }
 .spot-list__item {
+  background-color: #ffffff;
+  border-radius: 0.5rem;
   display: grid;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  grid-template-columns: 120px auto 3rem;
+  height: 120px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+.spot-list__item img {
+  height: 120px;
+  width: 120px;
+  object-fit: cover;
+}
+.spot-list__item-describe {
+  border-right: 1px solid rgb(100, 100, 100);
+  display: grid;
+  height: 100%;
+}
+.spot-list__item-depart {
+  border-left: 1px solid rgb(175, 175, 175);
+  display: grid;
+  height: 100%;
+}
+
+@media screen and (min-width: 1020px) {
+  .spot-list__item {
+    grid-template-columns: 240px auto 4rem;
+    height: 240px;
+  }
+  .spot-list__item img {
+    height: 240px;
+    width: 240px;
+  }
 }
