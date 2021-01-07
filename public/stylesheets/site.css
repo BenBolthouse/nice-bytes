@@ -1,3 +1,12 @@
+@keyframes submitting-icon-rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}
+
 html, body, main {
   height: 100%;
 }
@@ -7,9 +16,34 @@ body {
   overflow: hidden;
 }
 .page {
+  position: relative;
   margin-top: 4rem; /* Clear the header */
   overflow-x: hidden;
   overflow-y: auto;
+  display: grid; /* ! Important */
+}
+.page__awaiting--hide,
+.page__awaiting--show {
+  background-color: #ffffff;
+  position: absolute;
+  z-index: 300;
+  top: -6rem; right: 0px; bottom: 0px; left: -6rem;
+}
+.page__awaiting--hide {
+  display: none;
+}
+.page__awaiting--show {
+  display: block;
+}
+.page__awaiting-spinner {
+  animation: submitting-icon-rotation .5s infinite linear;
+  background-image: url('/images/spinner_96x96.svg');
+  /* border-radius: 50%; */
+  position: absolute;
+  height: 6rem;
+  width: 6rem;
+  z-index: 304;
+  top: 50%; left: 50%;
 }
 .page-content {
   min-height: 100vh;

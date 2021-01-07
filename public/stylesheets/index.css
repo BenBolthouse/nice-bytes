@@ -66,7 +66,7 @@
   position: relative;
   z-index: 100;
 }
-.spot-list__item-fill {
+.spot-list__item-rating-fill {
   background-color: #ffc70d;
   position: absolute;
   z-index: 101;

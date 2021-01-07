@@ -20,6 +20,22 @@
 }
 .spot-detail__describe {
   display: grid;
+  padding-left: 2rem;
+  grid-template-rows: 3rem 3rem 3rem;
+}
+.spot-detail__type {
+  color: #777777;
+  height: 1.5rem;
+}
+.spot-detail__description {
+  margin: 2rem 0;
+  line-height: 2.5rem;
+  font-size: 1.75rem;
+}
+.spot-detail__describe button {
+  height: 3rem;
+  margin-right: 1rem;
+  border-radius: .25rem;
 }
 .spot-detail__rating {
   float: left;
@@ -49,27 +65,3 @@
   bottom: 0px;
   left: 0px;
 }
-
-/* .spot-review__parent {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 700px;
-  margin: auto;
-}
-
-.spot-review__box {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 700px;
-    border: 2px solid #555555;
-    border-radius: 15px;
-    background-color: rgba(244, 241, 234);
-}
-
-.spot-review__wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-} */
