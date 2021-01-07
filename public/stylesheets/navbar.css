@@ -1,101 +1,35 @@
-header {
-  background-color: rgb(30,30,30);
-  color: #ffffff;
-  position: absolute;
-  z-index: 200;
-  top: 0;
-  right: 0;
-  left: 0;
-}
 .navbar {
+  background-color: rgb(17, 17, 17);
+  color: #ffffff;
   display: grid;
-  grid-template-columns: 200px auto 200px;
-  height: 4rem;
-  padding: 1rem 0;
-}
-.navbar__brand {
-  height: 2rem;
+  position: absolute;
+  grid-template-columns: 20% 80%;
+  height: 80px;
+  padding: 16px;
+  z-index: 200;
+  top: 0; right: 0; left: 0;
 }
 .navbar__brand a {
   display: grid;
-  grid-template-columns: 2rem auto;
+  grid-template-columns: 48px auto;
 }
 .navbar__logo {
-  background-color: #00B7FF;
-  border-radius: .25rem;
-  background-image: url('/images/logo_32.svg');
-  width: 2rem;
-  height: 2rem;
+  width: 48px;
+  height: 48px;
 }
 .navbar__name {
   font-size: 18px;
-  letter-spacing: 0.1rem;
-  line-height: 2rem;
-  padding-left: 1rem;
+  letter-spacing: .1em;
+  line-height: 48px;
+  padding-left: 16px;
 }
-.navbar__links--no-stretch ul,
-.navbar__links--stretch ul {
-  height: 2rem;
+.navbar__links ul {
+  height: 50px;
   list-style: none;
 }
-.navbar__links--no-stretch ul li,
-.navbar__links--stretch ul li {
-  height: 2rem;
+.navbar__links ul li {
+  height: 50px;
 }
-.navbar__links--no-stretch ul li a,
-.navbar__links--stretch ul li a {
-  display: block;
-  color: #00B7FF;
-  line-height: 2rem;
-}
-.navbar__links--no-stretch,
-.navbar__links--stretch {
-  height: 2rem;
-}
-.navbar__links--no-stretch ul li {
-  float: left;
-  margin-right: 1rem;
-}
-.navbar__links--stretch ul li {
-  float: right;
-  margin-left: 1rem;
-}
-.navbar__links--no-stretch {
-  display: none;
-  grid-column: 2 / 3;
-}
-.navbar__links--stretch {
-  grid-column: 2 / 4;
-}
-.navbar__user {
-  display: grid;
-  grid-template-columns: auto 2rem;
-  height: 2rem;
-  color: #ffffff;
-  grid-column: 3 / 4;
-}
-.navbar__user p {
-  text-align: right;
-  color: #00B7FF;
-  line-height: 2rem;
-  margin: 0 1rem 0 0;
-}
-.navbar__avatar {
-  background-color: #ffffff;
-  border-radius: 50%;
-  height: 2rem;
-  width: 2rem;
-}
-.navbar__avatar div {
-  color: #333;
-  font-family: 'Lobster', cursive;
-  line-height: 2rem;
-  width: 2rem;
-  text-align: center;
-}
-
-@media screen and (min-width: 1020px) {
-  .navbar__links--no-stretch {
-    display: block;
-  }
+.navbar__links ul li a {
+  line-height: 50px;
 }

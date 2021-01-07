@@ -12,10 +12,11 @@ const __setExpiryDate = () => {
  */
 const logUserIn = (req, user) => {
   req.session.cookie = {
-    expires: __setExpiryDate(),
     httpOnly: true,
-    secure: false,
     path: '/',
+    secure: false,
+    expires: __setExpiryDate(),
+    maxAge: 10000,
   };
   req.session.auth = {
     userId: user.id,
@@ -25,14 +26,14 @@ const logUserIn = (req, user) => {
     lastName: user.lastName,
     username: user.username,
     email: user.email,
-  };
+  }
 };
 
 /**
  * Logs a user out by deleting their session.
  * @param {Express middleware request object} req
  */
-const logUserOut = req => {
+const logUserOut = (req) => {
   delete req.session.auth;
   delete req.session.user;
 };
@@ -42,12 +43,12 @@ const logUserOut = req => {
  */
 const authorize = (req, res, next) => {
   if (!req.session.auth) {
-    const err = new Error('Not authorized to view this resource.');
+    const err = new Error('Not authorized to view this resource.')
     err.title = 'Not authorized to view this resource.';
     err.status = 403;
     next(err);
   }
   next();
-};
+}
 
 module.exports = { logUserIn, logUserOut, authorize };

@@ -1,0 +1,121 @@
+body {
+  background-image: url("/images/restaurant-blue.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.full-container {
+  display: flex;
+  /* margin: auto 0px auto 0px; */
+  height: 100%;
+  /* vertical-align: auto; */
+}
+
+.half-container {
+  margin: auto 0px auto 0px;
+  width: 55%;
+  /* height: 100%; */
+}
+
+.right-side {
+  /* background-color: rgb(82, 140, 177); */
+  /* border-left: 5px solid white; */
+  width: 45%;
+}
+
+.content-container {
+  height: 100%;
+  margin: 0px auto;
+  width: 80%;
+  /* width: 500px; */
+}
+
+.h2-header {
+  color: white;
+  font: 30pt "Kufam Regular";
+  letter-spacing: 3px;
+  margin: auto;
+}
+
+#link-container-sign-up {
+  border-bottom: hidden;
+}
+
+.link-container {
+  border-top-left-radius: 7px;
+  border-top-right-radius: 7px;
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0px 10px 0px;
+}
+
+#log-in-link,
+#sign-up-link {
+  text-align: center;
+}
+
+.link-container,
+.sign-up-container {
+  background-color: whitesmoke;
+  margin: 60px auto 0px auto;
+}
+.sign-up-container {
+  border: 2px solid black;
+  border-bottom-left-radius: 7px;
+  border-bottom-right-radius: 7px;
+  border-top: hidden;
+  margin: 0px auto 0px auto;
+  width: 500px;
+}
+
+.sign-up {
+  background-color: whitesmoke;
+  margin: 0px 5%;
+  padding: 10px;
+}
+
+.form__h3,
+.form__p {
+  font-family: "Kufam Regular";
+  text-align: center;
+}
+
+.form__h3 {
+  font-size: 20pt;
+  margin-top: 10px;
+}
+
+.link-container {
+  border: 2px solid black;
+  width: 50%;
+}
+
+.tabs-container {
+  display: flex;
+  font: 14pt "Kufam Black";
+  margin: 0px auto;
+  width: 500px;
+}
+
+input {
+  color: rgb(110, 107, 107);
+  font: 14pt "Kufam Regular";
+  padding: 2px 12px 2px 24px;
+  margin: 5px 0px;
+  width: 100%;
+  border-radius: 6px;
+  font-size: 20px;
+}
+
+#sign-up-container__button {
+  background-color: rgb(92 96 224);
+  border: none;
+  border-radius: 6px;
+  box-shadow: none;
+  color: white;
+  font: 20px "Kufam Black";
+  margin: 10px 0px;
+  padding: 3px 0px;
+  text-decoration: none;
+  width: 100%;
+}
