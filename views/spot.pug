@@ -1,23 +1,40 @@
 extends layout.pug
 
 append head
-  //- add page specific styles by appending to the head
-  link(rel="stylesheet" href="/stylesheets/spots.css")
+  link(rel="stylesheet" href="/stylesheets/spot.css")
+  script(src="/javascripts/spot.js" type="module" defer)
 
 block content
-  if spot
-    div(class= 'spot-review__parent')
-      img(src= `${spot.imgUrl}` width="100px" height="100px")
-      h1= spot.name
-      h2= spot.type
-      h3= spot.description
-      div(class= 'spot-review__box')
-        h2 Reviews
-        each review in reviews
-          div(class= 'spot-review__wrapper')
-            p= review.title
-            p= review.body
-            p= review.stars
-        button Add Review
-        button Mark As Visted
-        button Want to Visit?
+  div(class="page spot-page")
+    div(class="page-content page-width")
+      h1=spot.name
+      div(class="spot-detail")
+        img(src=spot.imgUrl) 
+        div(class="spot-detail__describe")
+          div(class="spot-detail__rating")
+            div(class="spot-detail__rating-fill")
+            div(class="spot-detail__rating-mask")
+          p=`Type: ${spot.type}`
+          div(class="spot-detail__collection-ctrl")
+            button(type="button" id="addToWantToVisit" class="spot-detail__collection-want-to-visit") Want To Visit
+            button(type="button" id="addVisited" class="spot-detail__collection-visited") Visited
+          p=spot.description
+
+          include includes/reviews.pug
+
+  //- if spot
+  //-   div(class= 'spot-review__parent')
+  //-     img(src= `${spot.imgUrl}` width="100px" height="100px")
+  //-     h1= spot.name
+  //-     h2= spot.type
+  //-     h3= spot.description
+  //-     div(class= 'spot-review__box')
+  //-       h2 Reviews
+  //-       each review in reviews
+  //-         div(class= 'spot-review__wrapper')
+  //-           p= review.title
+  //-           p= review.body
+  //-           p= review.stars
+  //-       button Add Review
+  //-       button Mark As Visted
+  //-       button Want to Visit?

@@ -2,13 +2,12 @@ html {
   color: #333333;
   font-family: "Open Sans", Arial, Helvetica, sans-serif;
 }
-h1, h2, h3 {
+/* h1, h2, h3 {
   font-family: "Kufam Regular", Arial, Helvetica, sans-serif;
-}
+} */
 h1 {
-  font-size: 2rem;
-  font-weight: 400;
-  letter-spacing: -.1rem;
+  font-size: 3rem;
+  font-weight: 300;
 }
 h2 {
   font-size: 1.5rem;

@@ -4,21 +4,23 @@
 }
 .home-page h1 {
   color: #777777;
-  margin: 2rem 0;
+  margin: 4rem 0;
   text-align: center;
 }
 .spot-list {
+  display: grid;
+  grid-template-columns: auto auto;
   min-width: 480px;
 }
 .spot-list__item {
   background-color: #ffffff;
-  border-radius: 0.5rem;
+  border-radius: 0.25rem;
   display: grid;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-  grid-template-columns: 120px auto 3rem;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  grid-template-columns: 120px auto;
   height: 120px;
   overflow: hidden;
-  margin-bottom: 1rem;
+  margin: 0 0.5rem 1rem;
 }
 .spot-list__item img {
   height: 120px;
@@ -27,52 +29,66 @@
 }
 .spot-list__item-describe {
   display: grid;
-  grid-template-rows: 2rem 6rem 3rem;
+  grid-template-rows: 1.5rem 1.5rem 6.5rem 1.5rem;
   height: 100%;
   max-height: 240px;
   padding: 2rem 2rem;
   overflow: hidden;
 }
-.spot-list__item-describe h2 {
-  color: #00B7FF;
-  font-size: 2rem;
+.spot-list__item-describe a {
+  height: 1.5rem;
+  float: left;
+}
+.spot-list__item-describe a h2 {
+  color: #00b7ff;
+  font-size: 1.5rem;
+  line-height: 1.5rem;
 }
 .spot-list__item-description {
-  font-size: 1.25rem;
-  line-height: 2rem;
+  font-size: 0.875rem;
+  line-height: 1.5rem;
   margin: 1rem 0;
   overflow: hidden;
   display: -webkit-box;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
 }
 .spot-list__item-type {
   color: #777777;
+  height: 1.5rem;
 }
 .spot-list__item-rating {
-  height: 100%;
+  float: left;
+  background-color: #aeaeae;
+  height: 2rem;
+  margin-left: -0.5rem;
+  width: 120px;
   position: relative;
   z-index: 100;
 }
 .spot-list__item-fill {
-  background-color: salmon;
+  background-color: #ffc70d;
   position: absolute;
-  top: 120px;
   z-index: 101;
-  right: 0px; bottom: 0px; left: 0px;
+  top: 0px;
+  right: 25px;
+  bottom: 0px;
+  left: 0px;
 }
 .spot-list__item-rating-mask {
   position: absolute;
-  background-image: url('/images/rating_mask_vertical_FFFFFF.svg');
+  background-image: url('/images/rating_stars_horizontal_FFFFFF.svg');
   background-position: center;
-  height: 100%;
   z-index: 102;
-  top: 0px; right: 0px; bottom: 0px; left: 0px;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
 }
 
 @media screen and (min-width: 1020px) {
   .spot-list__item {
-    grid-template-columns: 240px auto 4rem;
+    grid-template-columns: 240px auto;
     height: 240px;
   }
   .spot-list__item img {

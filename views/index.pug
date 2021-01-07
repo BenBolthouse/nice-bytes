@@ -16,23 +16,8 @@ block content
             div(class="spot-list__item-describe")
               a(href=spotHref)
                 h2=spot.name
+              div(class="spot-list__item-rating")
+                div(class="spot-list__item-rating-fill")
+                div(class="spot-list__item-rating-mask")
               p(class="spot-list__item-description")=spot.description
               p(class="spot-list__item-type")= `Type: ${spot.type}`
-            div(class="spot-list__item-rating")
-              div(class="spot-list__item-fill")
-              div(class="spot-list__item-rating-mask")
-
-    //- h1= title
-    //- h2 Find your new favorite Spot
-    //- if spots
-    //- ul(class='spot-list__container')
-    //-   each spot in spots
-    //-     a(href=`spots/${spot.id}`) 
-    //-       li(class='spot-list__box')
-    //-         div(class='spot-list__div')
-    //-           img(class= 'spot-list__img', src= `${spot.imgUrl}`)
-    //-         div(class='spot-list__textwrap')
-    //-           div(class= 'spot-list__name spot-list__div')= spot.name
-    //-           div(class= 'spot-list__description spot-list__div')= spot.description
-              //- each review in spot.Reviews
-              //-   div(class= 'spot-list__rating spot-list__div')= review.stars

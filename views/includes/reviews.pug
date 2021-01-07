@@ -1,0 +1,5 @@
+div(class="spot-reviews")
+  button(type="button" id="newUserReview" class="spot-reviews__new-user-review")
+  each review in reviews
+    h3=review.title
+    p=review.body
