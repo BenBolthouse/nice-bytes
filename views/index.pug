@@ -10,10 +10,17 @@ block content
       h1 Find your new favorite spot
       div(class="spot-list")
         each spot in spots
+          - var spotHref = `/spots/${spot.id}`
           div(class="spot-list__item")
             img(src=spot.imgUrl)
             div(class="spot-list__item-describe")
-            a(class="spot-list__item-depart")
+              a(href=spotHref)
+                h2=spot.name
+              p(class="spot-list__item-description")=spot.description
+              p(class="spot-list__item-type")= `Type: ${spot.type}`
+            div(class="spot-list__item-rating")
+              div(class="spot-list__item-fill")
+              div(class="spot-list__item-rating-mask")
 
     //- h1= title
     //- h2 Find your new favorite Spot
