@@ -79,7 +79,19 @@ router.post(
   '/spots/reviews',
   authorize,
   asyncHandler(async (req, res, next) => {
-    const { name } = req.body;
+    const { spotId, stars, title, body } = req.body;
+    const userId = req.session.auth.userId;
+
+    const insertReview = await Review.create({
+      userId: userId,
+      spotId: spotId,
+      stars: stars,
+      title: title,
+      body: body
+    })
+    res.json({
+      "id": insertReview.id
+    })
   })
 );
 
