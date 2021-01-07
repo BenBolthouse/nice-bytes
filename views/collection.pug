@@ -1,0 +1,18 @@
+extends layout.pug
+
+append head
+  //- add page specific styles by appending to the head
+  link(rel="stylesheet" href="/stylesheets/spots.css")
+
+block content
+  h1= title
+  if collections
+    ul(class='spot-list__container')
+      each collection in collections
+        a(href=``)
+          li(class='spot-list__box')
+            div(class='spot-list__div')
+              img(class= 'spot-list__img', src= `${spot.imgUrl}`)
+            div(class='spot-list__textwrap')
+              div(class= 'spot-list__name spot-list__div')= spot.name
+              div(class= 'spot-list__description spot-list__div')= spot.description
