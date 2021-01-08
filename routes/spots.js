@@ -21,10 +21,10 @@ router.get("/:id", async (req, res, next) => {
     if (user.collections.length === 0) res.render('spot', { title: `${spot.name}`, spot, user });
     else res.json(user);
 
-})
 
 
-  const spot = await Spot.findByPk(id);
+
+
 
   const [customCollections] = await Collection.findAll({
     where: { userId },
