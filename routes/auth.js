@@ -218,8 +218,9 @@ router.post(
   csrfProtection,
   validateLogin,
   asyncHandler(async (req, res, next) => {
-    const user = await User.findOne({ where: { email: 'demo@demo.com' } });
+    const user = await User.findOne({ where: { firstName: 'demo' } });
     logUserIn(req, user);
+    console.log(user);
     return res.redirect('/');
   })
 );
