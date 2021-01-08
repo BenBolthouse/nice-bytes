@@ -164,8 +164,6 @@ router.post(
 
     // data from form submission
     const { _csrf, email, password } = req.body;
-    const { demo_csrf, demoEmail, demoPassword } = req.params;
-
 
     // if the user cannot be found in user store notify client
     user = await User.findOne({ where: { email: email } });

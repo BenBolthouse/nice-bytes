@@ -5,12 +5,7 @@ const { secret } = require('../../config');
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    /*
-      Add altering commands here.
-      Return a promise to correctly handle asynchronicity.
 
-      Example:
-    */
       return queryInterface.bulkInsert('Users', [
         { username: "NotGenAgain", email: "gen@notagain.com", firstName: "Gen", lastName: "Yoka", passwordHash: await bcrypt.hash(`password1:${secret}`, 10),	createdAt :	new Date()	,	updatedAt :	new Date()	},
         { username: "reesespieces", email: "mitch@reeses.com", firstName: "Mitch", lastName: "Yeezy", passwordHash: await bcrypt.hash(`password1:${secret}`, 10),	createdAt :	new Date()	,	updatedAt :	new Date()	},
@@ -20,12 +15,7 @@ module.exports = {
   },
 
   down: (queryInterface, Sequelize) => {
-    /*
-      Add reverting commands here.
-      Return a promise to correctly handle asynchronicity.
 
-      Example:
-      */
     return queryInterface.bulkDelete('Users', null, {});
   }
 };
