@@ -114,10 +114,13 @@
   list-style: none;
   padding: 1rem;
   position: absolute;
-  left: 0; right: 0; top: 3.5rem;
+  left: 0; 
+  right: 0; 
+  top: 3.5rem;
   z-index: 302;
 }
-.auth-splash__form-messages--hide li, .auth-splash__form-messages--show li {
+.auth-splash__form-messages--hide li, 
+.auth-splash__form-messages--show li {
   font-size: .875rem;
   line-height: 1rem;
   padding-bottom: .25rem;
