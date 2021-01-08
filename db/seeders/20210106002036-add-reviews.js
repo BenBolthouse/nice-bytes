@@ -2,10 +2,7 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    /*
-      Add altering commands here.
-      Return a promise to correctly handle asynchronicity.
-    */
+
 
       return queryInterface.bulkInsert('Reviews', [
         {	spotId:	1	,	userId:	1	,	stars:	5	,	title:	"Amazing Spot!"	,	body:	"The food deserves 5 stars, the service deserves 5 stars, the atmosphere deserves 5 stars!"	,	createdAt:	new Date()	,	updatedAt:	new Date()	},
@@ -24,12 +21,7 @@ module.exports = {
   },
 
   down: (queryInterface, Sequelize) => {
-    /*
-      Add reverting commands here.
-      Return a promise to correctly handle asynchronicity.
-
-      Example:
-      */
+   
    return queryInterface.bulkDelete('Reviews', null, {});
   }
 };
