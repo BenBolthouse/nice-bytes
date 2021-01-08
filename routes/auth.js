@@ -213,6 +213,17 @@ router.post(
   })
 );
 
+router.post(
+  '/demo',
+  csrfProtection,
+  validateLogin,
+  asyncHandler(async (req, res, next) => {
+    const user = await User.findOne({ where: { email: 'demo@demo.com' } });
+    logUserIn(req, user);
+    return res.redirect('/');
+  })
+);
+
 /**
  * GET: http://localhost:8080/logout
  */
