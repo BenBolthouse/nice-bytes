@@ -87,7 +87,7 @@
   position: relative;
 }
 #auth-splash__form-demo {
-  padding-top: 0px;
+  padding-top: 0rem;
   padding-bottom: 2.5rem;
 }
 .auth-splash__validation-icon--invalid,
@@ -154,7 +154,7 @@
   margin: 2rem auto 0;
 }
 #demo-button {
-  margin-top: 10px;
+  margin-top: 1rem;
 }
 @media screen and (min-width: 1020px) {
   .auth-splash {

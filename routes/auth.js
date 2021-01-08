@@ -213,14 +213,20 @@ router.post(
   })
 );
 
+/**
+ * POST: http://localhost:8080/demo
+ */
 router.post(
   '/demo',
   csrfProtection,
   validateLogin,
   asyncHandler(async (req, res, next) => {
-    const user = await User.findOne({ where: { firstName: 'demo' } });
+
+    //Queries for demo user using a unique key
+    const user = await User.findOne({ where: { email: 'demo@demo.com' } });
+    
+    //Logs in demo user
     logUserIn(req, user);
-    console.log(user);
     return res.redirect('/');
   })
 );
