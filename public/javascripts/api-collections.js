@@ -1,21 +1,19 @@
 /**
- * Client-side utilities for ajax requests to NiceBytes collection API.
+ * Collection management utilities for API queries.
  */
 
-document.addEventListener('DOMContentLoaded', evt => {
-  const addToCollectionButtons = document.querySelectorAll('.addToCollection');
-
-  addToCollectionButtons.forEach(elem => {
-    // console.log(elem);
-    const collectionId = elem.getAttribute('collectionId');
-    const spotId = elem.getAttribute('spotId');
-    elem.addEventListener('click', evt =>
-      addToCollection(collectionId, spotId)
-    );
-  });
-
-  const addToCollection = async (collectionId, spotId) => {
-    const result = await fetch('http://localhost:8080/api/collections/spot', {
+/**
+ * Asynchronously adds a spot to a collection. User must be authenticated.
+ * Invokes optional callbacks on success or error.
+ * @param {Integer id value of the collection to add to} collectionId 
+ * @param {Integer id value of the spot to add to a collection} spotId 
+ * @param {DOM event target} target
+ * @param {Callback on 200 range responses} success
+ * @param {Callback on 400 and 500-range responses} error
+ */
+const addToCollection = async (collectionId, spotId, target, success, error) => {
+  try {
+    await fetch('http://localhost:8080/api/collections/spot', {
       method: 'post',
       headers: {
         'Accept': 'application/json',
@@ -26,6 +24,10 @@ document.addEventListener('DOMContentLoaded', evt => {
         spotId,
       }),
     });
-    // console.log("collectionId", collectionId, "spotId", spotId)
-  };
-});
+    return success();
+  } catch (e) {
+    return error(e);
+  }
+};
+
+export { addToCollection }

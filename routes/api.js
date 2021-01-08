@@ -47,7 +47,6 @@ router.post(
   authorize,
   asyncHandler(async (req, res, next) => {
     const { spotId, collectionId } = req.body;
-
     const insertCollectionSpot = await SpotCollection.create({
       spotId: spotId,
       collectionId: collectionId,
