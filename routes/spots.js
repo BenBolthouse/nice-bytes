@@ -9,11 +9,30 @@ router.get('/', (req, res) => {
 
 router.get('/:id', async (req, res, next) => {
     const id = req.params.id;
+    const spot = await Spot.findByPk(id, {include: Review }) //working code, but missing User model 
+    
+    // IN PROGRESS NESTED EAGER LOADING TO INCLUDE USERS THROUGH REVIEWS 
+    // { include: Review },
+    // {    
+    //     include: [{ 
+    //         model: Users,
+    //         through: { 
+    //             model: Review
+    //         }
+    //     }]
+    // })
+    
+    // const spot = await Spot.findAll({ 
+    //     where: {id: id},
+    //     include: [{ 
+    //         model: Review,
+    //         include: [{ 
+    //             model: User,
+    //         }]
+    //     }]
+    // });
 
-    const spot = await Spot.findByPk(id);
-    const reviews = await Review.findAll({where: { spotId: id}});
-
-    res.render('spot', { title: `${spot.name}`, spot, reviews, user: req.session.user });
+    res.render('spot', { title: `${spot.name}`, spot});
 })
 
 module.exports = router;
