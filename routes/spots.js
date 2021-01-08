@@ -12,6 +12,18 @@ router.get("/:id", async (req, res, next) => {
   const id = req.params.id;
   const userId = req.session.auth.userId;
 
+     // this query for rendering the spot page with associated reviews
+    const spot = await Spot.findOne({ where: { id }, include: { model: Review, include: User } });
+
+    // this query to retrieve all collections and included spots for the current user
+    const user = await User.findOne({ where: { id: userId }, include: { model: Collection, as: 'collections', include: { model: Spot, where: { id } } } });
+
+    if (user.collections.length === 0) res.render('spot', { title: `${spot.name}`, spot, user });
+    else res.json(user);
+
+})
+
+
   const spot = await Spot.findByPk(id);
   // const reviews = await Review.findAll({ where: { spotId: id } });
 
