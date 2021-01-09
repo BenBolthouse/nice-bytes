@@ -214,6 +214,25 @@ router.post(
 );
 
 /**
+ * POST: http://localhost:8080/demo
+ */
+router.get(
+  '/demo',
+  csrfProtection,
+  validateLogin,
+  asyncHandler(async (req, res, next) => {
+
+    //Queries for demo user using a unique key
+    const user = await User.findOne({ where: { email: 'demo@demo.com' } });
+    
+    //Logs in demo user
+    logUserIn(req, user);
+    return res.redirect('/');
+  })
+);
+
+
+/**
  * GET: http://localhost:8080/logout
  */
 router.get('/logout', authorize, (req, res, next) => {
