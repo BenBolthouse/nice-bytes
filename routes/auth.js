@@ -216,7 +216,7 @@ router.post(
 /**
  * POST: http://localhost:8080/demo
  */
-router.post(
+router.get(
   '/demo',
   csrfProtection,
   validateLogin,
@@ -230,6 +230,8 @@ router.post(
     return res.redirect('/');
   })
 );
+
+// <a href="/demo?_csrf=csrf">Login as demo user</a>
 
 /**
  * GET: http://localhost:8080/logout
