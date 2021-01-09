@@ -19,11 +19,11 @@ const validateSignUp = [
     .exists({ checkFalsy: true })
     .withMessage('Password is required.')
     .isLength({ min: 8, max: 20 })
-    .withMessage('Password must be between 8 and 20 characters long.')
-    .matches(/((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W]).{8,64})/g)
-    .withMessage(
-      'Password must contain an uppercase letter, lowercase letter, special character and a number.'
-    ),
+    .withMessage('Password must be between 8 and 20 characters long.'),
+    // .matches(/((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W]).{8,64})/g)
+    // .withMessage(
+    //   'Password must contain an uppercase letter, lowercase letter, special character and a number.'
+    // ),
   check('confirmPassword')
     .exists({ checkFalsy: true })
     .withMessage('Confirm password is required.')
