@@ -7,9 +7,9 @@ const validateSignUp = [
     .exists({ checkFalsy: true })
     .withMessage('Username is required.')
     .isLength({ min: 4, max: 20 })
-    .withMessage('Username must be between 4 and 20 characters long.')
-    .matches(/^[a-zA-Z0-9_-]*$/g)
-    .withMessage('Username can only contain letters, numbers and the characters "-" and "_".'),
+    .withMessage('Username must be between 4 and 20 characters long.'),
+    // .matches(/^([a-zA-Z0-9])$/gm)
+    // .withMessage('Username can only contain letters, numbers and the characters "-" and "_".'),
   check('email')
     .exists({ checkFalsy: true })
     .withMessage('Email is required.')
@@ -19,11 +19,11 @@ const validateSignUp = [
     .exists({ checkFalsy: true })
     .withMessage('Password is required.')
     .isLength({ min: 8, max: 20 })
-    .withMessage('Password must be between 8 and 20 characters long.')
-    .matches(/((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W]).{8,64})/g)
-    .withMessage(
-      'Password must contain an uppercase letter, lowercase letter, special character and a number.'
-    ),
+    .withMessage('Password must be between 8 and 20 characters long.'),
+    // .matches(/((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W]).{8,64})/g)
+    // .withMessage(
+    //   'Password must contain an uppercase letter, lowercase letter, special character and a number.'
+    // ),
   check('confirmPassword')
     .exists({ checkFalsy: true })
     .withMessage('Confirm password is required.')

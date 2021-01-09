@@ -2,22 +2,23 @@ extends layout.pug
 
 append head
   link(rel="stylesheet" href="/stylesheets/spot.css")
-  script(src="/javascripts/spot.js" type="module" defer)
+  script(src="/javascripts/spot.js" content-type="text/javascript" type="module")
 
 block content
   div(class="page spot-page")
     div(class="page-content page-width")
       h1=spot.name
       div(class="spot-detail")
-        img(src=spot.imgUrl)
+        img(src=`/images/spots/480/${spot.id}_default.png`)
         div(class="spot-detail__describe")
           div(class="spot-detail__rating")
             div(class="spot-detail__rating-fill")
             div(class="spot-detail__rating-mask")
           p(class="spot-detail__type")=`Type: ${spot.type}`
-          div(class="spot-detail__collection-ctrl")
-            button(type="button" id="addToWantToVisit" class="spot-detail__collection-want-to-visit") Want To Visit
-            button(type="button" id="addVisited" class="spot-detail__collection-visited") Visited
+          if(user)
+            div(class="spot-detail__collection-ctrl")
+              button(type="button" id="addToWantToVisit" spotIsCollected="false" spotId=spot.id collectionId=user.defaultCollections.wantToVisitId class="spot-detail__collection-want-to-visit addToCollection") Want To Visit
+              button(type="button" id="addVisited" spotIsCollected="false" spotId=spot.id collectionId=user.defaultCollections.haveVisitedId class="spot-detail__collection-visited addToCollection") Visited
           p(class="spot-detail__description")=spot.description
 
           //- include includes/reviews.pug

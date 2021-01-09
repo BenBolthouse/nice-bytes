@@ -2,10 +2,7 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    /*
-      Add altering commands here.
-      Return a promise to correctly handle asynchronicity.
-    */
+
       return queryInterface.bulkInsert('Spots', [
         { name:	"P Mac's",	description:	"At Dublin's trendy intersection of Stephen and Digges lies one of the hippest gastropubs in town! You enter a hive of activity, a bustling bar blasting loud rock music with mostly millennials immersed in lively conversation.",	imgUrl:	"/images/restaurant-image-1.jpg",	type:	"Pub",	createdAt:	new Date(),	updatedAt:	new Date() },
         { name:	"The Boxty House",	description:	"Gallagher's Boxty House is the home of traditional Irish food. As well as our Boxty dishes, we serve stews, coddle, steaks and fresh seafood",	imgUrl:	"/images/restaurant-image-2.jpg",	type:	"Traditional Irish",	createdAt:	new Date(),	updatedAt:	new Date() },
@@ -21,12 +18,7 @@ module.exports = {
   },
 
   down: (queryInterface, Sequelize) => {
-    /*
-      Add reverting commands here.
-      Return a promise to correctly handle asynchronicity.
 
-      Example:
-      */
     return queryInterface.bulkDelete('Spots', null, {});
   }
 };
