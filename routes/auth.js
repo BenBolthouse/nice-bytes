@@ -231,7 +231,6 @@ router.get(
   })
 );
 
-// <a href="/demo?_csrf=csrf">Login as demo user</a>
 
 /**
  * GET: http://localhost:8080/logout
