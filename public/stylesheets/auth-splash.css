@@ -8,17 +8,17 @@
 }
 
 .page {
-  background-image:url("/images/restaurant-blue.jpg");
+  background-image: url('/images/restaurant-blue.jpg');
   background-size: cover;
 }
 .auth-splash {
-  align-items: center;
-  display: block;
   height: 100%;
 }
 .auth-splash__panel-1 {
   color: #ffffff;
   height: auto;
+  max-width: 560px;
+  margin: 0 auto;
   padding: 2rem 2rem 1.5rem;
   text-align: center;
 }
@@ -26,8 +26,8 @@
   font-family: 'Lobster', cursive;
   font-size: 10rem;
   margin-bottom: 2rem;
-  text-shadow: 0.25rem 0.25rem 0 rgb(219, 13, 230), 0.5rem 0.5rem 0 rgb(114, 13, 230),
-    0.75rem 0.75rem 0 rgb(71, 13, 230);
+  text-shadow: 0.25rem 0.25rem 0 rgb(219, 13, 230),
+    0.5rem 0.5rem 0 rgb(114, 13, 230), 0.75rem 0.75rem 0 rgb(71, 13, 230);
 }
 .auth-splash__panel-1 p {
   color: #ffffff;
@@ -48,10 +48,13 @@
 .auth-splash__submitting--hide,
 .auth-splash__submitting--show {
   background-color: #fff;
-  opacity: .75;
+  opacity: 0.75;
   position: absolute;
   z-index: 303;
-  top: -6rem; right: 0; bottom: 0; left: -6rem;
+  top: -6rem;
+  right: 0;
+  bottom: 0;
+  left: -6rem;
 }
 .auth-splash__submitting--hide {
   display: none;
@@ -60,14 +63,15 @@
   display: block;
 }
 .auth-splash__submitting-icon {
-  animation: submitting-icon-rotation .5s infinite linear;
+  animation: submitting-icon-rotation 0.5s infinite linear;
   background-image: url('/images/spinner_96x96.svg');
   /* border-radius: 50%; */
   position: absolute;
   height: 6rem;
   width: 6rem;
   z-index: 304;
-  top: 50%; left: 50%;
+  top: 50%;
+  left: 50%;
 }
 .auth-splash__tab--active,
 .auth-splash__tab--inactive {
@@ -88,7 +92,7 @@
 }
 #auth-splash__form-demo {
   grid-column: 1 / 3;
-  color: #00B7FF;
+  color: #00b7ff;
   padding-top: 0rem;
   padding-bottom: 2.5rem;
   width: 100%;
@@ -104,7 +108,8 @@
   cursor: pointer;
   height: 1.5rem;
   width: 1.5rem;
-  top: 1.25rem; right: .75rem;
+  top: 1.25rem;
+  right: 0.75rem;
 }
 .auth-splash__validation-icon--invalid {
   color: rgb(214, 24, 59);
@@ -116,21 +121,21 @@
 .auth-splash__form-messages--hide,
 .auth-splash__form-messages--show {
   background-color: rgb(214, 24, 59);
-  border-radius: .25rem;
+  border-radius: 0.25rem;
   color: #ffffff;
   list-style: none;
   padding: 1rem;
   position: absolute;
-  left: 0; 
-  right: 0; 
+  left: 0;
+  right: 0;
   top: 3.5rem;
   z-index: 302;
 }
-.auth-splash__form-messages--hide li, 
+.auth-splash__form-messages--hide li,
 .auth-splash__form-messages--show li {
-  font-size: .875rem;
+  font-size: 0.875rem;
   line-height: 1rem;
-  padding-bottom: .25rem;
+  padding-bottom: 0.25rem;
 }
 .auth-splash__form-messages--hide {
   display: none;
@@ -142,29 +147,34 @@
   position: absolute;
   color: #777777;
   font-weight: 600;
-  font-size: .75rem;
+  font-size: 0.75rem;
   z-index: 301;
-  top: .9rem; left: .87rem;
+  top: 0.9rem;
+  left: 0.87rem;
 }
 .auth-splash__form input {
   background-color: rgb(245, 245, 245);
   border: none;
   border-radius: 0;
-  border-top-right-radius: .25rem;
-  border-bottom-right-radius: .25rem;
-  border-left: 2px solid #00B7FF;
+  border-top-right-radius: 0.25rem;
+  border-bottom-right-radius: 0.25rem;
+  border-left: 2px solid #00b7ff;
   font-weight: 400;
-  padding: .75rem .75rem 0;
+  padding: 0.75rem 0.75rem 0;
 }
 .auth-splash__form button {
   display: block;
   margin: 2rem auto 0;
-  border-radius: .25rem;
+  border-radius: 0.25rem;
 }
 @media screen and (min-width: 1020px) {
   .auth-splash {
     display: grid;
-    grid-template-columns: 60% 40%;
+    grid-template-columns: 50% 50%;
+    margin-top: 15%;
+  }
+  .auth-splash__panel-1 {
+    margin-right: 0;
   }
   .auth-splash__panel-2 {
     margin: 0;
@@ -172,7 +182,6 @@
 }
 @media screen and (min-width: 1340px) {
   .auth-splash {
-    display: grid;
-    grid-template-columns: 70% 30%;
+    grid-template-columns: 50% 50%;
   }
 }

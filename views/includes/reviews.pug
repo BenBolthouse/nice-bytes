@@ -1,6 +1,7 @@
 div(class="user-reviews")
   h2 What people are saying about #{spot.name}
   p Community Reviews
+    ion-icon(name="chatbox")
   button(type="button" id="newUserReview" class="user-reviews__new-user-review") Add Review
   div(class="user-reviews__new")
 
@@ -12,6 +13,6 @@ div(class="user-reviews")
           p=review.User.username
         div(class="user-review__review")
           div(class="user-review__rating")=review.stars
-          p(class="user-review__date") hello date
+          p(class="user-review__date")=review.createdAt
           h3(class="user-review__title")=review.title
           p(class="user-review__body")=review.body
