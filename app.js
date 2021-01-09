@@ -47,7 +47,6 @@ app.use('/', authRouter);
 app.use('/api', apiRouter);
 app.use('/spots', spotRouter);
 app.use('/users', usersRouter);
-app.use('/spots', spotRouter);
 app.use('/collections', collectionRouter);
 
 // catch 404 and forward to error handler
