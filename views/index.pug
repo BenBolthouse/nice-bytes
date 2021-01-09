@@ -12,11 +12,10 @@ block content
       h1 Find your new favorite spot
       div(class="spot-list")
         each spot in spots
-          - var spotHref = `/spots/${spot.id}`
           div(class="spot-list__item")
-            img(src=spot.imgUrl)
+            img(src=`/images/spots/240/${spot.id}_default.png`)
             div(class="spot-list__item-describe")
-              a(href=spotHref)
+              a(href=`/spots/${spot.id}`)
                 h2=spot.name
               div(class="spot-list__item-rating")
                 div(class="spot-list__item-rating-fill")
