@@ -1,11 +1,17 @@
-div(class="spot-reviews-container")
-  h2(class="spot-review-title") What people are saying about #{spot.name}
-  button(type="button" id="newUserReview" class="spot-reviews__new-user-review") Add Review
-  h2 Community Reviews
-  div(class="spot-reviews-container")
+div(class="user-reviews")
+  h2 What people are saying about #{spot.name}
+  p Community Reviews
+  button(type="button" id="newUserReview" class="user-reviews__new-user-review") Add Review
+  div(class="user-reviews__new")
+
+  div(class="user-reviews__list")
     each review in spot.Reviews
-      div(class="spot-review" id="spot-review")
-        h3=review.User.username
-        h4=review.title
-        p=review.stars
-        p=review.body
+      div(class="user-review")
+        div(class="user-review__user")
+          div(class="user-review__avatar")=review.User.username.slice(0,1).toUpperCase()
+          p=review.User.username
+        div(class="user-review__review")
+          div(class="user-review__rating")=review.stars
+          p(class="user-review__date") hello date
+          h3(class="user-review__title")=review.title
+          p(class="user-review__body")=review.body
