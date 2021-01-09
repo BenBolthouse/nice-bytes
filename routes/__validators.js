@@ -7,9 +7,9 @@ const validateSignUp = [
     .exists({ checkFalsy: true })
     .withMessage('Username is required.')
     .isLength({ min: 4, max: 20 })
-    .withMessage('Username must be between 4 and 20 characters long.')
-    .matches(/^[a-zA-Z0-9_-]*$/g)
-    .withMessage('Username can only contain letters, numbers and the characters "-" and "_".'),
+    .withMessage('Username must be between 4 and 20 characters long.'),
+    // .matches(/^([a-zA-Z0-9])$/gm)
+    // .withMessage('Username can only contain letters, numbers and the characters "-" and "_".'),
   check('email')
     .exists({ checkFalsy: true })
     .withMessage('Email is required.')

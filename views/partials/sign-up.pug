@@ -19,7 +19,7 @@ block form
             each message in messages.firstName
               li= message
       div(class="auth-splash__form-group")
-        label(for="firstName") Last name
+        label(for="lastName") Last name
         input(type="text" name="lastName" value=prefill.lastName)
         - var lastNameValid = messages.lastName.length ? "invalid" : "valid";
         if messages.lastName.length
@@ -29,7 +29,7 @@ block form
             each message in messages.lastName
               li= message
       div(class="auth-splash__form-group")
-        label(for="firstName") Username
+        label(for="username") Username
         input(type="text" name="username" required=true value=prefill.username)
         - var usernameValid = messages.username.length ? "invalid" : "valid";
         if messages.username.length
@@ -39,7 +39,7 @@ block form
             each message in messages.username
               li= message
       div(class="auth-splash__form-group")
-        label(for="firstName") Email
+        label(for="email") Email
         input(type="email" name="email" required=true value=prefill.email)
         - var emailValid = messages.email.length ? "invalid" : "valid";
         if messages.email.length
@@ -49,7 +49,7 @@ block form
             each message in messages.email
               li= message
       div(class="auth-splash__form-group")
-        label(for="firstName") Password
+        label(for="password") Password
         input(type="password" name="password" required=true)
         - var passwordValid = messages.password.length ? "invalid" : "valid";
         if messages.password.length
@@ -59,7 +59,7 @@ block form
             each message in messages.password
               li= message
       div(class="auth-splash__form-group")
-        label(for="firstName") Confirm password
+        label(for="confirmPassword") Confirm password
         input(type="password" name="confirmPassword" required=true)
         - var confirmPasswordValid = messages.confirmPassword.length ? "invalid" : "valid";
         if messages.confirmPassword.length
