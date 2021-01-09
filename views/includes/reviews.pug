@@ -1,10 +1,11 @@
 div(class="user-reviews")
-  h2 What people are saying about #{spot.name}
-  p Community Reviews
-    ion-icon(name="chatbox")
-  button(type="button" id="newUserReview" class="user-reviews__new-user-review") Add Review
   div(class="user-reviews__new")
-
+    button(type="button" id="newUserReview" class="user-reviews__new-user-review") Add Review
+  
+  
+  h2 What people are saying about #{spot.name}
+  p Community Reviews 
+    ion-icon(name="chatbox")
   div(class="user-reviews__list")
     each review in spot.Reviews
       div(class="user-review")
@@ -13,6 +14,6 @@ div(class="user-reviews")
           p=review.User.username
         div(class="user-review__review")
           div(class="user-review__rating")=review.stars
-          p(class="user-review__date")=review.createdAt
+          p(class="user-review__date") Reviewed on #{review.createdAt}
           h3(class="user-review__title")=review.title
           p(class="user-review__body")=review.body

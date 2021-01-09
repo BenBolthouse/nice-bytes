@@ -1,22 +1,27 @@
 .user-reviews {
-  grid-column: 2 / 3;
-  padding-left: 2rem; 
+  grid-column: 1 / 3;
+  padding-top: 3rem;
+  padding-left: 2rem;
 }
 .user-reviews h2 {
-    font-weight: 300;
-    font-size: 2rem;
+  font-weight: 300;
+  font-size: 2rem;
+  text-align: center;
+  padding-top: 4rem;
 }
 .user-reviews > p {
-    line-height: 2rem;
-    font-weight: 600;
-    font-size: 1rem;
+  line-height: 2rem;
+  font-weight: 600;
+  font-size: 1rem;
 }
 .user-reviews ion-icon {
-    font-size: 2rem;
+  font-size: 2rem;
 }
 .user-reviews__new-user-review {
 }
 .user-reviews__new {
+  display: grid;
+  justify-items: center;
 }
 .user-reviews__list {
 }
@@ -24,6 +29,8 @@
   display: grid;
   grid-template-columns: 8rem auto;
   align-items: center;
+  border-bottom: 1px solid #D3D3D3;
+  padding: 2.5rem;
 }
 .user-review__user {
 }
@@ -44,17 +51,22 @@
 .user-review__review {
   display: grid;
   grid-template-columns: auto auto;
-  grid-template-rows: 1rem 1rem auto;
+  grid-template-rows: 2rem 2rem 3rem;
+  
 }
 .user-review__review p {
   margin: 0;
+  
 }
 .user-review__rating {
+  font-size: 1.5rem;
 }
 .user-review__date {
 }
 .user-review__title {
   grid-column: 1 / 3;
+  font-size: 1.2rem;
+  font-weight: bold;
 }
 .user-review__body {
   grid-column: 1 / 3;
