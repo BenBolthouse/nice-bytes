@@ -17,8 +17,8 @@ block content
           p(class="spot-detail__type")=`Type: ${spot.type}`
           if(user)
             div(class="spot-detail__collection-ctrl")
-              button(type="button" id="addToWantToVisit" spotIsCollected="false" spotId=spot.id collectionId="1" class="spot-detail__collection-want-to-visit addToCollection") Want To Visit
-              button(type="button" id="addVisited" spotIsCollected="false" spotId=spot.id collectionId="1" class="spot-detail__collection-visited addToCollection") Visited
+              button(type="button" id="addToWantToVisit" spotIsCollected="false" spotId=spot.id collectionId=user.defaultCollections.wantToVisitId class="spot-detail__collection-want-to-visit addToCollection") Want To Visit
+              button(type="button" id="addVisited" spotIsCollected="false" spotId=spot.id collectionId=user.defaultCollections.haveVisitedId class="spot-detail__collection-visited addToCollection") Visited
           p(class="spot-detail__description")=spot.description
 
           //- include includes/reviews.pug
