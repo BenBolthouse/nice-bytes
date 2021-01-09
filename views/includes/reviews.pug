@@ -1,6 +1,11 @@
-div(class="spot-reviews")
-  button(type="button" id="newUserReview" class="spot-reviews__new-user-review")
-  each review in spot.Reviews
-    h3=review.title
-    p=review.body
-    //- p=review.User.id
+div(class="spot-reviews-container")
+  h2(class="spot-review-title") What people are saying about #{spot.name}
+  button(type="button" id="newUserReview" class="spot-reviews__new-user-review") Add Review
+  h2 Community Reviews
+  div(class="spot-reviews-container")
+    each review in spot.Reviews
+      div(class="spot-review" id="spot-review")
+        h3=review.User.username
+        h4=review.title
+        p=review.stars
+        p=review.body
