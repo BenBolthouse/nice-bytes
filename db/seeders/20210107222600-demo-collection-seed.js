@@ -11,7 +11,7 @@ module.exports = {
 
       return queryInterface.bulkInsert('Collections', [
         { userId: demoUser.id, name: 'Want To Visit', createdAt: new Date(), updatedAt: new Date() },
-        { userId: demoUser.id, name: 'Have Visted', createdAt: new Date(), updatedAt: new Date() },
+        { userId: demoUser.id, name: 'Have Visited', createdAt: new Date(), updatedAt: new Date() },
       ], {});
   },
 

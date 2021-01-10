@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', evt => {
   // handles the DOM star selection experience
   let rating;
 
-  userReviewStarColor = document.getElementById('userReviewStarColor');
+  const userReviewStarColor = document.getElementById('userReviewStarColor');
 
   [
     document.getElementById('userReviewStar1Selection'),
@@ -29,15 +29,15 @@ document.addEventListener('DOMContentLoaded', evt => {
       if (!rating) {
         userReviewStarColor.classList.remove(`star${pos}Active`);
         userReviewStarColor.classList.add(`star${pos}ActivePermanent`);
-        userReviewForm.classList.add('selected');
-        userReviewForm.classList.remove('notSelected');
+        // userReviewForm.classList.add('ratingSelected');
+        // userReviewForm.classList.remove('ratingNotSelected');
         rating = pos;
       }
       else {
         userReviewStarColor.classList.remove(`star${pos}ActivePermanent`);
         userReviewStarColor.classList.add(`star${pos}Active`);
-        userReviewForm.classList.add('notSelected');
-        userReviewForm.classList.remove('selected');
+        // userReviewForm.classList.add('ratingNotSelected');
+        // userReviewForm.classList.remove('ratingSelected');
         rating = null;
       }
     });
@@ -46,9 +46,9 @@ document.addEventListener('DOMContentLoaded', evt => {
   // TODO gather form data and handle submit
   const userReviewForm = document.getElementById('userReviewForm');
 
-  userReviewForm.addEventListener('submit', evt => {
-      evt.preventDefault();
-  });
+  // userReviewForm.addEventListener('submit', evt => {
+  //     evt.preventDefault();
+  // });
 
 
   
