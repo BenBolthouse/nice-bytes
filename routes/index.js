@@ -10,7 +10,6 @@ const router = express.Router();
 router.get('/', async function (req, res, next) {
   const spots = await Spot.findAll({
     include: { model: Review },
-    limit: 10,
     order: ['name'],
   });
   res.render('index', { user: req.session.user, spots });
