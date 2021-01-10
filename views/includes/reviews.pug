@@ -1,6 +1,16 @@
-div(class="spot-reviews")
-  button(type="button" id="newUserReview" class="spot-reviews__new-user-review")
-  each review in spot.Reviews
-    h3=review.title
-    p=review.body
-    //- p=review.User.id
+div(class="user-reviews")
+  div(class="user-reviews__new")
+  
+  h2 What people are saying about #{spot.name}  
+    ion-icon(name="chatbox")
+  div(class="user-reviews__list")
+    each review in spot.Reviews
+      div(class="user-review")
+        div(class="user-review__user")
+          div(class="user-review__avatar")=review.User.username.slice(0,1).toUpperCase()
+          p=review.User.username
+        div(class="user-review__review")
+          div(class="user-review__rating")=review.stars
+          p(class="user-review__date")= `Reviewed on: ${new Date(Date.parse(review.createdAt)).toDateString()}`
+          h3(class="user-review__title")=review.title
+          p(class="user-review__body")=review.body

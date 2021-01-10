@@ -16,11 +16,10 @@ body {
   overflow: hidden;
 }
 .page {
-  position: relative;
-  margin-top: 4rem; /* Clear the header */
+  position: absolute;
   overflow-x: hidden;
   overflow-y: auto;
-  display: grid; /* ! Important */
+  top: 4rem; right: 0; bottom: 0; left: 0;
 }
 .page__awaiting--hide,
 .page__awaiting--show {
@@ -90,4 +89,9 @@ button {
   color: #ffffff;
   font-size: 1.125rem;
   padding: .5rem 2rem;
+  border-radius: .25rem;
+}
+
+button:hover {
+  background-color: #0479a7;
 }
