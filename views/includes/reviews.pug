@@ -2,6 +2,16 @@ div(class="user-reviews")
   div(class="user-reviews__new")
     if(user)
       button(type="button" id="newUserReview" class="user-reviews__new-user-review") Add Review
+
+      div(class="new-review__rating")
+        div(class="new-review__rating-mask")
+        div(class="new-review__rating-color-layer" id="userReviewStarColor")
+        div(class="new-review__rating-interaction-layer")
+          div(class="new-review__rating-star-ctrl" id="userReviewStar1Selection")
+          div(class="new-review__rating-star-ctrl" id="userReviewStar2Selection")
+          div(class="new-review__rating-star-ctrl" id="userReviewStar3Selection")
+          div(class="new-review__rating-star-ctrl" id="userReviewStar4Selection")
+          div(class="new-review__rating-star-ctrl" id="userReviewStar5Selection")
   
   
   h2 What people are saying about #{spot.name}  

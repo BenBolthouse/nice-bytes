@@ -27,6 +27,23 @@
   display: grid;
   justify-items: center;
 }
+.new-review__rating {
+  position: relative;
+  z-index: 400;
+}
+.new-review__rating-interaction-layer {
+  grid-template-columns: auto auto auto auto auto;
+  position: absolute;
+  display: grid;
+  height: 2rem;
+  z-index: 403;
+  top: 0; right: 0; bottom: 0; left: 0;
+}
+.new-review__rating-star-ctrl {
+  background-color: red;
+  height: 2rem;
+  width: 2rem;
+}
 .user-reviews__list {
   display: grid;
   max-width: 800px
