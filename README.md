@@ -1,5 +1,9 @@
 # nice-bytes
-A clone of the popular website GoodReads where users can find and rate restaurants. 
+A clone of the popular website GoodReads where users can find and rate restaurants.
+
+Live link: https://nice-bytes.herokuapp.com/
+
+Please note: this project is hosted on a Heroku dyno that requires time to spin up. If loading takes long please allow about 30 seconds for the dyno to start.
 
 ## Local Environment Setup
 
