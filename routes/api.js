@@ -2,6 +2,7 @@ const express = require("express");
 const { asyncHandler } = require("./__utils");
 const { authorize } = require("../auth");
 const { User, Collection, SpotCollection, Review } = require("../db/models");
+const { get } = require(".");
 
 const router = express.Router();
 
@@ -101,20 +102,18 @@ router.put(
   "/spots/reviews/:id",
   authorize,
   asyncHandler(async (req, res, next) => {
-    const { spotId, stars, title, body } = req.body;
+    const { stars, title, body } = req.body;
     const { id } = req.params;
-    const userId = req.session.auth.userId;
 
-    const editReview = await Review.update(
-      {
-        stars: stars,
-        title: title,
-        body: body,
-      },
-      { where: { id: id } }
-    );
+    const getReview = await Review.findByPk(id);
+    if (getReview) {
+      getReview.body = body;
+      getReview.title = title;
+      getReview.stars = stars;
+      await getReview.save();
+    }
     res.json({
-      id: editReview.id,
+      id: getReview.id,
     });
   })
 );
