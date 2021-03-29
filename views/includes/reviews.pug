@@ -1,5 +1,22 @@
 div(class="user-reviews")
   div(class="user-reviews__new")
+    if(user)
+      h2 Write a review
+      form(action="/spot/reviews" method="post" id="userReviewForm")
+        //- input(type="hidden" name="userId" value=spot.Reviews.User.id)
+        input(type="hidden" name="spotId" value=spot.id)
+        label(for="stars") Select your rating
+        select(name="stars")
+          option 5
+          option 4
+          option 3
+          option 2
+          option 1
+        label(for="title") Title of review
+        input(type="text" name="title")
+        label(for="body") Write your review
+        textarea(type="text" name="body")
+        button(type="submit" id="newUserReview" class="user-reviews__new-user-review") Add Review
   
   h2 What people are saying about #{spot.name}  
     ion-icon(name="chatbox")
