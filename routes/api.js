@@ -1,7 +1,7 @@
-const express = require('express');
-const { asyncHandler } = require('./__utils');
-const { authorize } = require('../auth');
-const { User, Collection, SpotCollection, Review } = require('../db/models');
+const express = require("express");
+const { asyncHandler } = require("./__utils");
+const { authorize } = require("../auth");
+const { User, Collection, SpotCollection, Review } = require("../db/models");
 
 const router = express.Router();
 
@@ -9,7 +9,7 @@ const router = express.Router();
  * POST /collections
  */
 router.post(
-  '/collections',
+  "/collections",
   authorize,
   asyncHandler(async (req, res, next) => {
     const { name } = req.body;
@@ -21,7 +21,7 @@ router.post(
     });
 
     res.json({
-      "id": insertCollection.id,
+      id: insertCollection.id,
     });
   })
 );
@@ -30,7 +30,7 @@ router.post(
  * DELETE /collection/:id
  */
 router.delete(
-  '/collection/:id',
+  "/collection/:id",
   authorize,
   asyncHandler(async (req, res, next) => {
     const { id } = req.params;
@@ -43,7 +43,7 @@ router.delete(
  * POST /collections/spot
  */
 router.post(
-  '/collections/spot',
+  "/collections/spot",
   authorize,
   asyncHandler(async (req, res, next) => {
     const { spotId, collectionId } = req.body;
@@ -53,7 +53,7 @@ router.post(
     });
 
     res.json({
-      "id": insertCollectionSpot.id,
+      id: insertCollectionSpot.id,
     });
   })
 );
@@ -62,7 +62,7 @@ router.post(
  * DELETE /collections/spot/:id
  */
 router.delete(
-  '/collections/spot/:id',
+  "/collections/spot/:id",
   authorize,
   asyncHandler(async (req, res, next) => {
     const { id } = req.params;
@@ -75,7 +75,7 @@ router.delete(
  * POST /spots/reviews
  */
 router.post(
-  '/spots/reviews',
+  "/spots/reviews",
   authorize,
   asyncHandler(async (req, res, next) => {
     const { spotId, stars, title, body } = req.body;
@@ -86,11 +86,36 @@ router.post(
       spotId: spotId,
       stars: stars,
       title: title,
-      body: body
-    })
+      body: body,
+    });
     res.json({
-      "id": insertReview.id
-    })
+      id: insertReview.id,
+    });
+  })
+);
+
+/**
+ * PUT /spots/reviews
+ */
+router.put(
+  "/spots/reviews/:id",
+  authorize,
+  asyncHandler(async (req, res, next) => {
+    const { spotId, stars, title, body } = req.body;
+    const { id } = req.params;
+    const userId = req.session.auth.userId;
+
+    const editReview = await Review.update(
+      {
+        stars: stars,
+        title: title,
+        body: body,
+      },
+      { where: { id: id } }
+    );
+    res.json({
+      id: editReview.id,
+    });
   })
 );
 
@@ -98,7 +123,7 @@ router.post(
  * DELETE /spots/review/:id
  */
 router.delete(
-  '/spots/review/:id',
+  "/spots/review/:id",
   authorize,
   asyncHandler(async (req, res, next) => {
     const { id } = req.params;
