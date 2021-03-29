@@ -89,9 +89,7 @@ router.post(
       title: title,
       body: body,
     });
-    res.json({
-      id: insertReview.id,
-    });
+    res.redirect(`/spots/${spotId}`);
   })
 );
 

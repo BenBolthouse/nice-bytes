@@ -9,6 +9,7 @@ div
       input(type="text" name="stars" required=true)
     div
       label Review
-      input(type="textarea" name="body" required=true)
+      textarea(name="body" required=true)
+    input(type="hidden" name="spotId" value=spot.id)
     input(type="hidden" name="_csrf" value=csrf)
     button(type="submit") Submit Review
