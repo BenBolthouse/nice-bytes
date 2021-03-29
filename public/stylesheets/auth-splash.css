@@ -8,8 +8,10 @@
 }
 
 .page {
-  background-image: url('/images/restaurant-blue.jpg');
+  background-image: url("/images/restaurant-blue.jpg");
   background-size: cover;
+  overflow-x: unset;
+  overflow-y: unset;
 }
 .auth-splash {
   height: 100%;
@@ -23,7 +25,7 @@
   text-align: center;
 }
 .auth-splash__panel-1 h1 {
-  font-family: 'Lobster', cursive;
+  font-family: "Lobster", cursive;
   font-size: 10rem;
   margin-bottom: 2rem;
   text-shadow: 0.25rem 0.25rem 0 rgb(219, 13, 230),
@@ -64,7 +66,7 @@
 }
 .auth-splash__submitting-icon {
   animation: submitting-icon-rotation 0.5s infinite linear;
-  background-image: url('/images/spinner_96x96.svg');
+  background-image: url("/images/spinner_96x96.svg");
   /* border-radius: 50%; */
   position: absolute;
   height: 6rem;
