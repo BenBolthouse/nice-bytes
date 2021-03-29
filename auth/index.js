@@ -8,7 +8,7 @@ const __setExpiryDate = () => {
 /**
  * Logs a user in with a 24-hour session.
  * @param {Express middleware request object} req
- * @param {Application user to log in} user
+ * @param {Application user to log in} user 
  */
 const logUserIn = (req, user) => {
   req.session.cookie = {
