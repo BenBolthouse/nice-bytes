@@ -1,7 +1,7 @@
-const express = require('express');
-const { asyncHandler } = require('./__utils');
-const { authorize } = require('../auth');
-const { User, Collection, SpotCollection, Review } = require('../db/models');
+const express = require("express");
+const { asyncHandler } = require("./__utils");
+const { authorize } = require("../auth");
+const { User, Collection, SpotCollection, Review } = require("../db/models");
 
 const router = express.Router();
 
@@ -9,19 +9,17 @@ const router = express.Router();
  * POST /collections
  */
 router.post(
-  '/collections',
+  "/collections",
   authorize,
   asyncHandler(async (req, res, next) => {
     const { name } = req.body;
     const userId = req.session.auth.userId;
-
     const insertCollection = await Collection.create({
       userId: userId,
       name: name,
     });
-
     res.json({
-      "id": insertCollection.id,
+      id: insertCollection.id,
     });
   })
 );
@@ -30,11 +28,10 @@ router.post(
  * DELETE /collection/:id
  */
 router.delete(
-  '/collection/:id',
+  "/collection/:id",
   authorize,
   asyncHandler(async (req, res, next) => {
     const { id } = req.params;
-
     await Collection.destroy({ where: { id: id } });
   })
 );
@@ -43,7 +40,7 @@ router.delete(
  * POST /collections/spot
  */
 router.post(
-  '/collections/spot',
+  "/collections/spot",
   authorize,
   asyncHandler(async (req, res, next) => {
     const { spotId, collectionId } = req.body;
@@ -51,23 +48,26 @@ router.post(
       spotId: spotId,
       collectionId: collectionId,
     });
-
     res.json({
-      "id": insertCollectionSpot.id,
+      id: insertCollectionSpot.id,
     });
   })
 );
 
-/**
- * DELETE /collections/spot/:id
- */
+// ********************************************************
+// Delete a collection with a given collection ID.
+//
 router.delete(
-  '/collections/spot/:id',
+  "/collections/:collectionId/spot/:spotId",
   authorize,
   asyncHandler(async (req, res, next) => {
-    const { id } = req.params;
-
-    await SpotCollection.destroy({ where: { id: id } });
+    const { collectionId, spotId } = req.params;
+    try {
+      await SpotCollection.destroy({ where: { collectionId, spotId } });
+    } catch (e) {
+      return next(e);
+    }
+    res.status(200).json({ result: "Deleted" });
   })
 );
 
@@ -75,22 +75,21 @@ router.delete(
  * POST /spots/reviews
  */
 router.post(
-  '/spots/reviews',
+  "/spots/reviews",
   authorize,
   asyncHandler(async (req, res, next) => {
     const { spotId, stars, title, body } = req.body;
     const userId = req.session.auth.userId;
-
     const insertReview = await Review.create({
       userId: userId,
       spotId: spotId,
       stars: stars,
       title: title,
-      body: body
-    })
+      body: body,
+    });
     res.json({
-      "id": insertReview.id
-    })
+      id: insertReview.id,
+    });
   })
 );
 
@@ -98,11 +97,10 @@ router.post(
  * DELETE /spots/review/:id
  */
 router.delete(
-  '/spots/review/:id',
+  "/spots/review/:id",
   authorize,
   asyncHandler(async (req, res, next) => {
     const { id } = req.params;
-
     await Review.destroy({ where: { id: id } });
   })
 );
