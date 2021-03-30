@@ -12,7 +12,7 @@
 }
 .spot-detail img {
   border: 1px solid #333333;
-  border-radius: .25rem;
+  border-radius: 0.25rem;
   width: 480px;
   height: 480px;
   object-fit: cover;
@@ -20,7 +20,7 @@
 .spot-detail__describe {
   display: grid;
   padding-left: 2rem;
-  grid-template-rows: 3rem 3rem 3rem;
+  grid-template-rows: 3rem 3rem auto;
 }
 .spot-detail__type {
   color: #777777;
@@ -34,7 +34,7 @@
 .spot-detail__describe button {
   height: 3rem;
   margin-right: 1rem;
-  border-radius: .25rem;
+  border-radius: 0.25rem;
 }
 .spot-detail__rating {
   float: left;
@@ -56,7 +56,7 @@
 }
 .spot-detail__rating-mask {
   position: absolute;
-  background-image: url('/images/rating_stars_horizontal_FFFFFF.svg');
+  background-image: url("/images/rating_stars_horizontal_FFFFFF.svg");
   background-position: center;
   z-index: 102;
   top: 0px;
