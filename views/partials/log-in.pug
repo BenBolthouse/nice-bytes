@@ -28,8 +28,8 @@ block form
               li= message
       input(type="hidden" name="_csrf" value=csrf)
       button(type="submit") Login
-
-  <a href="/demo?_csrf=csrf" id="auth-splash__form-demo">Login as demo user</a>    
-  //- form(id="auth-splash__form-demo" class="auth-splash__form" action="/demo", method="post")
-  //-   input(type="hidden" name="_csrf" value=csrf)
-  //-   button(type="submit" id="demo-button") Demo Login
+  form(action="/login" method="post")
+    input(type="hidden" name="_csrf" value=csrf)
+    input(type="hidden" name="email" value="demo@demo.com")
+    input(type="hidden" name="password" value="password1")
+    button(type="submit" class="auth-splash__form-demo") Login as demo user
