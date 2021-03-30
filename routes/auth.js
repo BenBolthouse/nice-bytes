@@ -1,18 +1,25 @@
-const { validateSignUp, validateLogin } = require('./__validators');
-const { User, Collection } = require('../db/models');
-const { validationResult } = require('express-validator');
-const { secret } = require('../config');
-const { logUserIn, logUserOut, authorize } = require('../auth');
-const { asyncHandler } = require('./__utils');
-const express = require('express');
-const csrf = require('csurf');
-const bcrypt = require('bcrypt');
+const { validationResult } = require("express-validator");
+const bcrypt = require("bcrypt");
+const asyncHandler = require("express-async-handler");
+const express = require("express");
+const csrf = require("csurf");
+
+const { validateSignUp, validateLogin } = require("./__validators");
+const { User, Collection } = require("../db/models");
+const { logUserIn, logUserOut, authorize } = require("../auth");
+
+const { secret } = require("../config");
 
 const router = express.Router();
 
-// form request forgery protection
+// X-CSRF token
 const csrfProtection = csrf({ cookie: true });
 
+/**********************************************************
+ * Router level middleware configures response locals object
+ * to later contain the validation results from sign up and
+ * login.
+ */
 router.use((req, res, next) => {
   const { firstName, lastName, username, email } = req.body;
   res.locals.messages = {
@@ -24,54 +31,50 @@ router.use((req, res, next) => {
     confirmPassword: [],
   };
   res.locals.prefill = {
-    firstName: firstName || '',
-    lastName: lastName || '',
-    username: username || '',
-    email: email || '',
+    firstName: firstName || "",
+    lastName: lastName || "",
+    username: username || "",
+    email: email || "",
   };
   next();
 });
 
-//
-// GET: http://localhost:8080/signup
-//
-router.get('/signup', csrfProtection, (req, res, next) => {
-  return res.render('partials/sign-up', {
+/**********************************************************
+ * Returns a Pug view with an embedded X-CSRF token
+ * and—where applicable—prefill data from the previous POST
+ * attempt.
+ */
+// prettier-ignore
+router.get("/signup", csrfProtection, (req, res) => {
+  return res.render("partials/sign-up", {
     csrf: req.csrfToken(),
-    user: req.session.user,
     messages: res.locals.messages,
     prefill: res.locals.prefill,
   });
 });
 
-//
-// POST: http://localhost:8080/signup
-//
-router.post(
-  '/signup',
-  validateSignUp,
-  csrfProtection,
-  asyncHandler(async (req, res, next) => {
-    // scoped uer variable
-    let user;
-
-    // indicates that express validation is passing
+/************************************************************
+ * Accepts data from a form submission to create the
+ * database user.
+ */
+// prettier-ignore
+router.post("/signup", validateSignUp, csrfProtection, asyncHandler(async (req, res) => {
+    // data from form submission
+    const { firstName, lastName, username, email, password } = req.body;
+    // variable is used in multiple validation steps; if
+    // passing is still equal to true after validation then
+    // create the user in the database and then send a
+    // success response
     let passing = true;
-
-    // check for form validation errors
+    // do form validation
     const validationErrors = validationResult(req);
-
     // if form validation failed push errors into validation view model
     if (!validationErrors.isEmpty()) {
-      validationErrors.errors.forEach(err => {
+      validationErrors.errors.forEach((err) => {
         res.locals.messages[err.param].push(err.msg);
       });
       passing = false;
     }
-
-    // data from form submission
-    const { _csrf, firstName, lastName, username, email, password } = req.body;
-
     // if the requested username is in use notify client
     if (!(await userUsernameIsUnique(username))) {
       res.locals.messages.username.push(
@@ -79,7 +82,6 @@ router.post(
       );
       passing = false;
     }
-
     // if the requested email is in use notify client
     if (!(await userEmailIsUnique(email))) {
       res.locals.messages.email.push(
@@ -87,20 +89,18 @@ router.post(
       );
       passing = false;
     }
-
     // if any other validation is not passing notify the client
     if (!passing)
-      return res.render('partials/sign-up', {
+      return res.render("partials/sign-up", {
         csrf: req.csrfToken(),
         user: req.session.user,
         messages: res.locals.messages,
         prefill: res.locals.prefill,
       });
-
+    // if still passing then create the user in the database
     user = User.build();
-
     // else create the user and redirect to home
-    const hash = await bcrypt.hash(`${password}:${secret}`, 10);
+    const hash = await bcrypt.hash(password, 10);
     user = await User.create(
       {
         firstName: firstName || null,
@@ -108,28 +108,28 @@ router.post(
         username: username,
         email: email,
         passwordHash: hash,
-        collections: [{ name: 'Have Visited' }, { name: 'Want To Visit' }],
+        collections: [{ name: "Have Visited" }, { name: "Want To Visit" }],
       },
       {
         include: {
           model: Collection,
-          as: 'collections',
+          as: "collections",
         },
       }
     );
-
-    // log the user
-    // logUserIn(req, user);
-
-    return res.redirect('/');
+    // finally redirect the logged in user to the home page
+    logUserIn(req, user);
+    return res.redirect("/");
   })
 );
 
-/**
- * GET: http://localhost:8080/login
+/**********************************************************
+ * Returns a Pug view with an embedded X-CSRF token to
+ * accept login form data.
  */
-router.get('/login', csrfProtection, (req, res, next) => {
-  return res.render('partials/log-in', {
+// prettier-ignore
+router.get("/login", csrfProtection, (req, res) => {
+  return res.render("partials/log-in", {
     csrf: req.csrfToken(),
     user: req.session.user,
     messages: res.locals.messages,
@@ -137,124 +137,97 @@ router.get('/login', csrfProtection, (req, res, next) => {
   });
 });
 
-/**
- * POST: http://localhost:8080/login
+/************************************************************
+ * Accepts data from a form submission to create the session
+ * user for a 24-hour express session.
  */
-router.post(
-  '/login',
-  csrfProtection,
-  validateLogin,
-  asyncHandler(async (req, res, next) => {
-    // scoped user variable
-    let user;
-
-    // indicates that express validation is passing
+// prettier-ignore
+router.post("/login", csrfProtection, validateLogin, asyncHandler(async (req, res, next) => {
+    // data from form submission
+    const { email, password } = req.body;
+    // variable is used in multiple validation steps; if
+    // passing is still equal to true after validation then
+    // create the session and then send a success response
     let passing = true;
-
-    // check for form validation errors
+    // do form validation
     const validationErrors = validationResult(req);
-
     // if form validation failed push errors into validation view model
     if (!validationErrors.isEmpty()) {
-      validationErrors.errors.forEach(err => {
+      validationErrors.errors.forEach((err) => {
         res.locals.messages[err.param].push(err.msg);
       });
       passing = false;
     }
-
-    // data from form submission
-    const { _csrf, email, password } = req.body;
-
-    // if the user cannot be found in user store notify client
-    user = await User.findOne({ where: { email: email } });
-    res.locals.messages.email.push(
-      'A user does not exist with the provided email.'
-    );
-    if (!user)
-      return res.render('partials/log-in', {
-        csrf: req.csrfToken(),
-        user: req.session.user,
-        messages: res.locals.messages,
-        prefill: res.locals.prefill,
-      });
-
-    // compare request password with user password
-    const saltyPassword = `${password}:${secret}`;
-    const passwordIsValid = await bcrypt.compare(
-      saltyPassword,
-      user.passwordHash.toString()
-    );
-
-    // if password is invalid notify client
-    if (!passwordIsValid)
-      res.locals.messages.password.push(
-        'Password is invalid. Please try again.'
+    // if the user cannot be found in the database send the
+    // Pug login form with the error message
+    const user = await User.findOne({ where: { email: email } });
+    if (!user) {
+      res.locals.messages.email.push(
+        "A user does not exist with the provided email."
       );
-    if (!user)
-      return res.render('partials/log-in', {
+      return res.render("partials/log-in", {
         csrf: req.csrfToken(),
         user: req.session.user,
         messages: res.locals.messages,
         prefill: res.locals.prefill,
       });
-
+    }
+    // compare request password with user password
+    const hash = user.passwordHash.toString();
+    const passwordIsValid = await bcrypt.compare(password, hash);
+    // if the password is invalid send the Pug login form
+    // with the error message
+    if (!passwordIsValid) {
+      res.locals.messages.password.push(
+        "Password is invalid. Please try again."
+      );
+      return res.render("partials/log-in", {
+        csrf: req.csrfToken(),
+        user: req.session.user,
+        messages: res.locals.messages,
+        prefill: res.locals.prefill,
+      });
+    }
     // if any other validation is not passing notify the client
     if (!passing)
-      return res.render('partials/log-in', {
+      return res.render("partials/log-in", {
         csrf: req.csrfToken(),
         user: req.session.user,
         messages: res.locals.messages,
         prefill: res.locals.prefill,
       });
-
-    // if everything else checks out then log the user in
+    // finally redirect the logged in user to the home page
     logUserIn(req, user);
-    return res.redirect('/');
+    return res.redirect("/");
   })
 );
 
-/**
- * POST: http://localhost:8080/demo
+/************************************************************
+ * Deletes a users 24-hour express session.
  */
-router.get(
-  '/demo',
-  csrfProtection,
-  validateLogin,
-  asyncHandler(async (req, res, next) => {
-
-    //Queries for demo user using a unique key
-    const user = await User.findOne({ where: { email: 'demo@demo.com' } });
-    
-    //Logs in demo user
-    logUserIn(req, user);
-    return res.redirect('/');
-  })
-);
-
-
-/**
- * GET: http://localhost:8080/logout
- */
-router.get('/logout', authorize, (req, res, next) => {
+// prettier-ignore
+router.get("/logout", authorize, (req, res, next) => {
   logUserOut(req);
-  res.redirect('/login');
+  return res.redirect("/login");
 });
 
-/**
- * Checks the `Users` store for a record containing the same username.
- * @param {The `username` string of the new user object} username
+/************************************************************
+ * Helper function checks the database for a user with a
+ * given username.
+ * @param {String} username
  */
-const userUsernameIsUnique = async username => {
+const userUsernameIsUnique = async (username) => {
   const result = await User.findOne({ where: { username: username } });
   if (result) return false;
   return true;
 };
 
-/**
- * Checks the `Users` store for a record containing the same email address.
- * @param {The `email` string of the new user object} email
+/************************************************************
+ * Helper function checks the database for a user with a
+ * given email.
+ * @param {String} username
  */
-const userEmailIsUnique = async email => {
+const userEmailIsUnique = async (email) => {
   const result = await User.findOne({ where: { email: email } });
   if (result) return false;
   return true;
