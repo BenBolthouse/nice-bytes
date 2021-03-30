@@ -18,7 +18,7 @@ const __setExpiryDate = () => {
  * @param {Request} req `express.Request`
  * @param {User} user `db.models.User`
  */
-export const logUserIn = (req, user) => {
+const logUserIn = (req, user) => {
   req.session.cookie = {
     expires: __setExpiryDate(),
     httpOnly: true,
@@ -41,7 +41,7 @@ export const logUserIn = (req, user) => {
  * Logs a user out by deleting their session.
  * @param {Request} req `express.Request`
  */
-export const logUserOut = (req) => {
+const logUserOut = (req) => {
   delete req.session.auth;
   delete req.session.user;
 };
@@ -52,7 +52,7 @@ export const logUserOut = (req) => {
  * @param {Request} req `express.Request`
  * @param {Function} next Express middleware `next()`
  */
-export const authorize = (req, next) => {
+const authorize = (req, _res, next) => {
   if (!req.session.auth) {
     const err = new Error("Not authorized to view this resource.");
     err.title = "Not authorized to view this resource.";
@@ -61,3 +61,5 @@ export const authorize = (req, next) => {
   }
   return next();
 };
+
+module.exports = { logUserIn, logUserOut, authorize };
