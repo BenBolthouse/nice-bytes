@@ -1,4 +1,4 @@
-const { asyncHandler: asyn } = require('./__utils');
+const asyncHandler = require("express-async-handler");
 const express = require('express');
 const csrf = require('csurf');
 
@@ -9,7 +9,7 @@ const router = express.Router();
 //
 router.post(
   '/',
-  asyn(async (req, res, next) => {
+  asyncHandler(async (req, res, next) => {
     res.send('Nothing here yet.');
   })
 );
