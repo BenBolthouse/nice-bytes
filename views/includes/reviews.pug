@@ -5,7 +5,7 @@ div(class="user-reviews")
     ion-icon(name="chatbox")
   div(class="user-reviews__list")
     each review in spot.Reviews
-      div(class="user-review")
+      div(class="user-review" id=`review__${review.id}`)
         div(class="user-review__user")
           div(class="user-review__avatar")=review.User.username.slice(0,1).toUpperCase()
           p=review.User.username
@@ -15,6 +15,8 @@ div(class="user-reviews")
           h3(class="user-review__title")=review.title
           p(class="user-review__body")=review.body
         if(review.User.id === userId)
-          div 
-            button(type='button' id='editReviewBtn' reviewId=review.id ) Edit 
-            button(type='button' id='deleteReviewBtn' reviewId=review.id spotId=spot.id ) Delete
+          div(class="user-review__buttons")
+            button(type='button' id='editReviewBtn' reviewId=review.id ) 
+              ion-icon(name="create")
+            button(type='button' id='deleteReviewBtn' reviewId=review.id spotId=spot.id ) 
+              ion-icon(name="close-circle-outline")

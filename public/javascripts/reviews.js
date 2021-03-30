@@ -60,14 +60,16 @@ document.addEventListener("DOMContentLoaded", (evt) => {
       `/api/spots/review/${reviewId}`,
       success,
       error,
-      deleteReviewBtn
+      reviewId
     );
   });
 
-  const success = (target, data) => {
-    target.parentNode.parentNode.parentNode.removeChild(
-      target.parentNode.parentNode
-    );
+  const success = (reviewId, data) => {
+    const review = document.getElementById(`review__${reviewId}`);
+    review.parentNode.removeChild(review);
+    // target.parentNode.parentNode.parentNode.removeChild(
+    //   target.parentNode.parentNode
+    // );
   };
   const error = (target, error) => {
     console.log("delete error");
