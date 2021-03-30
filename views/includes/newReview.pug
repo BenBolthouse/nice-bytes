@@ -1,15 +1,15 @@
-div
-  a(href='/') Write a Review
+div(class='review-form__container')
+  a(href='/new-review' class='review-form__link') Write a Review
   form(action=`/api/spots/reviews/`, method="post") 
-    div
+    div(class='review-form__item')
       label Title
       input(type="text" name="title" required=true)
-    div
+    div(class='review-form__item')
       label Stars
       input(type="text" name="stars" required=true)
-    div
+    div(class='review-form__item')
       label Review
       textarea(name="body" required=true)
     input(type="hidden" name="spotId" value=spot.id)
     input(type="hidden" name="_csrf" value=csrf)
-    button(type="submit") Submit Review
+    button(type="submit" class="review-form__submit") Submit Review
