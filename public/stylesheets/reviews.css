@@ -209,3 +209,7 @@
 #deleteReviewBtn {
   background-color: rgb(226, 96, 96);
 }
+
+#deleteReviewBtn:hover {
+  background-color: rgb(172, 59, 59);
+}
