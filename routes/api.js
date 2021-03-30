@@ -124,12 +124,8 @@ router.delete(
   authorize,
   asyncHandler(async (req, res, next) => {
     const { id } = req.params;
-    const { spotId } = req.body;
-    console.log('from the route', spotId)
-
+  
     await Review.destroy({ where: { id: id } });
-
-    res.redirect(`/spots/${spotId}`);
   })
 );
 

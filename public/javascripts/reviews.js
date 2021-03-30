@@ -57,11 +57,8 @@ document.addEventListener('DOMContentLoaded', evt => {
   
   deleteReviewBtn.addEventListener('click', async e => {
     const reviewId = deleteReviewBtn.getAttribute('reviewId')
-    const spotId = deleteReviewBtn.getAttribute('spotId')
-    console.log('from the handler', spotId)
-    return await destroy(`/api/spots/review/${reviewId}`,
-    { spotId },
-    );
+
+    return await destroy(`/api/spots/review/${reviewId}`);
   })
   
   
