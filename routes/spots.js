@@ -56,6 +56,7 @@ router.get('/:id', async (req, res, next) => {
   res.render('spot', {
     spot,
     user,
+    userId
   });
 });
 

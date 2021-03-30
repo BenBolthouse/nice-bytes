@@ -14,3 +14,7 @@ div(class="user-reviews")
           p(class="user-review__date")= `Reviewed on: ${new Date(Date.parse(review.createdAt)).toDateString()}`
           h3(class="user-review__title")=review.title
           p(class="user-review__body")=review.body
+        if(review.User.id === userId)
+          div 
+            button(type='button' id='editReviewBtn' reviewId=review.id ) Edit 
+            button(type='button' id='deleteReviewBtn' reviewId=review.id spotId=spot.id ) Delete

@@ -1,15 +1,16 @@
-div
-  a(href='/') Write a Review
-  form(action=`/api/spots/reviews/`, method="post") 
-    div
-      label Title
-      input(type="text" name="title" required=true)
-    div
-      label Stars
-      input(type="text" name="stars" required=true)
-    div
-      label Review
-      textarea(name="body" required=true)
-    input(type="hidden" name="spotId" value=spot.id)
-    input(type="hidden" name="_csrf" value=csrf)
-    button(type="submit") Submit Review
+if(user)
+  div
+    a(href='/') Write a Review
+    form(action=`/api/spots/reviews/`, method="post") 
+      div
+        label Title
+        input(type="text" name="title" required=true)
+      div
+        label Stars
+        input(type="text" name="stars" required=true)
+      div
+        label Review
+        textarea(name="body" required=true)
+      input(type="hidden" name="spotId" value=spot.id)
+      input(type="hidden" name="_csrf" value=csrf)
+      button(type="submit") Submit Review
