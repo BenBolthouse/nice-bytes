@@ -2,11 +2,10 @@
  * Module loaded on views/includes/reviews.pug
  */
 
- import { post, get, put, destroy } from './webapi.js';
-
+import { post, get, put, destroy } from "./webapi.js";
 
 // sync form to javascript
-document.addEventListener('DOMContentLoaded', evt => {
+document.addEventListener("DOMContentLoaded", (evt) => {
   // handles the DOM star selection experience
   // let rating;
 
@@ -45,26 +44,32 @@ document.addEventListener('DOMContentLoaded', evt => {
   // });
 
   // TODO gather form data and handle submit
-  const userReviewForm = document.getElementById('userReviewForm');
+  const userReviewForm = document.getElementById("userReviewForm");
 
   // userReviewForm.addEventListener('submit', evt => {
   //     evt.preventDefault();
   // });
 
-  const editReviewBtn = document.getElementById('editReviewBtn')
-  const deleteReviewBtn = document.getElementById('deleteReviewBtn')
+  const editReviewBtn = document.getElementById("editReviewBtn");
+  const deleteReviewBtn = document.getElementById("deleteReviewBtn");
 
-  
-  deleteReviewBtn.addEventListener('click', async e => {
-    const reviewId = deleteReviewBtn.getAttribute('reviewId')
-    const spotId = deleteReviewBtn.getAttribute('spotId')
-    console.log('from the handler', spotId)
-    return await destroy(`/api/spots/review/${reviewId}`,
-    { spotId },
+  deleteReviewBtn.addEventListener("click", async (e) => {
+    const reviewId = deleteReviewBtn.getAttribute("reviewId");
+    const spotId = deleteReviewBtn.getAttribute("spotId");
+    return await destroy(
+      `/api/spots/review/${reviewId}`,
+      success,
+      error,
+      deleteReviewBtn
     );
-  })
-  
-  
+  });
 
-  
+  const success = (target, data) => {
+    target.parentNode.parentNode.parentNode.removeChild(
+      target.parentNode.parentNode
+    );
+  };
+  const error = (target, error) => {
+    console.log("delete error");
+  };
 });

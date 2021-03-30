@@ -13,12 +13,12 @@
 export const post = async (endpoint, payload, success, error, target) => {
   try {
     if (!endpoint || !payload)
-      throw new Error('Arguments endpoint and payload are required');
+      throw new Error("Arguments endpoint and payload are required");
     await fetch(endpoint, {
-      method: 'post',
+      method: "post",
       headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
+        Accept: "application/json",
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(payload),
     });
@@ -26,7 +26,7 @@ export const post = async (endpoint, payload, success, error, target) => {
   } catch (e) {
     return error(target, e);
   }
-}
+};
 
 /**
  * Sends get request to web API.
@@ -39,16 +39,16 @@ export const get = async (endpoint, success, error, target) => {
   let data;
   try {
     data = await fetch(endpoint, {
-      method: 'get',
+      method: "get",
       headers: {
-        Accept: 'application/json',
+        Accept: "application/json",
       },
     });
     return success(target, data);
   } catch (e) {
     return error(target, e);
   }
-}
+};
 
 /**
  * Sends put request with JSON payload to web API.
@@ -61,10 +61,10 @@ export const get = async (endpoint, success, error, target) => {
 export const put = async (endpoint, payload, success, error, target) => {
   try {
     await fetch(endpoint, {
-      method: 'put',
+      method: "put",
       headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
+        Accept: "application/json",
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(payload),
     });
@@ -72,7 +72,7 @@ export const put = async (endpoint, payload, success, error, target) => {
   } catch (e) {
     return error(target, e);
   }
-}
+};
 
 /**
  * Sends delete request to web API.
@@ -85,13 +85,13 @@ export const destroy = async (endpoint, success, error, target) => {
   let data;
   try {
     data = await fetch(endpoint, {
-      method: 'delete',
+      method: "delete",
       headers: {
-        Accept: 'application/json',
+        Accept: "application/json",
       },
     });
     return success(target, data);
   } catch (e) {
     return error(target, e);
   }
-}
+};
