@@ -19,9 +19,6 @@
   display: grid;
 }
 
-.review-form__link {
-}
-
 .review-form__item {
   position: relative;
   margin-top: 0.5rem;

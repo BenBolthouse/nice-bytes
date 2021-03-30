@@ -5,11 +5,11 @@
 import { destroy } from "./webapi.js";
 
 // sync form to javascript
-document.addEventListener("DOMContentLoaded", (evt) => {
+document.addEventListener("DOMContentLoaded", () => {
   const deleteReviewBtn = document.getElementById("deleteReviewBtn");
 
   if (deleteReviewBtn) {
-    deleteReviewBtn.addEventListener("click", async (e) => {
+    deleteReviewBtn.addEventListener("click", async () => {
       const reviewId = deleteReviewBtn.getAttribute("reviewId");
 
       return await destroy(
@@ -20,10 +20,10 @@ document.addEventListener("DOMContentLoaded", (evt) => {
       );
     });
 
-    const success = (reviewId, data) => {
+    const success = (reviewId) => {
       const review = document.getElementById(`review__${reviewId}`);
       review.parentNode.removeChild(review);
     };
-    const error = (target, error) => {};
+    const error = () => {};
   }
 });
