@@ -1,37 +1,78 @@
-'use strict';
-
-const { User, Collection } = require('../models');
-
-
+"use strict";
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-
-    const demoUser = await User.findOne({ where: { username: 'demouser' } });
-
-    const demoCollections = await Collection.findAll({
-        where: {userId: demoUser.id }
-      });
-
-
-
-      return queryInterface.bulkInsert('SpotCollections', [
-        { collectionId: demoCollections[0].id, spotId: 1, createdAt: new Date(), updatedAt: new Date()},
-        { collectionId: demoCollections[0].id, spotId: 2, createdAt: new Date(), updatedAt: new Date()},
-        { collectionId: demoCollections[0].id, spotId: 3, createdAt: new Date(), updatedAt: new Date()},
-        { collectionId: demoCollections[0].id, spotId: 4, createdAt: new Date(), updatedAt: new Date()},
-        { collectionId: demoCollections[0].id, spotId: 5, createdAt: new Date(), updatedAt: new Date()},
-        { collectionId: demoCollections[1].id, spotId: 6, createdAt: new Date(), updatedAt: new Date()},
-        { collectionId: demoCollections[1].id, spotId: 7, createdAt: new Date(), updatedAt: new Date()},
-        { collectionId: demoCollections[1].id, spotId: 8, createdAt: new Date(), updatedAt: new Date()},
-        { collectionId: demoCollections[1].id, spotId: 9, createdAt: new Date(), updatedAt: new Date()},
-        { collectionId: demoCollections[1].id, spotId: 10, createdAt: new Date(), updatedAt: new Date()},
-
-      ], {});
+    return queryInterface.bulkInsert(
+      "SpotCollections",
+      [
+        {
+          collectionId: 1,
+          spotId: 1,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          collectionId: 1,
+          spotId: 2,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          collectionId: 1,
+          spotId: 3,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          collectionId: 1,
+          spotId: 4,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          collectionId: 1,
+          spotId: 5,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          collectionId: 2,
+          spotId: 6,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          collectionId: 2,
+          spotId: 7,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          collectionId: 2,
+          spotId: 8,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          collectionId: 2,
+          spotId: 9,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          collectionId: 2,
+          spotId: 10,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+      ],
+      {}
+    );
   },
-
   down: (queryInterface, Sequelize) => {
-
-    return queryInterface.bulkDelete('SpotCollections', {} , {});
-  }
+    queryInterface.sequelize.query(
+      'ALTER SEQUENCE "SpotCollections_id_seq" RESTART WITH 1;'
+    );
+    return queryInterface.bulkDelete("SpotCollections", {}, {});
+  },
 };
