@@ -3,6 +3,12 @@ extends layout
 append head
   link(rel="stylesheet" href="/stylesheets/index.css")
   script(src="/javascripts/index.js" content-type="text/javascript" type="module")
+  meta(property="og:title" content="NiceBytes")
+  meta(property="og:website" content="website")
+  meta(property="og:url" content="https://nice-bytes.herokuapp.com/")
+  meta(name="image" property="og:image" content="/images/nice-bytes-thumbnail.png")
+  meta(name="description" property="og:description" content="A clone of the popular website GoodReads where users can rate and share restaurants.")
+  meta(name="author" content="Austin Howard, Ben Bolthouse, Reed Norton, & Ryan Maloney")
 
 block content
   div(class="page home-page")
