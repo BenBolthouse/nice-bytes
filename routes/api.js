@@ -1,5 +1,5 @@
 const express = require("express");
-const { asyncHandler } = require("./__utils");
+const asyncHandler = require("express-async-handler");
 const { authorize } = require("../auth");
 const { Collection, SpotCollection, Review } = require("../db/models");
 
@@ -11,7 +11,7 @@ const router = express.Router();
 router.post(
   "/collections",
   authorize,
-  asyncHandler(async (req, res, next) => {
+  asyncHandler(async (req, res, _next) => {
     const { name } = req.body;
     const userId = req.session.auth.userId;
 
@@ -32,7 +32,7 @@ router.post(
 router.delete(
   "/collection/:id",
   authorize,
-  asyncHandler(async (req, res, next) => {
+  asyncHandler(async (req, _res, _next) => {
     const { id } = req.params;
 
     await Collection.destroy({ where: { id: id } });
@@ -45,7 +45,7 @@ router.delete(
 router.post(
   "/collections/spot",
   authorize,
-  asyncHandler(async (req, res, next) => {
+  asyncHandler(async (req, res, _next) => {
     const { spotId, collectionId } = req.body;
     const insertCollectionSpot = await SpotCollection.create({
       spotId: spotId,
@@ -64,7 +64,7 @@ router.post(
 router.delete(
   "/collections/spot/:id",
   authorize,
-  asyncHandler(async (req, res, next) => {
+  asyncHandler(async (req, _res, _next) => {
     const { id } = req.params;
 
     await SpotCollection.destroy({ where: { id: id } });
@@ -77,11 +77,11 @@ router.delete(
 router.post(
   "/spots/reviews",
   authorize,
-  asyncHandler(async (req, res, next) => {
+  asyncHandler(async (req, res, _next) => {
     const { spotId, stars, title, body } = req.body;
     const userId = req.session.auth.userId;
 
-    const insertReview = await Review.create({
+    await Review.create({
       userId: userId,
       spotId: spotId,
       stars: stars,
@@ -98,7 +98,7 @@ router.post(
 router.put(
   "/spots/reviews/:id",
   authorize,
-  asyncHandler(async (req, res, next) => {
+  asyncHandler(async (req, res, _next) => {
     const { stars, title, body } = req.body;
     const { id } = req.params;
 
@@ -121,7 +121,7 @@ router.put(
 router.delete(
   "/spots/review/:id",
   authorize,
-  asyncHandler(async (req, res, next) => {
+  asyncHandler(async (req, res, _next) => {
     const { id } = req.params;
 
     await Review.destroy({ where: { id: id } });
