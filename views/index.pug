@@ -12,13 +12,14 @@ block content
       h1 Find your new favorite spot
       div(class="spot-list")
         each spot in spots
-          div(class="spot-list__item")
-            img(src=`/images/spots/240/${spot.id}_default.png`)
-            div(class="spot-list__item-describe")
-              a(href=`/spots/${spot.id}`)
+          a(href=`/spots/${spot.id}`)
+            div(class="spot-list__item")
+              img(src=`/images/spots/240/${spot.id}_default.png`)
+              div(class="spot-list__item-describe")
                 h2=spot.name
-              div(class="spot-list__item-rating")
-                div(class="spot-list__item-rating-fill")
-                div(class="spot-list__item-rating-mask")
-              p(class="spot-list__item-description")=spot.description
-              p(class="spot-list__item-type")= `Type: ${spot.type}`
+                p(class="spot-list__item-description")=spot.description
+                p(class="spot-list__item-type")= `Type: ${spot.type}`
+              div(class="spot-list__item-controls")
+                div(class="rating")
+                  span=spot.stars
+                  ion-icon(name="star")
