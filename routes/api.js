@@ -1,5 +1,5 @@
 const express = require("express");
-const { asyncHandler } = require("express-async-handler");
+const asyncHandler = require("express-async-handler");
 const { authorize } = require("../auth");
 const { Collection, SpotCollection, Review } = require("../db/models");
 
