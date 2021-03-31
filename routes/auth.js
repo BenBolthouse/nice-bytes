@@ -198,7 +198,7 @@ router.post("/login", csrfProtection, validateLogin, asyncHandler(async (req, re
       });
     // finally redirect the logged in user to the home page
     logUserIn(req, user);
-    return res.redirect("/");
+    req.session.save(() => res.redirect("/"));
   })
 );
 
@@ -207,8 +207,7 @@ router.post("/login", csrfProtection, validateLogin, asyncHandler(async (req, re
  */
 // prettier-ignore
 router.get("/logout", authorize, (req, res, next) => {
-  logUserOut(req);
-  return res.redirect("/login");
+  req.session.destroy(() => res.redirect("/login"));
 });
 
 /************************************************************
