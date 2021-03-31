@@ -3,6 +3,12 @@ extends layout
 append head
   link(rel="stylesheet" href="/stylesheets/index.css")
   script(src="/javascripts/index.js" content-type="text/javascript" type="module")
+  meta(property="og:title" content="NiceBytes")
+  meta(property="og:website" content="website")
+  meta(property="og:url" content="https://nice-bytes.herokuapp.com/")
+  meta(name="image" property="og:image" content="/images/nice-bytes-thumbnail.png")
+  meta(name="description" property="og:description" content="A clone of the popular website GoodReads where users can rate and share restaurants.")
+  meta(name="author" content="Austin Howard, Ben Bolthouse, Reed Norton, & Ryan Maloney")
 
 block content
   div(class="page home-page")
@@ -12,13 +18,14 @@ block content
       h1 Find your new favorite spot
       div(class="spot-list")
         each spot in spots
-          div(class="spot-list__item")
-            img(src=`/images/spots/240/${spot.id}_default.png`)
-            div(class="spot-list__item-describe")
-              a(href=`/spots/${spot.id}`)
+          a(href=`/spots/${spot.id}`)
+            div(class="spot-list__item")
+              img(src=`/images/spots/240/${spot.id}_default.png`)
+              div(class="spot-list__item-describe")
                 h2=spot.name
-              div(class="spot-list__item-rating")
-                div(class="spot-list__item-rating-fill")
-                div(class="spot-list__item-rating-mask")
-              p(class="spot-list__item-description")=spot.description
-              p(class="spot-list__item-type")= `Type: ${spot.type}`
+                p(class="spot-list__item-description")=spot.description
+                p(class="spot-list__item-type")= `Type: ${spot.type}`
+              div(class="spot-list__item-controls")
+                div(class="rating")
+                  span=spot.stars
+                  ion-icon(name="star")

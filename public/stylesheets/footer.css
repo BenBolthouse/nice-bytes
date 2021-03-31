@@ -1,4 +1,41 @@
 .footer {
-  
+  background-color: rgb(245, 245, 245);
+  border-top: 1px solid rgb(204, 204, 204);
+  height: 3rem;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 400;
 }
-.footer__section {}
+.footer > div {
+  display: grid;
+  grid-template-columns: 1fr auto auto 1fr;
+  justify-content: stretch;
+}
+.footer > div p {
+  margin: 0;
+}
+.footer > div p.authors {
+  grid-column: 2 / 3;
+}
+.footer > div p.repo {
+  grid-column: 3 / 4;
+}
+.footer > div p span {
+  float: left;
+  line-height: 3rem;
+  margin-right: 2rem;
+}
+.footer > div p span * {
+  font-size: .875rem;
+}
+.footer > div p span a {
+  color: #007bff;
+  font-weight: 600;
+}
+.footer > div p ion-icon {
+  float: left;
+  font-size: 2rem;
+  margin: 0.5rem 0.5rem 0.5rem 0;
+}
