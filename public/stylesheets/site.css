@@ -18,6 +18,7 @@ body {
   overflow: hidden;
 }
 .page {
+  background-color: rgb(245, 245, 245);
   position: absolute;
   overflow-x: hidden;
   overflow-y: auto;
