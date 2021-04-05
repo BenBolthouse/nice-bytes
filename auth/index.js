@@ -25,15 +25,15 @@ const logUserIn = (req, user) => {
     secure: false,
     path: "/",
   };
-  req.session.auth = {
-    userId: user.id,
-  };
   req.session.user = {
     id: user.id,
     firstName: user.firstName,
     lastName: user.lastName,
     username: user.username,
     email: user.email,
+    collections: user.collections,
+    favorites: user.favorites,
+    visited: user.visited,
   };
 };
 
