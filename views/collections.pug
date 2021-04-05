@@ -1,7 +1,28 @@
 extends layout.pug
 
 append head
-  
+  link(rel="stylesheet", href="stylesheets/collections.css")
 
 block content
   div(class="page collections-page")
+    h1(class="collections-page__title") My Collections
+    div(class="collections-page__sidebar-container page-width")
+      ul(class="sidebar")
+        a(class="add" href="/collections/add")
+          li
+            div
+              ion-icon(name="add-outline")
+              p Add a new collection
+        a(class="default" href=`/collections/${favorites.id}`)
+          li(class="favorites")
+            ion-icon(name="heart-outline")
+            p Want To Visit
+        a(class="default" href=`/collections/${visited.id}`)
+          li(class="visited")
+            ion-icon(name="restaurant-outline")
+            p Have Visited
+        if(!collections.length)
+          li(class="no-custom")
+            p You don't have any custom collections yet. Create one and it will show up in this list.
+    div(class="collections-page__scrollable-container page-width")
+      div(class="scrollable")
