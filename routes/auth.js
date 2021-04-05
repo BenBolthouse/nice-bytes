@@ -106,14 +106,10 @@ router.post("/signup", validateSignUp, csrfProtection, asyncHandler(async (req, 
         username: username,
         email: email,
         passwordHash: hash,
-        favorites: { name: "Want To Visit" },
-        visited: { name: "Have Visited" },
+        _collections: [{ name: "Want To Visit" }, { name: "Have Visited" }],
       },
       {
-        include: [
-          { model: Collection, as: "favorites" },
-          { model: Collection, as: "visited" },
-        ],
+        include: { model: Collection, as: "_collections" },
       }
     );
     // finally redirect the logged in user to the home page
@@ -161,11 +157,7 @@ router.post("/login", csrfProtection, validateLogin, asyncHandler(async (req, re
     // Pug login form with the error message
     const user = await User.findOne({
       where: { email: email },
-      include: [
-        { model: Collection, as: "collections" },
-        { model: Collection, as: "favorites" },
-        { model: Collection, as: "visited" },
-      ],
+      include: { model: Collection, as: "_collections" },
     });
     if (!user) {
       res.locals.messages.email.push(
