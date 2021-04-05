@@ -21,11 +21,11 @@ router.get('/:id', async (req, res, next) => {
     include: { model: Review, include: User },
   });
 
-  if (!req.session.auth) {
+  if (!req.session.user.id) {
     return res.render('spot', { spot, user });
   }
 
-  userId = req.session.auth.userId;
+  userId = req.session.user.id;
 
   const customCollections = await Collection.findAll({
     where: { userId: userId },

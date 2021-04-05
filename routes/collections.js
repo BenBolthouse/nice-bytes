@@ -4,7 +4,7 @@ const { Collection } = require("../db/models");
 const router = express.Router();
 
 router.get("/", async (req, res) => {
-  if (req.session.auth) {
+  if (req.session.user.id) {
     // get custom and default collections
     const collections = req.session.user.collections;
 
