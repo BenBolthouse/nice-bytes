@@ -31,9 +31,9 @@ const logUserIn = (req, user) => {
     lastName: user.lastName,
     username: user.username,
     email: user.email,
-    collections: user.collections,
-    favorites: user.favorites,
-    visited: user.visited,
+    collections: user.collections(),
+    favorites: user.favorites(),
+    visited: user.visited(),
   };
 };
 
