@@ -1,18 +1,11 @@
-const express = require("express");
-const { Collection } = require("../db/models");
-
-const router = express.Router();
+const router = require("express").Router();
 
 router.get("/", async (req, res) => {
   if (req.session.user.id) {
-    // get custom and default collections
-    const collections = req.session.user.collections;
-
-    // const spots= await SpotCollection.;
-    res.render("collections", { collections });
-  } else {
-    res.redirect("/");
+    const { collections, favorites, visited } = req.session.user;
+    return res.render("collections", { collections, favorites, visited });
   }
+  return res.redirect("/");
 });
 
 module.exports = router;
