@@ -9,7 +9,8 @@ module.exports = (sequelize, DataTypes) => {
     const columnMapping = {
       through: 'SpotCollection',
       otherKey: 'spotId',
-      foreignKey: 'collectionId'
+      foreignKey: 'collectionId',
+      as: "spots",
     }
     Collection.belongsToMany(models.Spot, columnMapping);
   };
