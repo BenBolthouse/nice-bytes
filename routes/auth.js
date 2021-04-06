@@ -1,12 +1,12 @@
-const validationResult = require("express-validator").validationResult;
-const bcrypt = require("bcrypt");
 const asyncHandler = require("express-async-handler");
-const express = require("express");
+const bcrypt = require("bcrypt");
 const csrf = require("csurf");
+const express = require("express");
+const validationResult = require("express-validator").validationResult;
 
-const { validateSignUp, validateLogin } = require("./__validators");
-const { User, Collection } = require("../db/models");
 const { logUserIn, authorize } = require("../auth");
+const { User, Collection } = require("../db/models");
+const { validateSignUp, validateLogin } = require("./__validators");
 
 const router = express.Router();
 
