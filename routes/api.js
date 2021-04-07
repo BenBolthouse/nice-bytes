@@ -13,7 +13,7 @@ router.post(
   authorize,
   asyncHandler(async (req, res, _next) => {
     const { name } = req.body;
-    const userId = req.session.auth.userId;
+    const userId = req.session.user.id;
 
     const insertCollection = await Collection.create({
       userId: userId,
@@ -79,7 +79,7 @@ router.post(
   authorize,
   asyncHandler(async (req, res, _next) => {
     const { spotId, stars, title, body } = req.body;
-    const userId = req.session.auth.userId;
+    const userId = req.session.user.id;
 
     await Review.create({
       userId: userId,

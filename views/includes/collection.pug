@@ -1,0 +1,12 @@
+div
+  h2=scoped.name
+  if scoped.spots.length
+    ul
+      each spot in scoped.spots
+        a(href=`/spots/${spot.id}`)
+          li
+            img(src=`/images/spots/240/${spot.id}_default.png`, alt="spot")
+            h3=spot.name
+            p=spot.description
+  else
+    p Looks like you haven't added anything, yet! Add spots to your collection to see them here.

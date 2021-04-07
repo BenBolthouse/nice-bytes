@@ -7,13 +7,11 @@ module.exports = (sequelize, DataTypes) => {
     type: DataTypes.STRING
   }, {});
   Spot.associate = function(models) {
-    // associations can be defined here
      const columnMapping = {
       through: 'SpotCollection',
       otherKey: 'collectionId',
       foreignKey: 'spotId'
     }
-
     Spot.belongsToMany(models.Collection, columnMapping);
     Spot.hasMany(models.Review, {foreignKey: 'spotId' });
   };
