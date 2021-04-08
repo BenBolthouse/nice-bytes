@@ -49,7 +49,7 @@ router.get("/:id", async (req, res, next) => {
     }
   }
 
-  spot.rating = await Review.averageRating(spot.id);
+  spot.stars = Math.round((await Review.averageRating(spot.id)) * 10) / 10;
 
   user = req.session.user;
   user.customCollections = customCollections;
