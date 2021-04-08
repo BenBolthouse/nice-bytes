@@ -1,18 +1,19 @@
 const { sequelize } = require('./db/models');
 const { secret } = require('./config');
-const createError = require('http-errors');
-const authRouter = require('./routes/auth');
-const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users')
-const spotRouter = require('./routes/spots');
-const collectionRouter = require('./routes/collection');
 const apiRouter = require('./routes/api');
-const path = require('path');
+const authRouter = require('./routes/auth');
+const collectionRouter = require('./routes/collection');
 const cookieParser = require('cookie-parser');
+const createError = require('http-errors');
 const express = require('express');
-const session = require('express-session');
+const favicon = require('serve-favicon');
+const indexRouter = require('./routes/index');
 const logger = require('morgan');
+const path = require('path');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
+const session = require('express-session');
+const spotRouter = require('./routes/spots');
+const usersRouter = require('./routes/users')
 
 const app = express();
 
@@ -25,6 +26,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 
 // set up session middleware
 const store = new SequelizeStore({ db: sequelize });
