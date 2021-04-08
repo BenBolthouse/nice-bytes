@@ -56,6 +56,9 @@
 .spot-detail__rating-mask {
   position: absolute;
   background-image: url("/images/rating_stars_horizontal_FFFFFF.svg");
+  filter: invert(0%) sepia(60%) saturate(0%) hue-rotate(86deg) brightness(88%)
+    contrast(123%);
+  fill: #f5f5f5;
   background-position: center;
   z-index: 102;
   top: 0px;
