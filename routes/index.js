@@ -26,6 +26,7 @@ router.get("/", asyncHandler(async (req, res, _next) => {
         spot.stars = Math.ceil(avg);
       }
     });
+
     // send pug view with spots data
     req.session.reload(() => {
       res.render("index", { user: req.session.user, spots });

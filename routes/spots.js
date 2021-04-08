@@ -1,16 +1,16 @@
-const express = require('express');
-const { Spot, Review, Collection, User } = require('../db/models');
+const express = require("express");
+const { Spot, Review, Collection, User } = require("../db/models");
 const router = express.Router();
 
 // redirects to home if the client navigates to http://localhost:8080/spots/
-router.get('/', (req, res) => {
-  res.redirect('/');
+router.get("/", (req, res) => {
+  res.redirect("/");
 });
 
 /**
  * GET http://localhost:8080/spots/:id
  */
-router.get('/:id', async (req, res, next) => {
+router.get("/:id", async (req, res, next) => {
   let user = null;
   let userId = null;
   const id = req.params.id;
@@ -22,7 +22,7 @@ router.get('/:id', async (req, res, next) => {
   });
 
   if (!req.session.user.id) {
-    return res.render('spot', { spot, user });
+    return res.render("spot", { spot, user });
   }
 
   userId = req.session.user.id;
@@ -37,26 +37,30 @@ router.get('/:id', async (req, res, next) => {
   };
 
   for (let i = 0; i < customCollections.length; i++) {
-    if (customCollections[i].name === 'Want To Visit') {
+    if (customCollections[i].name === "Want To Visit") {
       defaultCollections.wantToVisitId = customCollections.splice(i, 1)[0].id;
       i--;
       continue;
     }
-    if (customCollections[i].name === 'Have Visited') {
+    if (customCollections[i].name === "Have Visited") {
       defaultCollections.haveVisitedId = customCollections.splice(i, 1)[0].id;
       i--;
       continue;
     }
   }
 
+  // rating = await spot.averageRating();
+  rating = await Review.averageRating(spot.id);
+  console.log(rating);
+
   user = req.session.user;
   user.customCollections = customCollections;
   user.defaultCollections = defaultCollections;
 
-  res.render('spot', {
+  res.render("spot", {
     spot,
     user,
-    userId
+    userId,
   });
 });
 
