@@ -39,9 +39,9 @@
 .spot-detail__rating {
   float: left;
   background-color: #aeaeae;
-  height: 2rem;
+  height: 100%;
   margin-left: -0.5rem;
-  width: 120px;
+  width: 14rem;
   position: relative;
   z-index: 100;
 }
@@ -49,12 +49,14 @@
   position: absolute;
   z-index: 101;
   top: 0px;
-  right: 4px;
+  right: 18px;
   bottom: 0px;
-  left: 5px;
+  left: 17px;
 }
 .spot-detail__rating-mask {
   position: absolute;
+  height: 3.5rem;
+  background-size: cover;
   background-image: url("/images/rating_stars_horizontal_FFFFFF.svg");
   filter: invert(0%) sepia(60%) saturate(0%) hue-rotate(86deg) brightness(88%)
     contrast(123%);
