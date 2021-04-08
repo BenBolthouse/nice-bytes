@@ -21,7 +21,7 @@ module.exports = (sequelize, DataTypes) => {
     for (let review of reviews) {
       sum += review.stars;
     }
-    return sum / reviews.length;
+    return (sum / reviews.length).toFixed(1);
   };
   return Review;
 };

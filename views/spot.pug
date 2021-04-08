@@ -22,8 +22,6 @@ block content
               button(type="button" id="addToWantToVisit" spotIsCollected="false" spotId=spot.id collectionId=user.defaultCollections.wantToVisitId class="spot-detail__collection-want-to-visit addToCollection") Want To Visit
               button(type="button" id="addVisited" spotIsCollected="false" spotId=spot.id collectionId=user.defaultCollections.haveVisitedId class="spot-detail__collection-visited addToCollection") Visited
           p(class="spot-detail__description")=spot.description
-          p=spot.stars
-
 
         include includes/newReview.pug
         include includes/reviews.pug
