@@ -1,14 +1,12 @@
-const { validationResult } = require("express-validator");
-const bcrypt = require("bcrypt");
 const asyncHandler = require("express-async-handler");
-const express = require("express");
+const bcrypt = require("bcrypt");
 const csrf = require("csurf");
+const express = require("express");
+const validationResult = require("express-validator").validationResult;
 
-const { validateSignUp, validateLogin } = require("./__validators");
+const { logUserIn, authorize } = require("../auth");
 const { User, Collection } = require("../db/models");
-const { logUserIn, logUserOut, authorize } = require("../auth");
-
-const { secret } = require("../config");
+const { validateSignUp, validateLogin } = require("./__validators");
 
 const router = express.Router();
 
@@ -108,13 +106,10 @@ router.post("/signup", validateSignUp, csrfProtection, asyncHandler(async (req, 
         username: username,
         email: email,
         passwordHash: hash,
-        collections: [{ name: "Have Visited" }, { name: "Want To Visit" }],
+        _collections: [{ name: "Want To Visit" }, { name: "Have Visited" }],
       },
       {
-        include: {
-          model: Collection,
-          as: "collections",
-        },
+        include: { model: Collection, as: "_collections" },
       }
     );
     // finally redirect the logged in user to the home page
@@ -160,7 +155,10 @@ router.post("/login", csrfProtection, validateLogin, asyncHandler(async (req, re
     }
     // if the user cannot be found in the database send the
     // Pug login form with the error message
-    const user = await User.findOne({ where: { email: email } });
+    const user = await User.findOne({
+      where: { email: email },
+      include: { model: Collection, as: "_collections" },
+    });
     if (!user) {
       res.locals.messages.email.push(
         "A user does not exist with the provided email."
@@ -216,7 +214,7 @@ router.get("/logout", authorize, (req, res, next) => {
  * @param {String} username
  */
 const userUsernameIsUnique = async (username) => {
-  const result = await User.findOne({ where: { username: username } });
+  const result = await User.findOne({ where: { username } });
   if (result) return false;
   return true;
 };
@@ -227,7 +225,7 @@ const userUsernameIsUnique = async (username) => {
  * @param {String} username
  */
 const userEmailIsUnique = async (email) => {
-  const result = await User.findOne({ where: { email: email } });
+  const result = await User.findOne({ where: { email } });
   if (result) return false;
   return true;
 };

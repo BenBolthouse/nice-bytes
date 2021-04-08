@@ -1,0 +1,16 @@
+extends layout.pug
+
+append head
+  link(rel="stylesheet", href="/stylesheets/collections.css")
+
+block content
+  div(class="page add-collection-page")
+    h1(class="add-collection-page__title") New Collection
+    form(action="/collections/add" method="post")
+      div(class="form-group")
+        label(for="addCollectionName") Collection name
+        input(id="addCollectionName" type="text" name="name")
+        p(class="error")=error
+      input(type="hidden" name="_csrf" value=csrf)
+      button(type="submit") Add
+      

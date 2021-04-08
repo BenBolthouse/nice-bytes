@@ -25,15 +25,15 @@ const logUserIn = (req, user) => {
     secure: false,
     path: "/",
   };
-  req.session.auth = {
-    userId: user.id,
-  };
   req.session.user = {
     id: user.id,
     firstName: user.firstName,
     lastName: user.lastName,
     username: user.username,
     email: user.email,
+    collections: user.collections(),
+    favorites: user.favorites(),
+    visited: user.visited(),
   };
 };
 
@@ -42,7 +42,6 @@ const logUserIn = (req, user) => {
  * @param {Request} req `express.Request`
  */
 const logUserOut = (req) => {
-  delete req.session.auth;
   delete req.session.user;
 };
 
@@ -53,7 +52,7 @@ const logUserOut = (req) => {
  * @param {Function} next Express middleware `next()`
  */
 const authorize = (req, _res, next) => {
-  if (!req.session.auth) {
+  if (!req.session.user.id) {
     const err = new Error("Not authorized to view this resource.");
     err.title = "Not authorized to view this resource.";
     err.status = 403;
