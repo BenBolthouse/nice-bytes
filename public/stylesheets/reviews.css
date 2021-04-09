@@ -97,12 +97,12 @@
 }
 
 .review-form__cancel {
-  width: 10rem;
+  /* width: 10rem;
   height: 2rem;
-  font-size: 1rem;
-  padding: 0rem;
+  font-size: 1rem; */
+  /* padding: 0rem;
   align-self: center;
-  margin-top: 1rem;
+  margin-top: 1rem; */
   background-color: rgb(226, 96, 96)
 }
 

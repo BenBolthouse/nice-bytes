@@ -2,7 +2,7 @@
  * Module loaded on views/includes/reviews.pug
  */
 
-import { destroy } from "./webapi.js";
+import { destroy, put } from "./webapi.js";
 
 // sync form to javascript
 document.addEventListener("DOMContentLoaded", () => {
@@ -39,5 +39,34 @@ document.addEventListener("DOMContentLoaded", () => {
     editCancelBtn.addEventListener('click', () => {
       editReviewForm.classList.toggle('hidden')
     })
+    editSubmitBtn.addEventListener('click', async (e) => {
+      e.preventDefault()
+      const reviewId = editReviewBtn.getAttribute('reviewId');
+      const editReviewTitle = document.getElementById('editReviewTitle').value
+      const editReviewStar = document.getElementById('editReviewStar').value
+      const editReviewText = document.getElementById('editReviewText').value
+      const csrf = document.getElementById('editReviewCSRF')
+
+      console.log('from the console', editReviewTitle, editReviewStar, editReviewText)
+      const form = new FormData()
+      form.append('title', editReviewTitle)
+      form.append('stars', editReviewStar)
+      form.append('body', editReviewText)
+      form.append('csrf', csrf)
+
+      return await put(
+        `/api/spots/reviews/${reviewId}`,
+        form,
+        success,
+        error,
+        reviewId
+      )
+    })
+
+    const success = (reviewId) => {
+      const review = document.getElementById(`review__${reviewId}`);
+      // review.parentNode.removeChild(review);
+    };
+    const error = () => {};
   }
 });

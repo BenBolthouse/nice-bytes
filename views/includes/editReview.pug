@@ -1,12 +1,12 @@
 div(class='review-form__container hidden' id='editReviewForm')
-  form(action=`/api/spots/reviews/${review.id}`, method='put')
+  form(id='editReviewForm')
     a(class='review-form__link') Edit Review
     div(class='review-form__item')
       label Title 
-      input(type='text' name='title' required=true)
+      input(type='text' name='title' required=true id='editReviewTitle')
     div(class='review-form__item')
       label(id='review-form__star-label') Please select a star rating
-      select(type='text' name='stars' required=true)
+      select(type='text' name='stars' required=true id='editReviewStar')
         option(value='5') 5
         option(value='4') 4
         option(value='3') 3
@@ -14,10 +14,11 @@ div(class='review-form__container hidden' id='editReviewForm')
         option(value='1') 1
     div(class='review-form__item')
       label(id='review-form__body-label') Review 
-      textarea(name='body' required=true)
-    input(type='hidden' name='_csrf' value=csrf)
-    button(type='submit' class='review-form__submit' id='editSubmit')
-      ion-icon(name="create") 
-    button(type='button' class='review-form__cancel' id='editCancel')
-      ion-icon(name="close-circle-outline")
+      textarea(name='body' required=true id='editReviewText')
+    input(type='hidden' name='_csrf' value=csrf id='editReviewCSRF')
+    div(class="user-review__buttons")
+      button(type='submit' class='edit-review__submit' id='editSubmit')
+        ion-icon(name="create") 
+      button(type='button' class='review-form__cancel' id='editCancel')
+        ion-icon(name="close-circle-outline")
       

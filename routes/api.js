@@ -102,6 +102,8 @@ router.put(
     const { stars, title, body } = req.body;
     const { id } = req.params;
 
+    console.log('from the api', stars, title, body)
+
     const getReview = await Review.findByPk(id);
     if (getReview) {
       getReview.body = body;
