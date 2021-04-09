@@ -14,7 +14,7 @@ block content
         img(src=`/images/spots/480/${spot.id}_default.png`)
         div(class="spot-detail__describe")
           div(class="spot-detail__rating")
-            div(class="spot-detail__rating-fill")
+            div(class="spot-detail__rating-fill" style=`background: linear-gradient(to right, #ffc70d, #ffc70d ${spot.stars*20}%, rgba(255, 255, 255, 0.479) ${spot.stars*20}%);`)
             div(class="spot-detail__rating-mask")
           p(class="spot-detail__type")=`Type: ${spot.type}`
           if(user)
