@@ -16,5 +16,8 @@ div(class='review-form__container hidden' id='editReviewForm')
       label(id='review-form__body-label') Review 
       textarea(name='body' required=true)
     input(type='hidden' name='_csrf' value=csrf)
-    button(type='submit' class='edit-review__submit') Submit Edit 
-    button(type='button' class='edit-review__cancel') Cancel
+    button(type='submit' class='review-form__submit' id='editSubmit')
+      ion-icon(name="create") 
+    button(type='button' class='review-form__cancel' id='editCancel')
+      ion-icon(name="close-circle-outline")
+      

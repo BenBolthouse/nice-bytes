@@ -28,9 +28,15 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   const editReviewBtn = document.getElementById('editReviewBtn');
+  const editReviewForm = document.getElementById('editReviewForm');
+  const editCancelBtn = document.getElementById('editCancel');
+  const editSubmitBtn = document.getElementById('editSubmit');
+
   if(editReviewBtn) {
-    const editReviewForm = document.getElementById('editReviewForm');
     editReviewBtn.addEventListener('click', () => {
+      editReviewForm.classList.toggle('hidden')
+    })
+    editCancelBtn.addEventListener('click', () => {
       editReviewForm.classList.toggle('hidden')
     })
   }
