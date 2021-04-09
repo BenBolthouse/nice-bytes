@@ -16,16 +16,10 @@ router.get("/", asyncHandler(async (req, res, _next) => {
       order: ["name"],
     });
     // get average star rating per spot
-    spots.forEach((spot) => {
-      spot.rating = 0;
-      spot.Reviews.forEach((review) => {
-        spot.rating += review.stars;
-      });
-      if (spot.rating) {
-        const avg = spot.rating / spot.Reviews.length;
-        spot.stars = Math.ceil(avg);
-      }
+    spots.forEach(async (spot) => {
+      spot.stars = await Review.averageRating(spot.id);
     });
+
     // send pug view with spots data
     req.session.reload(() => {
       res.render("index", { user: req.session.user, spots });
