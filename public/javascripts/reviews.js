@@ -26,4 +26,12 @@ document.addEventListener("DOMContentLoaded", () => {
     };
     const error = () => {};
   }
+
+  const editReviewBtn = document.getElementById('editReviewBtn');
+  if(editReviewBtn) {
+    const editReviewForm = document.getElementById('editReviewForm');
+    editReviewBtn.addEventListener('click', () => {
+      editReviewForm.classList.toggle('hidden')
+    })
+  }
 });

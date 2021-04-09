@@ -1,5 +1,6 @@
-div(class='review-form__container')
+div(class='review-form__container hidden' id='editReviewForm')
   form(action=`/api/spots/reviews/${review.id}`, method='put')
+    a(class='review-form__link') Edit Review
     div(class='review-form__item')
       label Title 
       input(type='text' name='title' required=true)
