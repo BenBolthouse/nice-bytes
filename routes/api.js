@@ -99,10 +99,8 @@ router.put(
   "/spots/reviews/:id",
   authorize,
   asyncHandler(async (req, res, _next) => {
-    const { stars, title, body } = req.body;
+    const { stars, title, body, spotId } = req.body;
     const { id } = req.params;
-
-    console.log('from the api', stars, title, body)
 
     const getReview = await Review.findByPk(id);
     if (getReview) {
@@ -111,9 +109,7 @@ router.put(
       getReview.stars = stars;
       await getReview.save();
     }
-    res.json({
-      id: getReview.id,
-    });
+    res.redirect(`/spots/${spotId}`);
   })
 );
 

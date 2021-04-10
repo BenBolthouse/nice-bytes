@@ -42,25 +42,27 @@ document.addEventListener("DOMContentLoaded", () => {
     editSubmitBtn.addEventListener('click', async (e) => {
       e.preventDefault()
       const reviewId = editReviewBtn.getAttribute('reviewId');
+      const spotId = editSubmitBtn.getAttribute("spotId");
       const editReviewTitle = document.getElementById('editReviewTitle').value
       const editReviewStar = document.getElementById('editReviewStar').value
       const editReviewText = document.getElementById('editReviewText').value
       const csrf = document.getElementById('editReviewCSRF')
 
-      console.log('from the console', editReviewTitle, editReviewStar, editReviewText)
-      const form = new FormData()
-      form.append('title', editReviewTitle)
-      form.append('stars', editReviewStar)
-      form.append('body', editReviewText)
-      form.append('csrf', csrf)
-
+      const form = {
+      title: editReviewTitle,
+      stars: editReviewStar,
+      body: editReviewText,
+      spotId: spotId,
+      csrf: csrf
+      }
+    
       return await put(
         `/api/spots/reviews/${reviewId}`,
         form,
-        success,
+        success, 
         error,
         reviewId
-      )
+        )
     })
 
     const success = (reviewId) => {
