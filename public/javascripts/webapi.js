@@ -58,9 +58,9 @@ export const get = async (endpoint, success, error, target) => {
  * @param {Callback on 400 and 500-range responses} error
  * @param {DOM event target} target
  */
-export const put = async (endpoint, payload, success, error, target) => {
+export const put = async (endpoint, payload, success, error) => {
   try {
-    await fetch(endpoint, {
+  const res = await fetch(endpoint, {
       method: "put",
       headers: {
         Accept: "application/json",
@@ -68,9 +68,9 @@ export const put = async (endpoint, payload, success, error, target) => {
       },
       body: JSON.stringify(payload),
     });
-    return success(target);
+    return success(res);
   } catch (e) {
-    return error(target, e);
+    return error(e);
   }
 };
 

@@ -110,7 +110,10 @@ router.put(
       await getReview.save();
     }
     res.json({
-      id: getReview.id,
+      body,
+      title,
+      stars, 
+      id
     });
   })
 );

@@ -1,0 +1,24 @@
+div(class='review-form__container hidden' id='editReviewForm')
+  form(id='editReviewForm')
+    a(class='review-form__link') Edit Review
+    div(class='review-form__item')
+      label Title 
+      input(type='text' name='title' required=true id='editReviewTitle')
+    div(class='review-form__item')
+      label(id='review-form__star-label') Please select a star rating
+      select(type='text' name='stars' required=true id='editReviewStar')
+        option(value='5') 5
+        option(value='4') 4
+        option(value='3') 3
+        option(value='2') 2
+        option(value='1') 1
+    div(class='review-form__item')
+      label(id='review-form__body-label') Review 
+      textarea(name='body' required=true id='editReviewText')
+    input(type='hidden' name='_csrf' value=csrf id='editReviewCSRF')
+    div(class="user-review__buttons")
+      button(type='submit' class='edit-review__submit' id='editSubmit' spotId=spot.id)
+        ion-icon(name="create") 
+      button(type='button' class='review-form__cancel' id='editCancel')
+        ion-icon(name="close-circle-outline")
+      
