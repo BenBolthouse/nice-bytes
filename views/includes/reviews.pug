@@ -10,10 +10,10 @@ div(class="user-reviews")
           div(class="user-review__avatar")=review.User.username.slice(0,1).toUpperCase()
           p=review.User.username
         div(class="user-review__review")
-          div(class="user-review__rating")=review.stars
+          div(class="user-review__rating" id='review__stars')=review.stars
           p(class="user-review__date")= `Reviewed on: ${new Date(Date.parse(review.createdAt)).toDateString()}`
-          h3(class="user-review__title")=review.title
-          p(class="user-review__body")=review.body
+          h3(class="user-review__title" id='review__title')=review.title
+          p(class="user-review__body" id='review__body')=review.body
         if(review.User.id === userId)
           div(class="user-review__buttons")
             button(type='button' id='editReviewBtn' reviewId=review.id ) 

@@ -39,6 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
     editCancelBtn.addEventListener('click', () => {
       editReviewForm.classList.toggle('hidden')
     })
+
     editSubmitBtn.addEventListener('click', async (e) => {
       e.preventDefault()
       const reviewId = editReviewBtn.getAttribute('reviewId');
@@ -56,18 +57,18 @@ document.addEventListener("DOMContentLoaded", () => {
       csrf: csrf
       }
     
-      return await put(
+       await put(
         `/api/spots/reviews/${reviewId}`,
         form,
         success, 
         error,
-        reviewId
+        
         )
+        location.reload();
     })
 
-    const success = (reviewId) => {
-      const review = document.getElementById(`review__${reviewId}`);
-      // review.parentNode.removeChild(review);
+    const success = (res) => {
+      
     };
     const error = () => {};
   }

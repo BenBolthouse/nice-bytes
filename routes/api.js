@@ -109,7 +109,12 @@ router.put(
       getReview.stars = stars;
       await getReview.save();
     }
-    res.redirect(`/spots/${getReview.spotId}`);
+    res.json({
+      body,
+      title,
+      stars, 
+      id
+    });
   })
 );
 
