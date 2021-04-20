@@ -1,5 +1,5 @@
 header {
-  background-color: rgb(30,30,30);
+  background-color: rgb(30, 30, 30);
   color: #ffffff;
   position: absolute;
   z-index: 200;
@@ -21,9 +21,9 @@ header {
   grid-template-columns: 2rem auto;
 }
 .navbar__logo {
-  background-color: #00B7FF;
-  border-radius: .25rem;
-  background-image: url('/images/logo_32.svg');
+  background-color: #00b7ff;
+  border-radius: 0.25rem;
+  background-image: url("/images/logo_32.svg");
   width: 2rem;
   height: 2rem;
 }
@@ -45,15 +45,16 @@ header {
 .navbar__links--no-stretch ul li a,
 .navbar__links--stretch ul li a {
   display: block;
-  color: #00B7FF;
+  color: #00b7ff;
   line-height: 2rem;
 }
 .navbar__links--no-stretch,
 .navbar__links--stretch {
   height: 2rem;
 }
-.navbar__links--no-stretch ul li {
-  float: left;
+.navbar__links--no-stretch ul {
+  display: flex;
+  justify-content: space-between;
   margin-right: 1rem;
 }
 .navbar__links--stretch ul li {
@@ -76,7 +77,7 @@ header {
 }
 .navbar__user p {
   text-align: right;
-  color: #00B7FF;
+  color: #00b7ff;
   line-height: 2rem;
   margin: 0 1rem 0 0;
 }
