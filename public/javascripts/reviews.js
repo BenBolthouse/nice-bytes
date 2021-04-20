@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
     editSubmitBtn.addEventListener('click', async (e) => {
       e.preventDefault()
       const reviewId = editReviewBtn.getAttribute('reviewId');
-      const spotId = editSubmitBtn.getAttribute("spotId");
+      // const spotId = editSubmitBtn.getAttribute("spotId");
       const editReviewTitle = document.getElementById('editReviewTitle').value
       const editReviewStar = document.getElementById('editReviewStar').value
       const editReviewText = document.getElementById('editReviewText').value
@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
       title: editReviewTitle,
       stars: editReviewStar,
       body: editReviewText,
-      spotId: spotId,
+      // spotId: spotId,
       csrf: csrf
       }
     
