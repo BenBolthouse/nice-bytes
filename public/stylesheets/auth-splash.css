@@ -108,6 +108,7 @@
 .auth-splash__demo-form button:hover {
   background: none;
   text-decoration: underline;
+  outline: none;
 }
 .auth-splash__validation-icon--invalid,
 .auth-splash__validation-icon--valid {

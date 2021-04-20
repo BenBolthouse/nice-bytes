@@ -48,6 +48,7 @@
 .spot-list__item-describe h2 {
   font-size: 1.5rem;
   line-height: 2rem;
+  overflow-y: hidden;
 }
 .spot-list__item-description {
   font-size: 0.875rem;
