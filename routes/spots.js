@@ -21,7 +21,9 @@ router.get("/:id", async (req, res, next) => {
     include: { model: Review, include: User },
   });
 
-  if (!req.session.user.id) {
+  spot.stars = await Review.averageRating(spot.id);
+
+  if (!req.session.user) {
     return res.render("spot", { spot, user });
   }
 
@@ -48,8 +50,6 @@ router.get("/:id", async (req, res, next) => {
       continue;
     }
   }
-
-  spot.stars = await Review.averageRating(spot.id);
 
   user = req.session.user;
   user.customCollections = customCollections;
